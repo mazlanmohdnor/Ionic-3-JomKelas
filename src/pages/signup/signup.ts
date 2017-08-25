@@ -37,7 +37,17 @@ export class SignupPage {
         alert.present();
         this.navCtrl.push('LoginPage', {'email': this.profile.email, 'password':this.profile.password})
       })
+    }).catch(error => {
+      let alert = this.alertCtrl.create({
+        subTitle: error.message,
+        buttons: ['OK']
+      });
+      alert.present();
    })
+  }
+
+  terms() {
+    this.navCtrl.push('TermsPage')
   }
 
 }

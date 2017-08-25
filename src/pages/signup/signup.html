@@ -42,6 +42,6 @@
 
     <p text-center>By clicking sign up, I agree to your <a (click)="terms()">Terms</a></p>
 
-    <button ion-button block large round color="primary" (click)="signup()">Sign Up</button>
+    <button ion-button block large round color="primary" (click)="signup()" [disabled]="!profile.email || !profile.password ||!profile.phone || !profile.matric">Sign Up</button>
 
 </ion-content>
