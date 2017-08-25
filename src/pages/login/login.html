@@ -17,11 +17,13 @@
 
     <div class="spacer"></div>
 
-    <button ion-button block large round color="primary" (click)="login()" [disabled]="!profile.email || !profile.password">Sign In</button>
+    <button ion-button block medium round color="primary" (click)="login()" [disabled]="!profile.email || !profile.password">Sign In</button>
 
     <p text-center>or</p>
 
-    <button ion-button clear block (click)="fblogin()">Login with facebook</button>
+    <button ion-button icon-left round full (click)="fblogin()">
+        <ion-icon name="logo-facebook"></ion-icon> Login with facebook
+    </button>
 
     <p text-center>Don't have any account? <a (click)="signup()">Sign Up</a></p>
 

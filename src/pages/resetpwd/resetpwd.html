@@ -1,0 +1,24 @@
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-title>Reset your password</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <img src="assets/header.png">
+    <h2>Forgot your password?</h2>
+    <p>Enter your email below to receive your password reset instruction.</p>
+    <ion-item>
+        <ion-label floating>
+            <ion-icon name="mail"></ion-icon> Email
+        </ion-label>
+        <ion-input type="email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+
+    <div class="spacer"></div>
+
+    <button ion-button block medium round color="primary" (click)="reset()" [disabled]="!email">Reset Password</button>
+</ion-content>
