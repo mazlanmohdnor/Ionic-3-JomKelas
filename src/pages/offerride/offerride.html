@@ -1,0 +1,126 @@
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-title>Offer a ride</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content class="bg">
+    <ion-card>
+        <ion-card-header>
+            LOCATION
+        </ion-card-header>
+        <ion-card-content>
+
+
+            <ion-list>
+                <ion-item>
+                    <ion-label>
+
+                        From</ion-label>
+                    <ion-select [(ngModel)]="gaming">
+                        <ion-option value="nes">NES</ion-option>
+                        <ion-option value="n64">Nintendo64</ion-option>
+                        <ion-option value="ps">PlayStation</ion-option>
+                        <ion-option value="genesis">Sega Genesis</ion-option>
+                        <ion-option value="saturn">Sega Saturn</ion-option>
+                        <ion-option value="snes">SNES</ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+            <ion-list>
+                <ion-item>
+                    <ion-label>Destination</ion-label>
+                    <ion-select [(ngModel)]="gaming">
+                        <ion-option value="nes">NES</ion-option>
+                        <ion-option value="n64">Nintendo64</ion-option>
+                        <ion-option value="ps">PlayStation</ion-option>
+                        <ion-option value="genesis">Sega Genesis</ion-option>
+                        <ion-option value="saturn">Sega Saturn</ion-option>
+                        <ion-option value="snes">SNES</ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+
+
+            <ion-chip color="danger">
+                <ion-label>RM 0.50</ion-label>
+            </ion-chip>
+            <ion-list>
+
+                <ion-item>
+                    <ion-label stacked>Username</ion-label>
+                    <ion-input type="text"></ion-input>
+                </ion-item>
+
+
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header>
+            DATE AND TIME
+        </ion-card-header>
+        <ion-card-content>
+            date: {{date}}
+
+            <button ion-button block (click)="datepicker()">Select date</button>
+            <br>
+            <hr> time: {{time}}
+
+            <button ion-button block (click)="timepicker()">Select date</button>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header>
+            LOCATION
+        </ion-card-header>
+        <ion-card-content>
+
+
+            <ion-list>
+                <ion-item>
+                    <ion-label>
+
+                        From</ion-label>
+                    <ion-select [(ngModel)]="gaming">
+                        <ion-option value="nes">NES</ion-option>
+                        <ion-option value="n64">Nintendo64</ion-option>
+                        <ion-option value="ps">PlayStation</ion-option>
+                        <ion-option value="genesis">Sega Genesis</ion-option>
+                        <ion-option value="saturn">Sega Saturn</ion-option>
+                        <ion-option value="snes">SNES</ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+            <ion-list>
+                <ion-item>
+                    <ion-label>Destination</ion-label>
+                    <ion-select [(ngModel)]="gaming">
+                        <ion-option value="nes">NES</ion-option>
+                        <ion-option value="n64">Nintendo64</ion-option>
+                        <ion-option value="ps">PlayStation</ion-option>
+                        <ion-option value="genesis">Sega Genesis</ion-option>
+                        <ion-option value="saturn">Sega Saturn</ion-option>
+                        <ion-option value="snes">SNES</ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+
+
+            <ion-chip color="danger">
+                <ion-label>RM 0.50</ion-label>
+            </ion-chip>
+            <ion-list>
+
+                <ion-item>
+                    <ion-label stacked>Username</ion-label>
+                    <ion-input type="text"></ion-input>
+                </ion-item>
+
+
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

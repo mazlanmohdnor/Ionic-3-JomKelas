@@ -1,0 +1,47 @@
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-title>Sign Up</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <img src="assets/header.png">
+
+    <ion-item>
+        <ion-label floating>
+            <ion-icon name="mail"></ion-icon> Email
+        </ion-label>
+        <ion-input type="email" [(ngModel)]="profile.email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>
+            <ion-icon name="key"></ion-icon> Password
+        </ion-label>
+        <ion-input type="password" [(ngModel)]="profile.password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>
+            <ion-icon name="call"></ion-icon> Phone Number
+        </ion-label>
+        <ion-input type="tel" [(ngModel)]="profile.phone"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>
+            <ion-icon name="person"></ion-icon> Matric Number
+        </ion-label>
+        <ion-input type="number" [(ngModel)]="profile.matric"></ion-input>
+    </ion-item>
+
+    <div class="spacer"></div>
+
+    <p text-center>By clicking sign up, I agree to your <a (click)="terms()">Terms</a></p>
+
+    <button ion-button block large round color="primary" (click)="signup()">Sign Up</button>
+
+</ion-content>

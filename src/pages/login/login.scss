@@ -1,0 +1,17 @@
+page-login {
+    img {
+        width: 15em;
+        margin: 1em auto 0 auto;
+        display: block;
+    }
+    .spacer {
+        padding-top: 1em;
+    }
+    .item-md {
+        padding-left: 1em;
+    }
+    .item-md.item-block .item-inner {
+        margin-right: 1em;
+        border-bottom: 1px solid #dedede;
+    }
+}

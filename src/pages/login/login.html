@@ -1,0 +1,29 @@
+<ion-content padding>
+    <img src="assets/header.png">
+
+    <ion-item>
+        <ion-label floating>
+            <ion-icon name="mail"></ion-icon> Email
+        </ion-label>
+        <ion-input type="email" [(ngModel)]="profile.email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>
+            <ion-icon name="key"></ion-icon> Password
+        </ion-label>
+        <ion-input type="password" [(ngModel)]="profile.password"></ion-input>
+    </ion-item>
+
+    <div class="spacer"></div>
+
+    <button ion-button block large round color="primary" (click)="login()" [disabled]="!profile.email || !profile.password">Sign In</button>
+
+    <p text-center>or</p>
+
+    <button ion-button clear block (click)="fblogin()">Login with facebook</button>
+
+    <p text-center>Don't have any account? <a (click)="signup()">Sign Up</a></p>
+
+    <p text-center><a (click)="forgotpassword()">Forgot your password?</a></p>
+</ion-content>

@@ -1,18 +1,36 @@
 <ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-content>
+        <ion-card text-center class="hide-card">
+            <img src="{{photoURL}}" class="custom-avatar" />
+            <p>{{displayName}}</p>
+            <p><b>{{email}}</b></p>
+            <h2>{{phone}}</h2>
+        </ion-card>
+        <ion-list no-lines>
 
-  <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
-    </ion-list>
-  </ion-content>
+            <ion-item menuClose (click)="openPage(p)">
+                <ion-icon name="car" item-start color="primary"></ion-icon>
+                <h2>My Rides</h2>
+                <p>Manage your rides</p>
+            </ion-item>
+            <ion-item menuClose (click)="openPage(p)">
+                <ion-icon name="list-box" item-start color="primary"></ion-icon>
+                <h2>My Booking</h2>
+                <p>Manage your booking</p>
+            </ion-item>
+            <ion-item menuClose (click)="openPage(p)">
+                <ion-icon name="person" item-start color="primary"></ion-icon>
+                <h2>Account</h2>
+                <p>Manage your account</p>
+            </ion-item>
+            <ion-item menuClose (click)="logout()">
+                <ion-icon name="person" item-start color="primary"></ion-icon>
+                <h2>Logout</h2>
+                <p>Logout your account</p>
+            </ion-item>
 
+        </ion-list>
+    </ion-content>
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->

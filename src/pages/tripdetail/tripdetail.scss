@@ -1,0 +1,26 @@
+page-tripdetail {
+    .profile {
+        border-radius: 50%;
+    }
+    p.date {
+        font-weight: bold;
+    }
+    .message {
+        color: #999;
+        font-size: 0.8em;
+    }
+    .vehicle {
+        background-color: rgb(0, 0, 0);
+        box-shadow: 0px 7px 15px 0px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        height: auto;
+    }
+    .card-header-md {
+        padding: 10px 0 0 10px;
+    }
+    .card-content-md {
+        padding: 3px;
+        font-size: 1.4rem;
+        line-height: 1.5;
+    }
+}
