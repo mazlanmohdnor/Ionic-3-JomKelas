@@ -8,17 +8,23 @@
 
 
 <ion-content padding>
-    <img src="assets/header.png">
-    <h2>Forgot your password?</h2>
-    <p>Enter your email below to receive your password reset instruction.</p>
-    <ion-item>
-        <ion-label floating>
-            <ion-icon name="mail"></ion-icon> Email
-        </ion-label>
-        <ion-input type="email" [(ngModel)]="email"></ion-input>
-    </ion-item>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-12 text-center>
+                <img src="assets/header.png">
+                <h2>Forgot your password?</h2>
+                <p>Enter your email below to receive your password reset instruction.</p>
+                <ion-item>
+                    <ion-label floating>
+                        <ion-icon name="mail"></ion-icon> Email
+                    </ion-label>
+                    <ion-input type="email" [(ngModel)]="email"></ion-input>
+                </ion-item>
 
-    <div class="spacer"></div>
+                <div class="spacer"></div>
 
-    <button ion-button block medium round color="primary" (click)="reset()" [disabled]="!email">Reset Password</button>
+                <button ion-button block medium round color="primary" (click)="reset()" [disabled]="!email">Reset Password</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

@@ -1,11 +1,14 @@
 page-login {
+    ion-grid {
+        height: 100%;
+        justify-content: center;
+    }
     img {
-        width: 15em;
-        margin: 1em auto 0 auto;
-        display: block;
+        max-width: 100%;
+        height: 35%;
     }
     .spacer {
-        padding-top: 1em;
+        padding-top: 20px;
     }
     .item-md {
         padding-left: 1em;

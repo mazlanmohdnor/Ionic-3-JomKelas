@@ -15,7 +15,15 @@ export class AuthProvider {
   signup(profile) {
     return this.fire.auth.createUserWithEmailAndPassword(profile.email, profile.password).then((user) => {
       this.firebaseDB.object(`/userProfile/${user.uid}`)
-        .set(profile);
+        .set({
+          displayName: "No name",
+          fullname: "No name",
+          photoURL: "http://placehold.it/300x200",
+          email: profile.email,
+          emailVerified: false,
+          phoneNumber: profile.phone,
+          matricNumber: profile.matric
+        });
     })
   }
   
@@ -23,12 +31,12 @@ export class AuthProvider {
     return this.fire.auth.signOut();
 }
 
-  loggedinuser() {
-    var userId = this.fire.auth.currentUser.uid;
-    return this.firebaseDB.database.ref('/userProfile/+' + userId).once('value').then((snapshot) => {
-      var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-    })
-}  
+//   loggedinuser() {
+//     var userId = this.fire.auth.currentUser.uid;
+//     return this.firebaseDB.database.ref('/userProfile/+' + userId).once('value').then((snapshot) => {
+//       var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+//     })
+// }  
 
 
 

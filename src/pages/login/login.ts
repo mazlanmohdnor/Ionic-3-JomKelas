@@ -2,7 +2,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Facebook } from '@ionic-native/facebook';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController } from 'ionic-angular';
 import firebase from 'firebase';
 
 @IonicPage()
@@ -22,6 +22,7 @@ export class LoginPage {
     public navParams: NavParams,
     public fire: AngularFireAuth,
     public alertCtrl: AlertController,
+    public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
     public fb: Facebook,
     public firebaseDB:AngularFireDatabase
@@ -30,6 +31,7 @@ export class LoginPage {
     this.profile.password = this.navParams.get('password');
   }
 
+  // email and password login
   login() {
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
@@ -42,12 +44,11 @@ export class LoginPage {
         this.navCtrl.setRoot('HomePage')
       } else {
         loader.dismiss();
-        let alert = this.alertCtrl.create({
-          title: 'Try again',
-          subTitle: 'Email verification has been sent. Please check your email',
-          buttons: ['OK']
+        let toast = this.toastCtrl.create({
+          message: 'Please verify your email address.',
+          showCloseButton:true
         });
-        alert.present();
+        toast.present();
       }
     }, (error) => {
       loader.dismiss();
@@ -63,6 +64,8 @@ export class LoginPage {
   signup() {
     this.navCtrl.push('SignupPage');
   }
+
+  //login with facebook
   fblogin() {
     return this.fb.login(['email']).then((response) => {
       let loader = this.loadingCtrl.create({
@@ -71,14 +74,19 @@ export class LoginPage {
       loader.present();
       const fbCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
       this.fire.auth.signInWithCredential(fbCredential).then((user) => {
+        this.firebaseDB.database.ref(`userProfile/${user.uid}`).set({
+          displayName: user.displayName,
+          fullname: user.displayName,
+          photoURL: user.photoURL,
+          email: user.email,
+          emailVerified:user.emailVerified,
+          phoneNumber: 3434343,
+          matricNumber: 9999
+        });
+
         this.navCtrl.push('HomePage', {
           'user': user
         })
-        this.firebaseDB.object(`userProfile/${user.uid}`).set({
-          displayName: user.displayName,
-          photoURL: user.photoURL,
-          email: user.email
-        });
         loader.dismiss();
       })
     }).catch((error) => {

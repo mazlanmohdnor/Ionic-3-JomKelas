@@ -9,33 +9,40 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
   templateUrl: 'signup.html',
 })
 export class SignupPage {
+
   password: string;
   email: string;
-  phone: any;
+  phone: number;
   matric: number;
+
   profile = {
     email: this.email,
     password: this.password,
     phone: this.phone,
     matric: this.matric,
   }
+ 
   constructor(public navCtrl: NavController, public navParams: NavParams, public authprovider: AuthProvider, public fire: AngularFireAuth, public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+
   }
 
   signup() {
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+    loader.present();
+    
+
     this.authprovider.signup(this.profile).then(() => {
-      let loader = this.loadingCtrl.create({
-        content: "Please wait...",
-      });
-      loader.present();
       this.fire.auth.currentUser.sendEmailVerification().then(() => {
+        // this.navCtrl.setRoot('LoginPage', { 'email': this.profile.email, 'password': this.profile.password })
         loader.dismiss();
         let alert = this.alertCtrl.create({
-          subTitle: 'Email verification has been sent. Please check your email',
+          title:'Congratulation!',
+          subTitle: 'We have sent an email. Please check and verify your email.',
           buttons: ['OK']
         });
         alert.present();
-        this.navCtrl.push('LoginPage', {'email': this.profile.email, 'password':this.profile.password})
       })
     }).catch(error => {
       let alert = this.alertCtrl.create({
@@ -43,6 +50,7 @@ export class SignupPage {
         buttons: ['OK']
       });
       alert.present();
+      loader.dismiss();
    })
   }
 

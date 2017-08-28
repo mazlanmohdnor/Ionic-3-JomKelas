@@ -1,5 +1,3 @@
-import { OfferridePage } from './../offerride/offerride';
-import { TripdetailPage } from './../tripdetail/tripdetail';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 

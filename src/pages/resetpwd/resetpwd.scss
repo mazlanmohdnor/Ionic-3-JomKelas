@@ -1,13 +1,11 @@
 page-resetpwd {
-    img {
-        width: 15em;
-        margin: 1em auto 0 auto;
-        display: block;
+    ion-grid {
+        height: 100%;
+        justify-content: center;
     }
-    h2,
-    p {
-        text-align: center;
-        display: block;
+    img {
+        max-width: 100%;
+        height: 30%;
     }
     .spacer {
         padding-top: 1em;

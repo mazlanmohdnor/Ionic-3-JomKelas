@@ -7,12 +7,14 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DatePicker } from '@ionic-native/date-picker';
-import { AngularFireModule } from "angularfire2";
-import { AngularFireAuthModule } from "angularfire2/auth";
-import { AngularFireDatabaseModule } from "angularfire2/database";
-import { AuthProvider } from '../providers/auth/auth';
 import { HttpModule } from "@angular/http";
 import { Facebook } from "@ionic-native/facebook";
+import { IonicStorageModule } from '@ionic/storage';
+import { AuthProvider } from '../providers/auth/auth';
+
+import { AngularFireModule } from "angularfire2";
+import { AngularFireDatabaseModule } from "angularfire2/database";
+import { AngularFireAuthModule } from "angularfire2/auth";
 
 const config = {
     apiKey: "AIzaSyC9fyMmIMAptUaevwGV_GLKltcFb-0fSf0",
@@ -32,8 +34,9 @@ const config = {
     HttpModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
+    AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

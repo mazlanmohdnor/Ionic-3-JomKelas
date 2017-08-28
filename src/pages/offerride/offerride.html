@@ -10,117 +10,139 @@
             LOCATION
         </ion-card-header>
         <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-12>
+                        <ion-list>
+                            <ion-item>
+                                <ion-icon name="car" item-start color="secondary"></ion-icon>
+                                <ion-label>
+                                    From</ion-label>
+                                <ion-select [(ngModel)]="gaming">
+                                    <ion-option value="nes">NES</ion-option>
+                                    <ion-option value="n64">Nintendo64</ion-option>
+                                    <ion-option value="ps">PlayStation</ion-option>
+                                    <ion-option value="genesis">Sega Genesis</ion-option>
+                                    <ion-option value="saturn">Sega Saturn</ion-option>
+                                    <ion-option value="snes">SNES</ion-option>
+                                </ion-select>
+                            </ion-item>
+                        </ion-list>
 
+                        <ion-list>
+                            <ion-item>
+                                <ion-icon name="pin" item-start color="danger"></ion-icon>
+                                <ion-label>Destination</ion-label>
+                                <ion-select [(ngModel)]="gaming">
+                                    <ion-option value="nes">NES</ion-option>
+                                    <ion-option value="n64">Nintendo64</ion-option>
+                                    <ion-option value="ps">PlayStation</ion-option>
+                                    <ion-option value="genesis">Sega Genesis</ion-option>
+                                    <ion-option value="saturn">Sega Saturn</ion-option>
+                                    <ion-option value="snes">SNES</ion-option>
+                                </ion-select>
+                            </ion-item>
+                        </ion-list>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12>
+                        <ion-chip>
+                            <ion-icon name="pricetag" color="primary"></ion-icon>
+                            <ion-label>RM 0.50</ion-label>
+                        </ion-chip>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12>
+                        <ion-item>
+                            <ion-label stacked>
+                                <ion-icon name="locate"></ion-icon> Meeting Point
+                            </ion-label>
+                            <ion-input type="text" placeholder="Ex: Cafe Serumpun"></ion-input>
+                        </ion-item>
 
-            <ion-list>
-                <ion-item>
-                    <ion-label>
-
-                        From</ion-label>
-                    <ion-select [(ngModel)]="gaming">
-                        <ion-option value="nes">NES</ion-option>
-                        <ion-option value="n64">Nintendo64</ion-option>
-                        <ion-option value="ps">PlayStation</ion-option>
-                        <ion-option value="genesis">Sega Genesis</ion-option>
-                        <ion-option value="saturn">Sega Saturn</ion-option>
-                        <ion-option value="snes">SNES</ion-option>
-                    </ion-select>
-                </ion-item>
-            </ion-list>
-            <ion-list>
-                <ion-item>
-                    <ion-label>Destination</ion-label>
-                    <ion-select [(ngModel)]="gaming">
-                        <ion-option value="nes">NES</ion-option>
-                        <ion-option value="n64">Nintendo64</ion-option>
-                        <ion-option value="ps">PlayStation</ion-option>
-                        <ion-option value="genesis">Sega Genesis</ion-option>
-                        <ion-option value="saturn">Sega Saturn</ion-option>
-                        <ion-option value="snes">SNES</ion-option>
-                    </ion-select>
-                </ion-item>
-            </ion-list>
-
-
-            <ion-chip color="danger">
-                <ion-label>RM 0.50</ion-label>
-            </ion-chip>
-            <ion-list>
-
-                <ion-item>
-                    <ion-label stacked>Username</ion-label>
-                    <ion-input type="text"></ion-input>
-                </ion-item>
-
-
-            </ion-list>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
         </ion-card-content>
     </ion-card>
 
     <ion-card>
         <ion-card-header>
-            DATE AND TIME
+            SCHEDULE
         </ion-card-header>
         <ion-card-content>
-            date: {{date}}
-
-            <button ion-button block (click)="datepicker()">Select date</button>
-            <br>
-            <hr> time: {{time}}
-
-            <button ion-button block (click)="timepicker()">Select date</button>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-10>
+                        <ion-label>Date: {{date}}</ion-label>
+                    </ion-col>
+                    <ion-col col-2>
+                        <button ion-button icon-only clear (click)="datepicker()">
+                        <ion-icon name="calendar"></ion-icon>
+                        </button>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-10>
+                        <ion-label>Time: {{time}}</ion-label>
+                    </ion-col>
+                    <ion-col col-2>
+                        <button ion-button icon-only clear (click)="timepicker()">
+                        <ion-icon name="clock"></ion-icon>
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
         </ion-card-content>
     </ion-card>
 
     <ion-card>
         <ion-card-header>
-            LOCATION
+            DETAILS
         </ion-card-header>
         <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-12>
+                        <ion-list>
+                            <ion-item>
+                                <ion-icon name="car" item-start color="primary"></ion-icon>
+                                <ion-label>
+                                    Vehicle ID</ion-label>
+                                <ion-select [(ngModel)]="vehicle">
+                                    <ion-option value="nes">BMN 4832</ion-option>
+                                    <ion-option value="n64">BCQ 6844</ion-option>
+                                </ion-select>
+                            </ion-item>
+                        </ion-list>
 
-
-            <ion-list>
-                <ion-item>
-                    <ion-label>
-
-                        From</ion-label>
-                    <ion-select [(ngModel)]="gaming">
-                        <ion-option value="nes">NES</ion-option>
-                        <ion-option value="n64">Nintendo64</ion-option>
-                        <ion-option value="ps">PlayStation</ion-option>
-                        <ion-option value="genesis">Sega Genesis</ion-option>
-                        <ion-option value="saturn">Sega Saturn</ion-option>
-                        <ion-option value="snes">SNES</ion-option>
-                    </ion-select>
-                </ion-item>
-            </ion-list>
-            <ion-list>
-                <ion-item>
-                    <ion-label>Destination</ion-label>
-                    <ion-select [(ngModel)]="gaming">
-                        <ion-option value="nes">NES</ion-option>
-                        <ion-option value="n64">Nintendo64</ion-option>
-                        <ion-option value="ps">PlayStation</ion-option>
-                        <ion-option value="genesis">Sega Genesis</ion-option>
-                        <ion-option value="saturn">Sega Saturn</ion-option>
-                        <ion-option value="snes">SNES</ion-option>
-                    </ion-select>
-                </ion-item>
-            </ion-list>
-
-
-            <ion-chip color="danger">
-                <ion-label>RM 0.50</ion-label>
-            </ion-chip>
-            <ion-list>
-
-                <ion-item>
-                    <ion-label stacked>Username</ion-label>
-                    <ion-input type="text"></ion-input>
-                </ion-item>
-
-
-            </ion-list>
+                        <ion-list>
+                            <ion-item>
+                                <ion-icon name="man" item-start color="primary"></ion-icon>
+                                <ion-label>Number of seat</ion-label>
+                                <ion-select [(ngModel)]="seat">
+                                    <ion-option value="nes">1</ion-option>
+                                    <ion-option value="n64">2</ion-option>
+                                    <ion-option value="ps">3</ion-option>
+                                </ion-select>
+                            </ion-item>
+                        </ion-list>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12>
+                        <ion-item>
+                            <ion-label stacked>
+                                <ion-icon name="chatbubbles"></ion-icon> Ride Comment
+                            </ion-label>
+                            <ion-input type="text" placeholder="Ex: Im a cool guy"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
         </ion-card-content>
     </ion-card>
+    <button ion-button full large>Publish</button>
 </ion-content>

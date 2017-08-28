@@ -1,11 +1,14 @@
 page-signup {
+    ion-grid {
+        height: 100%;
+        justify-content: center;
+    }
     img {
-        width: 8em;
-        margin: 1em auto 0 auto;
-        display: block;
+        max-width: 100%;
+        height: 25%;
     }
     .spacer {
-        padding-top: 1em;
+        // padding-top: 1em;
     }
     .item-md {
         padding-left: 1em;

@@ -1,6 +1,6 @@
 {
   "name": "FYP",
-  "app_id": "",
+  "app_id": "8641d0cb",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
