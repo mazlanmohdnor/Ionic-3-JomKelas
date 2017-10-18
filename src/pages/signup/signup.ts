@@ -25,7 +25,7 @@ export class SignupPage {
     public authprovider: AuthProvider,
     public fire: AngularFireAuth,
     public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
   ) {
 
   }
@@ -39,14 +39,8 @@ export class SignupPage {
 
     this.authprovider.signup(this.profile).then(() => {
       this.fire.auth.currentUser.sendEmailVerification().then(() => {
-        // this.navCtrl.setRoot('LoginPage', { 'email': this.profile.email, 'password': this.profile.password })
+        this.navCtrl.setRoot('VerifymailPage', { 'profile': this.profile.matric })
         loader.dismiss();
-        let alert = this.alertCtrl.create({
-          title:'Congratulation!',
-          subTitle: 'We have sent an email. Please check and verify your email.',
-          buttons: ['OK']
-        });
-        alert.present();
       })
     }).catch(error => {
       let alert = this.alertCtrl.create({
@@ -55,7 +49,7 @@ export class SignupPage {
       });
       alert.present();
       loader.dismiss();
-   })
+    })
   }
 
   terms() {
