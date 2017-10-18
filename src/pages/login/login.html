@@ -6,9 +6,9 @@
 
                 <ion-item>
                     <ion-label floating>
-                        <ion-icon name="mail"></ion-icon> Email
+                        <ion-icon name="person"></ion-icon> Matric Number
                     </ion-label>
-                    <ion-input type="email" [(ngModel)]="profile.email"></ion-input>
+                    <ion-input type="number" [(ngModel)]="profile.matric"></ion-input>
                 </ion-item>
 
                 <ion-item>
@@ -21,13 +21,13 @@
 
                 <div class="spacer"></div>
 
-                <button ion-button block medium round color="primary" (click)="login()" [disabled]="!profile.email || !profile.password">Sign In</button>
+                <button ion-button block medium round color="primary" (click)="login()" [disabled]="!profile.matric || !profile.password">Sign In</button>
 
-                <p>or</p>
+                <!-- <p>or</p>
 
                 <button ion-button icon-left round full (click)="fblogin()">
         <ion-icon name="logo-facebook"></ion-icon> Login with facebook
-    </button>
+    </button> -->
 
                 <p text-center>Don't have any account? <a (click)="signup()">Sign Up</a></p>
 

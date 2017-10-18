@@ -9,20 +9,24 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
   templateUrl: 'signup.html',
 })
 export class SignupPage {
-
+  matric: string;
   password: string;
-  email: string;
   phone: number;
-  matric: number;
 
   profile = {
-    email: this.email,
-    password: this.password,
-    phone: this.phone,
     matric: this.matric,
+    password: this.password,
+    phone: this.phone
   }
  
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authprovider: AuthProvider, public fire: AngularFireAuth, public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public authprovider: AuthProvider,
+    public fire: AngularFireAuth,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController
+  ) {
 
   }
 

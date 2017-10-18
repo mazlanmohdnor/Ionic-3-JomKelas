@@ -15,6 +15,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AngularFireAuthModule } from "angularfire2/auth";
+import { NativeStorage } from '@ionic-native/native-storage';
 
 const config = {
     apiKey: "AIzaSyC9fyMmIMAptUaevwGV_GLKltcFb-0fSf0",
@@ -32,7 +33,11 @@ const config = {
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      scrollPadding: false,
+      scrollAssist: true,
+      autoFocusAssist: false
+    }),
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -48,7 +53,8 @@ const config = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    Facebook
+    Facebook,
+    NativeStorage
   ]
 })
 export class AppModule {}

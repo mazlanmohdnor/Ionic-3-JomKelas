@@ -13,13 +13,15 @@ export class AuthProvider {
   }
   //Signup
   signup(profile) {
-    return this.fire.auth.createUserWithEmailAndPassword(profile.email, profile.password).then((user) => {
+    // console.log(profile.matric + '@student.upm.edu.my');
+    var email = profile.matric + '@student.upm.edu.my';
+    return this.fire.auth.createUserWithEmailAndPassword(email, profile.password).then((user) => {
       this.firebaseDB.object(`/userProfile/${user.uid}`)
         .set({
           displayName: "No name",
           fullname: "No name",
           photoURL: "http://placehold.it/300x200",
-          email: profile.email,
+          email: email,
           emailVerified: false,
           phoneNumber: profile.phone,
           matricNumber: profile.matric
