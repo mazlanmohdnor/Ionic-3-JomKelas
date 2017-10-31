@@ -13,14 +13,26 @@
             <ion-col col-12 text-center>
                 <img src="assets/header.png">
 
-
+                <ion-item>
+                    <ion-label floating>
+                        <ion-icon name="person"></ion-icon> Full Name
+                    </ion-label>
+                    <ion-input type="text" [(ngModel)]="profile.fullname"></ion-input>
+                </ion-item>
 
                 <ion-item>
                     <ion-label floating>
-                        <ion-icon name="person"></ion-icon> Matric Number
+                        <ion-icon name="card"></ion-icon> Matric Number
                     </ion-label>
                     <ion-input type="number" [(ngModel)]="profile.matric"></ion-input>
                 </ion-item>
+
+                <!-- <ion-item>
+                    <ion-label floating>
+                        <ion-icon name="card"></ion-icon> Email
+                    </ion-label>
+                    <ion-input type="text" [(ngModel)]="profile.email"></ion-input>
+                </ion-item> -->
 
                 <ion-item>
                     <ion-label floating>

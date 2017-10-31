@@ -8,6 +8,80 @@
 </ion-header>
 
 
-<ion-content padding>
-    <button ion-button (click)="logout()">Logout</button>
+<ion-content parallax-header no-bounce>
+    <div class="header-image">
+        <div class="tab-header">
+            <img class="circular" src="{{(profile | async)?.photoURL}}" />
+            <h2>{{(profile | async)?.fullname}}</h2> Phone No: {{(profile | async)?.phoneNumber}} <br>Email : {{(profile | async)?.email}}
+        </div>
+    </div>
+
+
+    <div class="main-content">
+        <!--1st card-->
+
+        <ion-card class="overlap">
+            <ion-card-header>
+                <ion-row class="profile-numbers" text-center>
+                    <ion-col col-4>
+                        <p>Total Rides</p>
+                        <span>4</span>
+                    </ion-col>
+                    <ion-col col-4>
+                        <p>Ride Offered</p>
+                        <span>4</span>
+                    </ion-col>
+                    <ion-col col-4>
+                        <p>Ride Joined</p>
+                        <span>4</span>
+                    </ion-col>
+                </ion-row>
+                <hr>
+            </ion-card-header>
+            <ion-card-header>
+                BIOGRAPHY
+            </ion-card-header>
+            <ion-card-content>
+                Good UX design makes efficient. You can have all the functionality that user needs but if your app is hard to understand, then it will be useless. My new field of study is UI/UX design, what methods is used in order to achieve great UI/UX and how to implement
+                the technology into real application. And I believe, with my effort, I can go much further and improve my skills to meet industry needs.
+            </ion-card-content>
+        </ion-card>
+
+
+        <!-- 2nd card start -->
+        <ion-card>
+            <ion-card-header>
+                Your Vehicle
+            </ion-card-header>
+
+            <ion-card-content>
+                <ion-list>
+                    <ion-item detail-push>
+                        <ion-avatar item-start>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPvmQmclKhdjpOQ7FP23quJuyqemMmoxuRZzn_x1k7q7Zqed1BtA">
+                        </ion-avatar>
+                        <h2>Cher</h2>
+                        <p>Ugh. As if.</p>
+                    </ion-item>
+                    <ion-item detail-push>
+                        <ion-avatar item-start>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPvmQmclKhdjpOQ7FP23quJuyqemMmoxuRZzn_x1k7q7Zqed1BtA">
+                        </ion-avatar>
+                        <h2>Cher</h2>
+                        <p>Ugh. As if.</p>
+                    </ion-item>
+                </ion-list>
+                <button ion-button medium round color="primary">Add Vehicle</button>
+            </ion-card-content>
+        </ion-card>
+        <!-- 2nd card end -->
+
+
+        <button ion-button (click)="fblogin()">
+        <ion-icon name="logo-facebook"></ion-icon> Login with facebook
+        </button>
+
+        <button ion-button (click)="logout()">Logout</button>
+    </div>
+
 </ion-content>

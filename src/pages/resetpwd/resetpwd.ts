@@ -43,8 +43,12 @@ export class ResetpwdPage {
           {
             text: 'Check Email',
             handler: () => {
-              this.iab.create('http://mail.student.upm.edu.my/', '_system')
-            }
+              let browser = open('http://mail.student.upm.edu.my/', "_self", "location=true");
+              browser.addEventListener('exit', () => {
+             
+               
+                    })
+                }
           }
         ]
 

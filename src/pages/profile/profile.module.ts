@@ -1,6 +1,7 @@
+import { ParallaxHeaderDirectiveModule } from './../../components/parallax-header/parallax-header.module';
+import { ProfilePage } from './profile';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { ProfilePage } from './profile';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,11 @@ import { ProfilePage } from './profile';
   ],
   imports: [
     IonicPageModule.forChild(ProfilePage),
+    ParallaxHeaderDirectiveModule
   ],
+  exports: [
+    ProfilePage
+  ]
 })
-export class ProfilePageModule {}
+
+export class ProfilePageModule { }

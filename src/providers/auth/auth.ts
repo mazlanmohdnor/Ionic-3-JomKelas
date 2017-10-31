@@ -13,33 +13,31 @@ export class AuthProvider {
   }
   //Signup
   signup(profile) {
-    // console.log(profile.matric + '@student.upm.edu.my');
+    console.log(profile);
+
+
     var email = profile.matric + '@student.upm.edu.my';
     return this.fire.auth.createUserWithEmailAndPassword(email, profile.password).then((user) => {
-      this.firebaseDB.object(`/userProfile/${user.uid}`)
-        .set({
-          displayName: "No name",
-          fullname: "No name",
-          photoURL: "http://placehold.it/300x200",
-          email: email,
-          emailVerified: false,
-          phoneNumber: profile.phone,
-          matricNumber: profile.matric
-        });
+      //save to firebase database
+      this.fire.auth.onAuthStateChanged(auth => {
+        this.firebaseDB.object(`/userProfile/${user.uid}`)
+          .set({
+            fullname: profile.fullname,
+            photoURL: "assets/no-profile.png",
+            email: email,
+            phoneNumber: profile.phone,
+            matricNumber: profile.matric
+          });
+
+      })
+    
+    
     })
   }
   
   signout() {
     return this.fire.auth.signOut();
 }
-
-//   loggedinuser() {
-//     var userId = this.fire.auth.currentUser.uid;
-//     return this.firebaseDB.database.ref('/userProfile/+' + userId).once('value').then((snapshot) => {
-//       var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-//     })
-// }  
-
 
 
 }

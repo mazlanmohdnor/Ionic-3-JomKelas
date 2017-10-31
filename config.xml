@@ -76,7 +76,7 @@
         <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
     </platform>
-    <content original-src="index.html" src="http://118.118.118.97:8100" />
+    <content original-src="index.html" src="http://10.114.26.196:8100" />
     <allow-navigation href="http://10.114.26.196:8101" />
     <allow-navigation href="http://10.114.26.196:8100" />
     <allow-navigation href="http://10.101.2.162:8100" />

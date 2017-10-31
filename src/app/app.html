@@ -1,8 +1,8 @@
 <ion-menu [content]="content">
     <ion-card text-center class="hide-card">
-        <img src="{{photoURL}}" class="custom-avatar" />
-        <p><b>{{displayName}}</b></p>
-        <p>{{email}}</p>
+        <img src="{{(profile | async)?.photoURL}}" class="custom-avatar" />
+        <p><b>{{(profile | async)?.fullname}}</b></p>
+        <p>{{(profile | async)?.email}}</p>
     </ion-card>
 
     <ion-list no-lines>

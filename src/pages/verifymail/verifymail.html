@@ -13,13 +13,15 @@
                 <h2>Please verify your email</h2>
                 <p>You've just received an email containing verification link on </p>
                 <b>
-                {{matric}}@student.upm.edu.my
+                {{matric}}
                 </b>
 
-                <p>This step is crucial as we want to ensure all users are verified as an UPM student. We are using UPM student official email as primary email address. Button below will navigate you to the login page.
+                <p>This step is crucial as we want to ensure all users are verified as a UPM student only. We are using UPM student official email as primary email address. Button below will navigate you to the login page.
                 </p>
 
+                <p>Please login to UPM student official email at http://mail.student.upm.edu.my
 
+                </p>
                 <div class="spacer"></div>
 
 
@@ -27,12 +29,12 @@
         </ion-row>
         <ion-row>
             <ion-col col-6>
-                <button ion-button round (click)="navigateEmail()">Check Email</button>
+                <button ion-button round color="primary" block (click)="navigateEmail()">Check Email</button>
             </ion-col>
             <ion-col col-6>
-                <button ion-button round outline (click)="resendEmail">Resend Email</button>
+                <button ion-button round outline block (click)="resendEmail()">Resend Email</button>
             </ion-col>
         </ion-row>
-        <button ion-button round (click)="home()">Done</button>
+        <button ion-button clear color="primary" (click)="home()">I will verify later.</button>
     </ion-grid>
 </ion-content>

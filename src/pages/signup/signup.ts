@@ -1,7 +1,10 @@
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Profile } from './../../model/profile';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController, Events } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -9,15 +12,9 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
   templateUrl: 'signup.html',
 })
 export class SignupPage {
-  matric: string;
-  password: string;
-  phone: number;
+ 
 
-  profile = {
-    matric: this.matric,
-    password: this.password,
-    phone: this.phone
-  }
+  profile = {} as Profile;
  
   constructor(
     public navCtrl: NavController,
@@ -26,6 +23,12 @@ export class SignupPage {
     public fire: AngularFireAuth,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController,
+    public event: Events,
+    public firebaseDB: AngularFireDatabase,
+    public storage: Storage,
+
+
   ) {
 
   }
@@ -39,7 +42,31 @@ export class SignupPage {
 
     this.authprovider.signup(this.profile).then(() => {
       this.fire.auth.currentUser.sendEmailVerification().then(() => {
-        this.navCtrl.setRoot('VerifymailPage', { 'profile': this.profile.matric })
+      
+        //login user
+        var email = this.profile.matric + '@student.upm.edu.my';
+        this.fire.auth.signInWithEmailAndPassword(email, this.profile.password).then(user => {
+    // console.log(user);
+          //check whether email verified or Not
+          if (user.emailVerified) {
+            loader.dismiss();
+            //save profile object to localstorage
+            this.storage.set(this.profile.email, this.profile);
+
+            this.navCtrl.setRoot('HomePage')
+          } else {
+            loader.dismiss();
+              this.navCtrl.setRoot('VerifymailPage', { 'profile': this.profile.matric })
+          }
+        }, (error) => {
+          loader.dismiss();
+          let alert = this.alertCtrl.create({
+            title: 'Try again',
+            subTitle: error.message,
+            buttons: ['OK']
+          });
+          alert.present();
+          })
         loader.dismiss();
       })
     }).catch(error => {
