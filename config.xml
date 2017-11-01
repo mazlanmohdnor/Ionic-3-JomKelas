@@ -91,10 +91,10 @@
     <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
-    <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
-        <variable name="APP_ID" value="116522829008982" />
-        <variable name="APP_NAME" value="JomKelas" />
-    </plugin>
     <plugin name="cordova-plugin-nativestorage" spec="^2.2.2" />
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.1" />
+    <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
+        <variable name="APP_ID" value="1774480346185892" />
+        <variable name="APP_NAME" value="jomkelasapp" />
+    </plugin>
 </widget>

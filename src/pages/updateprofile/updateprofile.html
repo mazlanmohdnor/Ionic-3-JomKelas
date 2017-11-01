@@ -1,51 +1,57 @@
 <ion-header>
     <ion-navbar color="primary">
-        <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-        <ion-title>Profile</ion-title>
-        <ion-buttons end (click)="updateprofile()">
-            <button ion-button clear>EDIT</button>
+
+        <ion-title>Update Profile</ion-title>
+        <ion-buttons end (click)="saveprofile()">
+            <button ion-button clear>SAVE</button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
 
-
 <ion-content parallax-header no-bounce>
     <div class="header-image">
         <div class="tab-header">
-            <img class="circular" src="{{(profile | async)?.photoURL}}" />
-            <h2>{{(profile | async)?.fullname}}</h2> Phone No: {{(profile | async)?.phoneNumber}} <br>Email : {{(profile | async)?.email}}
+            <img class="circular" src="{{profile.photoURL}}" />
+            <p>{{profile.email}}</p>
         </div>
     </div>
-
 
     <div class="main-content">
         <!--1st card-->
 
         <ion-card class="overlap">
+
             <ion-card-header>
-                <ion-row class="profile-numbers" text-center>
-                    <ion-col col-4>
-                        <p>Total Rides</p>
-                        <span>4</span>
-                    </ion-col>
-                    <ion-col col-4>
-                        <p>Ride Offered</p>
-                        <span>4</span>
-                    </ion-col>
-                    <ion-col col-4>
-                        <p>Ride Joined</p>
-                        <span>4</span>
-                    </ion-col>
-                </ion-row>
-                <hr>
-            </ion-card-header>
-            <ion-card-header>
-                BIOGRAPHY
+                DETAILS
             </ion-card-header>
             <ion-card-content>
-                {{(profile|async)?.bio}}
+                <ion-item>
+                    <ion-label floating>
+                        <ion-icon name="person"></ion-icon> Fullname
+                    </ion-label>
+                    <ion-input type="text" [(ngModel)]="profile.fullname"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label floating>
+                        <ion-icon name="key"></ion-icon> Phone Number
+                    </ion-label>
+                    <ion-input type="number" [(ngModel)]="profile.phoneNumber"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label floating>
+                        <ion-icon name="key"></ion-icon> Biography
+                    </ion-label>
+                    <ion-input type="text" [(ngModel)]="profile.bio"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label floating>
+                        <ion-icon name="key"></ion-icon> College
+                    </ion-label>
+                    <ion-input type="text" [(ngModel)]="profile.kolej"></ion-input>
+                </ion-item>
             </ion-card-content>
         </ion-card>
 

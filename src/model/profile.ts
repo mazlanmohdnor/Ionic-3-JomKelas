@@ -4,5 +4,7 @@ export interface Profile {
     photoURL: string,
     email: string,
     phoneNumber: string,
-    matric: number
+    matric: number;
+    bio: string,
+    kolej:string
 }
