@@ -27,71 +27,73 @@
             <ion-card-content>
                 <ion-item>
                     <ion-label floating>
-                        <ion-icon name="person"></ion-icon> Fullname
+                        <ion-icon name="card" color="primary"></ion-icon> Fullname
                     </ion-label>
                     <ion-input type="text" [(ngModel)]="profile.fullname"></ion-input>
                 </ion-item>
 
                 <ion-item>
                     <ion-label floating>
-                        <ion-icon name="key"></ion-icon> Phone Number
+                        <ion-icon name="call" color="primary"></ion-icon> Phone Number
                     </ion-label>
                     <ion-input type="number" [(ngModel)]="profile.phoneNumber"></ion-input>
                 </ion-item>
 
                 <ion-item>
-                    <ion-label floating>
-                        <ion-icon name="key"></ion-icon> Biography
-                    </ion-label>
-                    <ion-input type="text" [(ngModel)]="profile.bio"></ion-input>
+                    <ion-label>
+                        <ion-icon name="person" color="primary"></ion-icon> Gender</ion-label>
+                    <ion-select [(ngModel)]="profile.gender" interface="popover">
+                        <ion-option value="male">Male</ion-option>
+                        <ion-option value="female">Female</ion-option>
+                    </ion-select>
                 </ion-item>
 
                 <ion-item>
-                    <ion-label floating>
-                        <ion-icon name="key"></ion-icon> College
-                    </ion-label>
-                    <ion-input type="text" [(ngModel)]="profile.kolej"></ion-input>
+                    <ion-label>
+                        <ion-icon name="home" color="primary"></ion-icon> College</ion-label>
+                    <ion-select [(ngModel)]="profile.kolej">
+                        <ion-option value="Kolej Mohamad Rashid">Kolej Mohamad Rashid</ion-option>
+                        <ion-option value="Kolej 2">Kolej 2</ion-option>
+                        <ion-option value="Kolej Tun Dr. Ismail">Kolej Tun Dr. Ismail</ion-option>
+                        <ion-option value="Kolej Canselor">Kolej Canselor</ion-option>
+                        <ion-option value="Kolej 5">Kolej 5</ion-option>
+                        <ion-option value="Kolej 6">Kolej 6</ion-option>
+                        <ion-option value="KOSAS">KOSAS</ion-option>
+                        <ion-option value="Kolej Tun Perak">Kolej Tun Perak</ion-option>
+                        <ion-option value="Kolej Pendeta Zaba">Kolej Pendeta Zaba</ion-option>
+                        <ion-option value="Kolej 10">Kolej 10</ion-option>
+                        <ion-option value="Kolej 11">Kolej 11</ion-option>
+                        <ion-option value="Kolej 12">Kolej 12</ion-option>
+                        <ion-option value="Kolej 13">Kolej 13</ion-option>
+                        <ion-option value="Kolej 14">Kolej 14</ion-option>
+                        <ion-option value="Kolej 15">Kolej 15</ion-option>
+                        <ion-option value="Kolej 16">Kolej 16</ion-option>
+                        <ion-option value="Kolej 17">Kolej 17</ion-option>
+                    </ion-select>
                 </ion-item>
+
+                <ion-item>
+                    <ion-label stacked>
+                        <ion-icon name="at" color="primary"></ion-icon> Biography
+                    </ion-label>
+                    <ion-textarea placeholder="Enter a description" [(ngModel)]="profile.bio"></ion-textarea>
+                </ion-item>
+
+
             </ion-card-content>
         </ion-card>
 
 
-        <!-- 2nd card start -->
-        <ion-card>
-            <ion-card-header>
-                Your Vehicle
-            </ion-card-header>
 
-            <ion-card-content>
-                <ion-list>
-                    <ion-item detail-push>
-                        <ion-avatar item-start>
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPvmQmclKhdjpOQ7FP23quJuyqemMmoxuRZzn_x1k7q7Zqed1BtA">
-                        </ion-avatar>
-                        <h2>Car</h2>
-                        <p>BMN 4831</p>
-                    </ion-item>
-                    <ion-item detail-push>
-                        <ion-avatar item-start>
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPvmQmclKhdjpOQ7FP23quJuyqemMmoxuRZzn_x1k7q7Zqed1BtA">
-                        </ion-avatar>
-                        <h2>Motorcycle</h2>
-                        <p>RBF 3234</p>
-                    </ion-item>
-                </ion-list>
-                <button ion-button color="primary">Add Vehicle</button>
-            </ion-card-content>
-        </ion-card>
-        <!-- 2nd card end -->
 
         <!-- 3rd card start -->
         <ion-card>
             <ion-card-content>
                 <button ion-button (click)="fblogin()">
-                    <ion-icon name="logo-facebook"></ion-icon> Login with facebook
+                    <ion-icon name="logo-facebook"></ion-icon> Integrate with Facebook
                 </button>
 
-                <button ion-button (click)="logout()">Logout</button>
+
             </ion-card-content>
         </ion-card>
         <!-- 3rd card end -->

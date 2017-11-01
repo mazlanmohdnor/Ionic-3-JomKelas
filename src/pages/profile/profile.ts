@@ -1,8 +1,8 @@
+import { Car } from './../../model/car';
 import { Observable } from 'rxjs/Observable';
 import { Profile } from './../../model/profile';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Facebook } from '@ionic-native/facebook';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
@@ -13,7 +13,9 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
+  car: any;
   profile: Observable<Profile>;
+  carArr: Car[] = [];
 
   constructor(
     public navCtrl: NavController,
@@ -21,7 +23,6 @@ export class ProfilePage {
     public auth: AuthProvider,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    public fb: Facebook,
     public fire: AngularFireAuth,
     public firebaseDB: AngularFireDatabase,
 
@@ -33,34 +34,15 @@ export class ProfilePage {
   ionViewDidLoad() {
     this.fire.authState.subscribe((user) => {
       this.profile = this.firebaseDB.object(`userProfile/${user.uid}`);
+
+      this.firebaseDB.database.ref(`userProfile/${user.uid}/car`).on('value', (data) => {
+        this.car = data.val();
+      })
     })
   }
 
 
-  //login with facebook
-  fblogin() {
-
-    this.fb.login(['email', 'public_profile']).then((response) => {
-      let userId = response.authResponse.userID;
-
-      // Getting name and gender properties
-      this.fb.api('me?fields=id,name', [])
-        .then((user) => {
-          //
-          // this.userData = { email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name'] }
-          //now we have the users info, let's save it in the firebase
-          this.fire.auth.onAuthStateChanged(auth => {
-            this.firebaseDB.database.ref(`/userProfile/${auth.uid}`)
-              .update({
-                fullname: user.name,
-                photoURL: "https://graph.facebook.com/" + userId + "/picture?type=large",
-
-              });
-          })
-
-        })
-    })
-  }
+ 
 
   updateprofile() {
     this.navCtrl.push('UpdateprofilePage');
@@ -89,4 +71,15 @@ export class ProfilePage {
     confirm.present();
   }
 
+  addvehicle() {
+    this.navCtrl.push('VehiclePage')
+  }
+
+  vehicledetail(plate) {
+    this.fire.authState.subscribe((user) => {
+      this.firebaseDB.database.ref(`userProfile/${user.uid}/car/${plate}`).on('value', (data) => {
+        this.navCtrl.push('VehicledetailPage', { 'vehicledata': data.val()})
+      })
+    })
+  }  
 }

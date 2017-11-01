@@ -6,5 +6,6 @@ export interface Profile {
     phoneNumber: string,
     matric: number;
     bio: string,
-    kolej:string
+    kolej: string,
+    gender:string
 }

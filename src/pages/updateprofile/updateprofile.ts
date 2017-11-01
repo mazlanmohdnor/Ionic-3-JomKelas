@@ -1,3 +1,4 @@
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { Observable } from 'rxjs/Observable';
 import { Profile } from './../../model/profile';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
@@ -20,6 +21,8 @@ export class UpdateprofilePage {
     public navParams: NavParams,
     public fire: AngularFireAuth,
     public firebaseDB: AngularFireDatabase,
+    public fb: Facebook,
+
   ) {
   }
 
@@ -29,14 +32,6 @@ export class UpdateprofilePage {
         console.log(result);
         this.profile = result
       })
-      // .once('value').then(snapshot => {
-      // this.profile = snapshot;
-      // console.log(this.profile);
-      // // alert(JSON.stringify(this.profile));
-      // this.profile.email = snapshot.email;
-      // this.profile.fullname = snapshot.fullname;
-      // this.profile.phoneNumber = snapshot.phoneNumber;
-      // });
     })
   }
 
@@ -46,12 +41,38 @@ export class UpdateprofilePage {
       this.firebaseDB.database.ref(`/userProfile/${user.uid}`)
         .update({
           fullname: this.profile.fullname,
-          // photoURL: "https://graph.facebook.com/" + userId + "/picture?type=large",
           phoneNumber: this.profile.phoneNumber,
           bio: this.profile.bio,
-          kolej:this.profile.kolej
+          kolej: this.profile.kolej,
+          gender: this.profile.gender
 
         });
+    })
+  }
+
+
+  //login with facebook
+  fblogin() {
+
+    this.fb.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
+      let userId = response.authResponse.userID;
+
+      // Getting name and gender properties
+      this.fb.api('me?fields=id,name', [])
+        .then((user) => {
+          //
+          // this.userData = { email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name'] }
+          //now we have the users info, let's save it in the firebase
+          this.fire.auth.onAuthStateChanged(auth => {
+            this.firebaseDB.database.ref(`/userProfile/${auth.uid}`)
+              .update({
+                fullname: user.name,
+                photoURL: "https://graph.facebook.com/" + userId + "/picture?type=large",
+
+              });
+          })
+
+        })
     })
   }
 

@@ -51,7 +51,7 @@ export class SignupPage {
           if (user.emailVerified) {
             loader.dismiss();
             //save profile object to localstorage
-            this.storage.set(this.profile.email, this.profile);
+            // this.storage.set(this.profile.email, this.profile);
 
             this.navCtrl.setRoot('HomePage')
           } else {

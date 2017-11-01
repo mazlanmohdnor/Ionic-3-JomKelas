@@ -42,6 +42,12 @@
                 <hr>
             </ion-card-header>
             <ion-card-header>
+                College:
+                <ion-chip color="secondary">
+                    <ion-label>{{(profile|async)?.kolej}}</ion-label>
+                </ion-chip>
+            </ion-card-header>
+            <ion-card-header>
                 BIOGRAPHY
             </ion-card-header>
             <ion-card-content>
@@ -58,37 +64,20 @@
 
             <ion-card-content>
                 <ion-list>
-                    <ion-item detail-push>
+                    <ion-item detail-push *ngFor="let car of car | keyobject" (click)="vehicledetail(car.plate)">
                         <ion-avatar item-start>
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPvmQmclKhdjpOQ7FP23quJuyqemMmoxuRZzn_x1k7q7Zqed1BtA">
                         </ion-avatar>
-                        <h2>Car</h2>
-                        <p>BMN 4831</p>
-                    </ion-item>
-                    <ion-item detail-push>
-                        <ion-avatar item-start>
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPvmQmclKhdjpOQ7FP23quJuyqemMmoxuRZzn_x1k7q7Zqed1BtA">
-                        </ion-avatar>
-                        <h2>Motorcycle</h2>
-                        <p>RBF 3234</p>
+                        <h2>{{car.brand}} {{car.model}}</h2>
+                        <p>{{car.plate}}</p>
                     </ion-item>
                 </ion-list>
-                <button ion-button color="primary">Add Vehicle</button>
+                <button ion-button color="primary" (click)="addvehicle()">Add Vehicle</button>
             </ion-card-content>
         </ion-card>
         <!-- 2nd card end -->
+        <button ion-button (click)="logout()">Logout</button>
 
-        <!-- 3rd card start -->
-        <ion-card>
-            <ion-card-content>
-                <button ion-button (click)="fblogin()">
-                    <ion-icon name="logo-facebook"></ion-icon> Login with facebook
-                </button>
-
-                <button ion-button (click)="logout()">Logout</button>
-            </ion-card-content>
-        </ion-card>
-        <!-- 3rd card end -->
 
 
     </div>

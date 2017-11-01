@@ -1,4 +1,4 @@
-page-profile {
+page-vehicle {
     .header-image {
         background-image: url(https://images.pexels.com/photos/370799/pexels-photo-370799.jpeg?h=350&auto=compress&cs=tinysrgb);
         background-size: cover;
@@ -41,23 +41,6 @@ page-profile {
     }
     .overlap {
         margin-top: -40px;
-    }
-    .profile-description {
-        font-size: 15px;
-        color: #888;
-    }
-    // Following, Followers and all..
-    .profile-numbers {
-        p {
-            color: #444;
-            font-size: medium;
-            margin-bottom: 3px;
-        }
-        span {
-            font-weight: bold;
-            font-size: 2.4rem;
-            color: #34354c;
-        }
     }
     .item-md {
         padding-left: 0px;

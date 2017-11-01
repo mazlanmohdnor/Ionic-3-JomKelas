@@ -26,7 +26,10 @@ export class AuthProvider {
             photoURL: "assets/no-profile.png",
             email: email,
             phoneNumber: profile.phone,
-            matricNumber: profile.matric
+            matricNumber: profile.matric,
+            bio: "",
+            kolej: "",
+            gender: ""
           });
 
       })
