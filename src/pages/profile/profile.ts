@@ -75,11 +75,11 @@ export class ProfilePage {
     this.navCtrl.push('VehiclePage')
   }
 
-  vehicledetail(plate) {
-    this.fire.authState.subscribe((user) => {
-      this.firebaseDB.database.ref(`userProfile/${user.uid}/car/${plate}`).on('value', (data) => {
-        this.navCtrl.push('VehicledetailPage', { 'vehicledata': data.val()})
-      })
-    })
+  vehicledetail(car) {
+    // this.fire.auth.onAuthStateChanged((user) => {
+    //   this.firebaseDB.database.ref(`userProfile/${user.uid}/car/${car.plate}`).on('value', (data) => {
+        this.navCtrl.push('VehicledetailPage', { 'vehicledata': car})
+      // })
+    // })
   }  
 }

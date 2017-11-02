@@ -2,7 +2,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Car } from './../../model/car';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -16,6 +16,8 @@ export class VehiclePage {
     public navParams: NavParams,
     public fire: AngularFireAuth,
     public firebaseDB: AngularFireDatabase,
+    public alertCtrl: AlertController
+
   ) {
   }
 
@@ -28,18 +30,41 @@ export class VehiclePage {
   }
 
   savevehicle() {
-    this.fire.authState.subscribe((user) => {
-      this.firebaseDB.object(`/userProfile/${user.uid}/car/${this.car.plate}`)
-        .set({
-          uid:user.uid,
-          type: this.car.type,
-          brand: this.car.brand,
-          model: this.car.model,
-          plate: this.car.plate,
-          color: this.car.color,
-          seat: this.car.seat
+    let confirm = this.alertCtrl.create({
+      title: `Add ${this.car.plate}`,
+      // message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.fire.authState.subscribe((user) => {
+              this.firebaseDB.object(`/userProfile/${user.uid}/car/${this.car.plate}`)
+                .set({
+                  uid: user.uid,
+                  type: this.car.type,
+                  brand: this.car.brand,
+                  model: this.car.model,
+                  plate: this.car.plate,
+                  color: this.car.color,
+                  seat: this.car.seat
 
-        });
-    })
+                });
+            })
+            this.navCtrl.setRoot('ProfilePage')
+          
+          }
+        }
+      ]
+    });
+    confirm.present();
+
+
+
   }
 }

@@ -64,7 +64,7 @@
 
             <ion-card-content>
                 <ion-list>
-                    <ion-item detail-push *ngFor="let car of car | keyobject" (click)="vehicledetail(car.plate)">
+                    <ion-item detail-push *ngFor="let car of car | keyobject" (click)="vehicledetail(car)">
                         <ion-avatar item-start>
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPvmQmclKhdjpOQ7FP23quJuyqemMmoxuRZzn_x1k7q7Zqed1BtA">
                         </ion-avatar>
@@ -72,7 +72,7 @@
                         <p>{{car.plate}}</p>
                     </ion-item>
                 </ion-list>
-                <button ion-button color="primary" (click)="addvehicle()">Add Vehicle</button>
+                <button ion-button block color="primary" (click)="addvehicle()">Add Vehicle</button>
             </ion-card-content>
         </ion-card>
         <!-- 2nd card end -->
