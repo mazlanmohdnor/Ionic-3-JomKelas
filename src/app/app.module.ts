@@ -17,6 +17,7 @@ import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { NativeStorage } from '@ionic-native/native-storage';
 import { InAppBrowser } from "@ionic-native/in-app-browser";
+import { Camera } from "@ionic-native/camera";
 
 const config = {
     apiKey: "AIzaSyC9fyMmIMAptUaevwGV_GLKltcFb-0fSf0",
@@ -56,7 +57,8 @@ const config = {
     AuthProvider,
     Facebook,
     NativeStorage,
-    InAppBrowser
+    InAppBrowser,
+    Camera
   ]
 })
 export class AppModule {}

@@ -21,13 +21,13 @@ export class VehiclePage {
   ) {
   }
 
-  ionViewDidLoad() {
-    this.fire.authState.subscribe((user) => {
-      this.firebaseDB.database.ref(`userProfile/${user.uid}/car`).on('value', (data) => {
-        var cars = data.val();
-      })
-    })
-  }
+  // ionViewDidLoad() {
+  //   this.fire.authState.subscribe((user) => {
+  //     this.firebaseDB.database.ref(`userProfile/${user.uid}/car`).on('value', (data) => {
+  //       var cars = data.val();
+  //     })
+  //   })
+  // }
 
   savevehicle() {
     let confirm = this.alertCtrl.create({
@@ -43,8 +43,8 @@ export class VehiclePage {
         {
           text: 'Ok',
           handler: () => {
-            this.fire.authState.subscribe((user) => {
-              this.firebaseDB.object(`/userProfile/${user.uid}/car/${this.car.plate}`)
+            this.fire.auth.onAuthStateChanged((user) => {
+              this.firebaseDB.object(`/vehicle/${user.uid}/${this.car.plate}`)
                 .set({
                   uid: user.uid,
                   type: this.car.type,

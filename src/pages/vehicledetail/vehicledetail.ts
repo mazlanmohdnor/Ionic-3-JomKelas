@@ -43,7 +43,7 @@ export class VehicledetailPage {
         {
           text: 'Ok',
           handler: () => {
-            this.firebaseDB.database.ref(`/userProfile/${this.fire.auth.currentUser.uid}/car/${this.car.plate}`)
+            this.firebaseDB.database.ref(`/vehicle/${this.fire.auth.currentUser.uid}/${this.car.plate}`)
               .update({
                 type: this.car.type,
                 brand: this.car.brand,
@@ -76,7 +76,7 @@ export class VehicledetailPage {
           text: 'Agree',
           handler: () => {
             this.fire.auth.onAuthStateChanged(auth => {
-              this.firebaseDB.database.ref(`/userProfile/${auth.uid}/car/${this.car.plate}`).remove().then(() => {
+              this.firebaseDB.database.ref(`/vehicle/${auth.uid}/${this.car.plate}`).remove().then(() => {
                 this.navCtrl.setRoot('ProfilePage')
               })
             })

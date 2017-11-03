@@ -35,14 +35,12 @@ export class ProfilePage {
     this.fire.authState.subscribe((user) => {
       this.profile = this.firebaseDB.object(`userProfile/${user.uid}`);
 
-      this.firebaseDB.database.ref(`userProfile/${user.uid}/car`).on('value', (data) => {
+      this.firebaseDB.database.ref(`vehicle/${user.uid}`).on('value', (data) => {
         this.car = data.val();
       })
     })
   }
 
-
- 
 
   updateprofile() {
     this.navCtrl.push('UpdateprofilePage');
@@ -76,10 +74,6 @@ export class ProfilePage {
   }
 
   vehicledetail(car) {
-    // this.fire.auth.onAuthStateChanged((user) => {
-    //   this.firebaseDB.database.ref(`userProfile/${user.uid}/car/${car.plate}`).on('value', (data) => {
         this.navCtrl.push('VehicledetailPage', { 'vehicledata': car})
-      // })
-    // })
   }  
 }

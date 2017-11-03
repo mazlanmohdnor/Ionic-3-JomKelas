@@ -1,10 +1,16 @@
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { Observable } from 'rxjs/Observable';
 import { Profile } from './../../model/profile';
-import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+
+import { AngularFireAuth } from 'angularfire2/auth';
+import { FirebaseApp } from 'angularfire2';
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
+
+
+
 
 @IonicPage()
 @Component({
@@ -12,6 +18,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'updateprofile.html',
 })
 export class UpdateprofilePage {
+  base64Image: string;
   // profile: Observable<Profile>;
   // profile: FirebaseObjectObservable<Profile>;
   profile = {} as Profile;
@@ -22,6 +29,9 @@ export class UpdateprofilePage {
     public fire: AngularFireAuth,
     public firebaseDB: AngularFireDatabase,
     public fb: Facebook,
+    public actionSheetCtrl: ActionSheetController,
+    private camera: Camera,
+    public fba:FirebaseApp
 
   ) {
   }
@@ -76,4 +86,70 @@ export class UpdateprofilePage {
     })
   }
 
+  cameraOption() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Choose below',
+      buttons: [
+        {
+          text: 'Camera',
+          icon: 'camera',
+          handler: () => {
+            this.opencamera();
+            console.log('Destructive clicked');
+          }
+        }, {
+          text: 'Gallery',
+          icon: 'photos',
+          handler: () => {
+            console.log('Archive clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+
+  opencamera() {
+   
+     
+    //defining camera cameraOption
+    const options: CameraOptions = {
+      quality: 50,
+      targetHeight: 600,
+      targetWidth: 600,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      encodingType: this.camera.EncodingType.PNG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+    }
+
+    this.camera.getPicture(options).then(profilePicture => {
+      // Send the picture to Firebase Storage
+      const image = `data:image/jpeg;based64,${profilePicture}`;
+
+      const pictures = this.fba.storage().ref('images/test.png');
+
+      pictures.putString(image, 'data_url')
+        .then(savedProfilePicture => {
+          this.fire.auth.onAuthStateChanged(auth => {
+            this.firebaseDB.database.ref(`/userProfile/${auth.uid}`)
+              .update({
+                photoURL: savedProfilePicture.downloadURL,
+              });
+          })
+        }, error => {
+          // Log an error to the console if something goes wrong.
+          console.log("ERROR -> " + JSON.stringify(error));
+        });
+     
+
+    
+
+   
+
+    })
+  }
 }
+  
