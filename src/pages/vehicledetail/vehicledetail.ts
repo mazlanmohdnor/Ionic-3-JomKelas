@@ -28,6 +28,12 @@ export class VehicledetailPage {
 
   ionViewDidLoad() {
     this.car = this.navParams.get('vehicledata')
+    this.fire.authState.subscribe((user) => {
+      this.firebaseDB.object(`vehicle/${user.uid}/${this.car.plate}`).subscribe(result => {
+        console.log(result);
+        this.car = result
+      })
+    })
     
   }
 
@@ -80,8 +86,12 @@ export class VehicledetailPage {
           text: 'Agree',
           handler: () => {
             this.fire.auth.onAuthStateChanged(auth => {
-              this.firebaseDB.database.ref(`/vehicle/${auth.uid}/${this.car.plate}`).remove().then(() => {
-                this.navCtrl.setRoot('ProfilePage')
+              const pictures = firebase.storage().ref(this.fire.auth.currentUser.uid);
+
+              pictures.child(`vehiclePic/${this.car.plate}/${this.car.plate}.jpg`).delete().then(() => {
+                this.firebaseDB.database.ref(`/vehicle/${auth.uid}/${this.car.plate}`).remove().then(() => {
+                  this.navCtrl.setRoot('ProfilePage')
+                })
               })
             })
           }
@@ -108,6 +118,13 @@ export class VehicledetailPage {
           icon: 'photos',
           handler: () => {
             this.opengallery();
+
+          }
+        }, {
+          text: 'Remove avatar',
+          icon: 'trash',
+          handler: () => {
+            this.deleteAvatar();
 
           }
         }
@@ -183,4 +200,35 @@ export class VehicledetailPage {
     })
   }
 
+  deleteAvatar() {
+    let loading = this.loadingCtrl.create({
+      content: 'Deleting...'
+    });
+
+    loading.present();
+    const pictures = firebase.storage().ref(`${this.fire.auth.currentUser.uid}/vehiclePic/${this.car.plate}/${this.car.plate}.jpg`);
+    console.log(pictures.getDownloadURL);
+    pictures.getDownloadURL().then(() => {
+      pictures.delete().then(() => {
+
+        this.fire.auth.onAuthStateChanged(auth => {
+
+          this.firebaseDB.database.ref(`/vehicle/${auth.uid}/${this.car.plate}`)
+            .update({
+              photoURL: "assets/no-vehicle.png",
+            }).then(_ => loading.dismiss());
+        })
+      })
+    }, (err) => {
+      loading.dismiss()
+      let alert = this.alertCtrl.create({
+        // title: 'No profile picture.',
+        subTitle: 'No vehicle picture.',
+        buttons: ['OK']
+      });
+      alert.present();
+    })
+
+
+  }
 }
