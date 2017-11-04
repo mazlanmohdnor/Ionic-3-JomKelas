@@ -6,9 +6,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { FirebaseApp } from 'angularfire2';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
-
+import firebase from 'firebase';
 
 
 
@@ -18,6 +17,7 @@ import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable }
   templateUrl: 'updateprofile.html',
 })
 export class UpdateprofilePage {
+  mypicref: firebase.storage.Reference;
   base64Image: string;
   // profile: Observable<Profile>;
   // profile: FirebaseObjectObservable<Profile>;
@@ -31,9 +31,11 @@ export class UpdateprofilePage {
     public fb: Facebook,
     public actionSheetCtrl: ActionSheetController,
     private camera: Camera,
-    public fba:FirebaseApp
 
   ) {
+
+    //create storage ref
+    // this.mypicref = firebase.storage().ref('/')
   }
 
   ionViewDidLoad() {
@@ -123,15 +125,16 @@ export class UpdateprofilePage {
       encodingType: this.camera.EncodingType.PNG,
       mediaType: this.camera.MediaType.PICTURE,
       correctOrientation: true,
+      allowEdit:true
     }
 
-    this.camera.getPicture(options).then(profilePicture => {
+    this.camera.getPicture(options).then(imgdata => {
       // Send the picture to Firebase Storage
-      const image = `data:image/jpeg;based64,${profilePicture}`;
+      // const image = `data:image/jpeg;based64,${imgdata}`;
 
-      const pictures = this.fba.storage().ref('images/test.png');
+      const pictures = firebase.storage().ref(this.fire.auth.currentUser.uid);
 
-      pictures.putString(image, 'data_url')
+      pictures.child(`profilepic/${this.fire.auth.currentUser.uid}-avatar.png`).putString(imgdata, 'base64',{contentType:'image/png'})
         .then(savedProfilePicture => {
           this.fire.auth.onAuthStateChanged(auth => {
             this.firebaseDB.database.ref(`/userProfile/${auth.uid}`)
