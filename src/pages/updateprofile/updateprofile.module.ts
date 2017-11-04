@@ -1,4 +1,4 @@
-import { ParallaxHeaderDirectiveModule } from './../../components/parallax-header/parallax-header.module';
+import { DirectivesModule } from './../../directives/directives.module';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { UpdateprofilePage } from './updateprofile';
@@ -9,8 +9,7 @@ import { UpdateprofilePage } from './updateprofile';
   ],
   imports: [
     IonicPageModule.forChild(UpdateprofilePage),
-    ParallaxHeaderDirectiveModule
-
+    DirectivesModule
   ],
 })
 export class UpdateprofilePageModule {}

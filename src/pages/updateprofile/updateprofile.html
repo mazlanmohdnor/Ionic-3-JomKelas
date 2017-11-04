@@ -14,7 +14,7 @@
             <div class="circular">
                 <div class="tag">
                     <button ion-button icon-only clear color="light" large (click)="cameraOption()">
-                        <ion-icon name="camera" ></ion-icon>
+                        <ion-icon name="create" ></ion-icon>
                     </button>
                 </div>
                 <img src="{{profile.photoURL}}">
@@ -85,7 +85,7 @@
                     <ion-label stacked>
                         <ion-icon name="at" color="primary"></ion-icon> Biography
                     </ion-label>
-                    <ion-textarea placeholder="Enter a description" [(ngModel)]="profile.bio"></ion-textarea>
+                    <ion-textarea elastic placeholder="Enter a description" [(ngModel)]="profile.bio"></ion-textarea>
                 </ion-item>
 
 

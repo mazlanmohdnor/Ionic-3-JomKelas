@@ -28,18 +28,13 @@ page-updateprofile {
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 20px;
-        // position: absolute;
-        // border: 1px solid #DDDDDD;
-        // width: 200px;
-        // height: 200px;
-        // position: relative;
         img {
-            // width: 120px;
-            // height: 120px;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             -webkit-border-radius: 150px;
-            -moz-border-radius: 150px;
-            // border: solid;
+            -moz-border-radius: 150px; // border: solid;
             display: block;
         }
     }
@@ -60,20 +55,6 @@ page-updateprofile {
         padding-left: 0px;
         padding-right: 15px;
         margin: 10px;
-    }
-    .camera {
-        position: absolute;
-        top: 80px;
-        right: 70px;
-        width: 50px;
-        height: 50px;
-        border: 3px solid #73AD21;
-    }
-    .container {
-        // border: 1px solid #DDDDDD;
-        // width: 200px;
-        // height: 200px;
-        // position: relative;
     }
     .tag {
         float: bottom;

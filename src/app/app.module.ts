@@ -18,8 +18,8 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 import { NativeStorage } from '@ionic-native/native-storage';
 import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { Camera } from "@ionic-native/camera";
-
-import 'firebase/storage';
+//to use ionic storage
+import 'firebase/storage'; 
 
 const config = {
     apiKey: "AIzaSyC9fyMmIMAptUaevwGV_GLKltcFb-0fSf0",

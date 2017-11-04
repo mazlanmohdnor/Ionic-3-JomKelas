@@ -4,7 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
         <ion-title>Profile</ion-title>
-        <ion-buttons end (click)="updateprofile()">
+        <ion-buttons end (tap)="updateprofile()">
             <button ion-button clear>EDIT</button>
         </ion-buttons>
     </ion-navbar>
@@ -14,7 +14,10 @@
 <ion-content parallax-header no-bounce>
     <div class="header-image">
         <div class="tab-header">
-            <img class="circular" src="{{(profile | async)?.photoURL}}" />
+            <div class="circular">
+                <img src="{{(profile | async)?.photoURL}}" />
+            </div>
+
             <h2>{{(profile | async)?.fullname}}</h2> Phone No: {{(profile | async)?.phoneNumber}} <br>Email : {{(profile | async)?.email}}
         </div>
     </div>
@@ -42,10 +45,7 @@
                 <hr>
             </ion-card-header>
             <ion-card-header>
-                College:
-                <ion-chip color="secondary">
-                    <ion-label>{{(profile|async)?.kolej}}</ion-label>
-                </ion-chip>
+                College: {{(profile|async)?.kolej}}
             </ion-card-header>
             <ion-card-header>
                 BIOGRAPHY
@@ -66,13 +66,13 @@
                 <ion-list>
                     <ion-item detail-push *ngFor="let car of car | keyobject" (click)="vehicledetail(car)">
                         <ion-avatar item-start>
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPvmQmclKhdjpOQ7FP23quJuyqemMmoxuRZzn_x1k7q7Zqed1BtA">
+                            <img src="{{car.photoURL}}">
                         </ion-avatar>
                         <h2>{{car.brand}} {{car.model}}</h2>
                         <p>{{car.plate}}</p>
                     </ion-item>
                 </ion-list>
-                <button ion-button block color="primary" (click)="addvehicle()">Add Vehicle</button>
+                <button ion-button block color="primary" (tap)="addvehicle()">Add Vehicle</button>
             </ion-card-content>
         </ion-card>
         <!-- 2nd card end -->

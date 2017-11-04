@@ -9,8 +9,14 @@
 <ion-content parallax-header no-bounce>
     <div class="header-image">
         <div class="tab-header">
-            <img class="circular" src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Car_crash_2.jpg" />
-
+            <div class="circular">
+                <div class="tag">
+                    <button ion-button icon-only clear color="light" large (click)="cameraOption()">
+                        <ion-icon name="add" ></ion-icon>
+                    </button>
+                </div>
+                <img src="{{car.photoURL}}" />
+            </div>
         </div>
     </div>
 

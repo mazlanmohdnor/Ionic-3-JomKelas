@@ -70,7 +70,42 @@ export class ProfilePage {
   }
 
   addvehicle() {
-    this.navCtrl.push('VehiclePage')
+    
+      let prompt = this.alertCtrl.create({
+        title: 'Enter plate number',
+        message: "Enter plate number of your vehicle",
+        inputs: [
+          {
+            name: 'platenumber',
+            placeholder: 'BMN 3214'
+          },
+        ],
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Save',
+            handler: data => {
+              this.fire.auth.onAuthStateChanged((user) => {
+                this.firebaseDB.object(`/vehicle/${user.uid}/${data.platenumber}`)
+                  .set({
+                   
+                    plate: data.platenumber
+                   
+                  }).then(_ => this.navCtrl.push('VehiclePage', { 'plate': data.platenumber}));
+              })
+              
+            }
+          }
+        ]
+      });
+      prompt.present();
+    
+    
   }
 
   vehicledetail(car) {
