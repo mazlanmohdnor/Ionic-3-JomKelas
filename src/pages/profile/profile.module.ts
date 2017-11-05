@@ -3,7 +3,8 @@ import { PipesModule } from './../../pipes/pipes.module';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ProfilePage } from './profile';
-
+import { Ionic2RatingModule } from "ionic2-rating";
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 @NgModule({
   declarations: [
     ProfilePage,
@@ -11,7 +12,9 @@ import { ProfilePage } from './profile';
   imports: [
     IonicPageModule.forChild(ProfilePage),
     DirectivesModule,
-    PipesModule
+    PipesModule,
+    Ionic2RatingModule,
+    IonicImageViewerModule
   ],
   exports: [
     ProfilePage

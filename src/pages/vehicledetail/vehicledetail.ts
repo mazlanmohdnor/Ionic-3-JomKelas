@@ -231,4 +231,6 @@ export class VehicledetailPage {
 
 
   }
+
+ 
 }

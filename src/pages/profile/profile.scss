@@ -1,6 +1,6 @@
 page-profile {
     .header-image {
-        background-image: url(https://images.pexels.com/photos/370799/pexels-photo-370799.jpeg?h=350&auto=compress&cs=tinysrgb);
+        background-image: url(https://computerscience.johncabot.edu/mscaramastra/S2016/CS110-1/Vittucci/PROJECT%20WHATSAPP%20CS%20110/files/whatsapp-wallpaper.jpg);
         background-size: cover;
         background-position: center;
         // height: 50vw;
@@ -72,5 +72,16 @@ page-profile {
         padding-left: 0px;
         padding-right: 15px;
         margin: 10px;
+    }
+    ul {
+        padding: 0px;
+        &.rating li {
+            padding: 5px 10px !important;
+            background: none;
+            color: #ffb400;
+            ion-icon {
+                font-size: 30px;
+            }
+        }
     }
 }

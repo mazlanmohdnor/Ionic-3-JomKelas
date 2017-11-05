@@ -1,11 +1,12 @@
 page-vehicledetail {
     .header-image {
-        background-image: url(https://images.pexels.com/photos/370799/pexels-photo-370799.jpeg?h=350&auto=compress&cs=tinysrgb);
-        background-size: cover;
-        background-position: center;
-        // height: 50vw;
-        position: relative;
-        z-index: -1;
+        height: 40vh;
+        overflow: hidden;
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
     }
     .tab-header {
         padding-top: 20px;
@@ -28,7 +29,9 @@ page-vehicledetail {
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 20px;
+        margin-top: -230px;
         img {
+            z-index: 500;
             object-fit: cover;
             width: 100%;
             height: 100%;
@@ -57,16 +60,17 @@ page-vehicledetail {
         margin: 10px;
     }
     .tag {
-        float: bottom;
-        position: absolute;
-        left: 42%;
-        top: 22%;
+        // float: bottom;
+        position: relative;
+        // left: auto;
+        // top: auto;
         z-index: 1000;
-        background: rgba(0, 0, 0, 0.575);
-        border-radius: 40%;
+        background: rgba(22, 22, 22, 0.761);
+        border-radius: 50%;
         -webkit-border-radius: 150px;
         -moz-border-radius: 150px;
         // border: solid;
         display: block;
+        z-index: 1;
     }
 }

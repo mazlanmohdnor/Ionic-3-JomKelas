@@ -1,3 +1,4 @@
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -18,6 +19,7 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 import { NativeStorage } from '@ionic-native/native-storage';
 import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { Camera } from "@ionic-native/camera";
+
 //to use ionic storage
 import 'firebase/storage'; 
 
@@ -45,7 +47,8 @@ const config = {
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    IonicImageViewerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

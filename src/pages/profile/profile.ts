@@ -13,9 +13,9 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-  car: any;
+  car: Car;
   profile: Observable<Profile>;
-  carArr: Car[] = [];
+  rate: any=(90/100)*5;
 
   constructor(
     public navCtrl: NavController,

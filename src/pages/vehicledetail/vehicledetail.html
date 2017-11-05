@@ -8,14 +8,17 @@
 
 <ion-content parallax-header no-bounce>
     <div class="header-image">
+        <img imageViewer src="{{car.photoURL}}">
         <div class="tab-header">
             <div class="circular">
                 <div class="tag">
-                    <button ion-button icon-only clear color="light" large (click)="cameraOption()">
-                        <ion-icon name="create" ></ion-icon>
-                    </button>
+
+                    <button ion-button icon-only clear (click)="cameraOption()">
+                        <ion-icon name="create" color="light"></ion-icon>
+                        </button>
+
+
                 </div>
-                <img src="{{car.photoURL}}" />
             </div>
         </div>
     </div>
