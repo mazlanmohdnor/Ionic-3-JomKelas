@@ -14,7 +14,7 @@
 // automatically applied to the <body> element in the app.
 .bg {
     // background: #1e8af7;
-    background: #EAEAEA;
+    background: #1e8af7;
 }
 
 .activemenu {
@@ -42,6 +42,9 @@
 }
 
 .custom-avatar {
+    object-fit: cover;
+    // width: 100%;
+    // height: 100%;
     height: 30vw;
     width: 30vw;
     border: 1px solid #fff;
@@ -58,4 +61,10 @@
 
 .card-md .item-md.item-block:not(.item-input):not(.item-select):not(.item-radio):not(.item-checkbox) .item-inner {
     border: 0;
+}
+
+.item-input ion-input,
+.item-input ion-textarea {
+    position: static;
+    border-bottom: 1px solid #dedede;
 }

@@ -199,7 +199,7 @@ export class UpdateprofilePage {
           // Log an error to the console if something goes wrong.
           console.log("ERROR -> " + JSON.stringify(error));
         });
-    })
+    }, (err) => { })
   }
 
   deleteAvatar() {

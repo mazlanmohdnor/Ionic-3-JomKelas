@@ -1,6 +1,6 @@
 page-profile {
     .header-image {
-        background-image: url(https://computerscience.johncabot.edu/mscaramastra/S2016/CS110-1/Vittucci/PROJECT%20WHATSAPP%20CS%20110/files/whatsapp-wallpaper.jpg);
+        background-image: url("../assets/wallpaper.jpg");
         background-size: cover;
         background-position: center;
         // height: 50vw;
@@ -11,8 +11,6 @@ page-profile {
         padding-top: 20px;
         color: white;
         text-align: center;
-        // background: #f53d3d;
-        // background: url(../assets/1.jpg);
         background-size: cover;
         background-position: center center;
         padding-bottom: 60px;

@@ -1,3 +1,6 @@
+import { College } from './../../model/college';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DatePicker } from '@ionic-native/date-picker';
@@ -8,15 +11,32 @@ import { DatePicker } from '@ionic-native/date-picker';
   templateUrl: 'offerride.html',
 })
 export class OfferridePage {
+  colleges = {} as College;
   time: string;
   date: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private datePicker: DatePicker) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private datePicker: DatePicker,
+    public fire: AngularFireAuth,
+    public firebaseDB: AngularFireDatabase,
+  ) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OfferridePage');
+  
+    this.firebaseDB.database.ref('college').on('value', (data) => {
+      this.colleges = data.val();
+      });
+   
   }
+
+  
+  collegeSelected(event) {
+    console.log(event);
+  }
+
 
   datepicker() {
     this.datePicker.show({

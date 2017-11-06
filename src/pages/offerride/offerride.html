@@ -10,61 +10,62 @@
             LOCATION
         </ion-card-header>
         <ion-card-content>
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-12>
-                        <ion-list>
-                            <ion-item>
-                                <ion-icon name="car" item-start color="secondary"></ion-icon>
-                                <ion-label>
-                                    From</ion-label>
-                                <ion-select [(ngModel)]="gaming">
-                                    <ion-option value="nes">NES</ion-option>
-                                    <ion-option value="n64">Nintendo64</ion-option>
-                                    <ion-option value="ps">PlayStation</ion-option>
-                                    <ion-option value="genesis">Sega Genesis</ion-option>
-                                    <ion-option value="saturn">Sega Saturn</ion-option>
-                                    <ion-option value="snes">SNES</ion-option>
-                                </ion-select>
-                            </ion-item>
-                        </ion-list>
 
-                        <ion-list>
-                            <ion-item>
-                                <ion-icon name="pin" item-start color="danger"></ion-icon>
-                                <ion-label>Destination</ion-label>
-                                <ion-select [(ngModel)]="gaming">
-                                    <ion-option value="nes">NES</ion-option>
-                                    <ion-option value="n64">Nintendo64</ion-option>
-                                    <ion-option value="ps">PlayStation</ion-option>
-                                    <ion-option value="genesis">Sega Genesis</ion-option>
-                                    <ion-option value="saturn">Sega Saturn</ion-option>
-                                    <ion-option value="snes">SNES</ion-option>
-                                </ion-select>
-                            </ion-item>
-                        </ion-list>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col col-12>
-                        <ion-chip>
-                            <ion-icon name="pricetag" color="primary"></ion-icon>
-                            <ion-label>RM 0.50</ion-label>
-                        </ion-chip>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col col-12>
-                        <ion-item>
-                            <ion-label stacked>
-                                <ion-icon name="locate"></ion-icon> Meeting Point
-                            </ion-label>
-                            <ion-input type="text" placeholder="Ex: Cafe Serumpun"></ion-input>
-                        </ion-item>
 
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+
+            <ion-item>
+                <ion-icon name="car" item-start color="secondary"></ion-icon>
+                <ion-label stacked>
+                    Destination Type</ion-label>
+                <ion-select [(ngModel)]="gaming" interface="popover">
+
+                    <ion-option value="College to Class">College to Class</ion-option>
+                    <ion-option value="Class to College">Class to College</ion-option>
+                    <ion-option value="College to College">College to College</ion-option>
+                    <ion-option value="Class to Class">Class to Class</ion-option>
+
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-icon name="car" item-start color="secondary"></ion-icon>
+                <ion-label stacked>
+                    From</ion-label>
+                <ion-select [(ngModel)]="gaming" interface="popover" (ionChange)="collegeSelected($event)">
+                    <ion-option *ngFor="let college of colleges | keyobject" value="{{college.code}}">{{college.name}}</ion-option>
+
+                </ion-select>
+            </ion-item>
+
+
+
+            <ion-item>
+                <ion-icon name="pin" item-start color="danger"></ion-icon>
+                <ion-label stacked>Destination</ion-label>
+                <ion-select [(ngModel)]="gaming">
+                    <ion-option value="nes">NES</ion-option>
+                    <ion-option value="n64">Nintendo64</ion-option>
+                    <ion-option value="ps">PlayStation</ion-option>
+                    <ion-option value="genesis">Sega Genesis</ion-option>
+                    <ion-option value="saturn">Sega Saturn</ion-option>
+                    <ion-option value="snes">SNES</ion-option>
+                </ion-select>
+            </ion-item>
+
+
+            <ion-chip>
+                <ion-icon name="pricetag" color="primary"></ion-icon>
+                <ion-label>RM 0.50</ion-label>
+            </ion-chip>
+
+            <ion-item>
+                <ion-label stacked>
+                    <ion-icon name="locate"></ion-icon> Meeting Point
+                </ion-label>
+                <ion-input type="text" placeholder="Ex: Cafe Serumpun"></ion-input>
+            </ion-item>
+
+
         </ion-card-content>
     </ion-card>
 

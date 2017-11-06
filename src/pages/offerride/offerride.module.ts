@@ -1,3 +1,4 @@
+import { PipesModule } from './../../pipes/pipes.module';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { OfferridePage } from './offerride';
@@ -8,6 +9,7 @@ import { OfferridePage } from './offerride';
   ],
   imports: [
     IonicPageModule.forChild(OfferridePage),
+    PipesModule,
   ],
 })
 export class OfferridePageModule {}

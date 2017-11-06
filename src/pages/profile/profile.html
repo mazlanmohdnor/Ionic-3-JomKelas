@@ -11,7 +11,7 @@
 </ion-header>
 
 
-<ion-content parallax-header no-bounce>
+<ion-content parallax-header no-bounce class="bg">
     <div class="header-image">
         <div class="tab-header">
             <div class="circular">
@@ -79,7 +79,15 @@
             </ion-card-content>
         </ion-card>
         <!-- 2nd card end -->
-        <button ion-button (click)="logout()">Logout</button>
+        <ion-card>
+            <ion-card-header>
+
+            </ion-card-header>
+            <ion-card-content>
+
+                <button ion-button (click)="logout()">Logout</button>
+            </ion-card-content>
+        </ion-card>
 
 
 
