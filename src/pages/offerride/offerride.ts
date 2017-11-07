@@ -11,6 +11,13 @@ import { DatePicker } from '@ionic-native/date-picker';
   templateUrl: 'offerride.html',
 })
 export class OfferridePage {
+  destinationData: any;
+  fromData: any;
+  destinationtype: string;
+  from: string;
+  destination: string;
+
+  classes: any;
   colleges = {} as College;
   time: string;
   date: any;
@@ -30,11 +37,56 @@ export class OfferridePage {
       this.colleges = data.val();
       });
    
+    this.firebaseDB.database.ref('class').on('value', (data) => {
+      this.classes = data.val();
+    });
   }
 
-  
-  collegeSelected(event) {
-    console.log(event);
+
+  destinationSelected(event) {
+    if (event ==='collegeToClass') {
+      this.firebaseDB.database.ref('college').on('value', (data) => {
+        this.fromData = data.val();
+        console.log(data.val());
+      });
+
+      this.firebaseDB.database.ref('class').on('value', (data) => {
+        this.destinationData = data.val();
+        console.log(data.val());
+      });
+      
+    } else if (event === 'classToCollege') {
+      this.firebaseDB.database.ref('class').on('value', (data) => {
+        this.fromData = data.val();
+        console.log(data.val());
+      });
+
+      this.firebaseDB.database.ref('college').on('value', (data) => {
+        this.destinationData = data.val();
+        console.log(data.val());
+      });
+    }
+    else if (event === 'collegeToCollege') {
+      this.firebaseDB.database.ref('college').on('value', (data) => {
+        this.fromData = data.val();
+        console.log(data.val());
+      });
+
+      this.firebaseDB.database.ref('college').on('value', (data) => {
+        this.destinationData = data.val();
+        console.log(data.val());
+      });
+    } else if (event === 'classToClass') {
+      this.firebaseDB.database.ref('class').on('value', (data) => {
+        this.fromData = data.val();
+        console.log(data.val());
+      });
+
+      this.firebaseDB.database.ref('class').on('value', (data) => {
+        this.destinationData = data.val();
+        console.log(data.val());
+      });
+    }
   }
 
 
