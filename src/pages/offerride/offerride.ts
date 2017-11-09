@@ -5,7 +5,7 @@ import { College } from './../../model/college';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Keyboard } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Keyboard, AlertController } from 'ionic-angular';
 import { DatePicker } from '@ionic-native/date-picker';
 
 @IonicPage()
@@ -29,7 +29,8 @@ export class OfferridePage {
     private datePicker: DatePicker,
     public fire: AngularFireAuth,
     public firebaseDB: AngularFireDatabase,
-    public keyboard: Keyboard
+    public keyboard: Keyboard,
+    public alertCtrl: AlertController,
   ) {
    
   }
@@ -48,8 +49,16 @@ export class OfferridePage {
       this.firebaseDB.database.ref(`vehicle/${user.uid}`).on('value', (data) => {
         this.vehicles = data.val();
       });
+
+      this.firebaseDB.database.ref(`userProfile/${user.uid}`).on('value', (data) => {
+        this.offerride.name = data.val().fullname;
+        this.offerride.userPhotoURL = data.val().photoURL;
+      });
     })  
+
+    
   }
+
 
 
 
@@ -145,8 +154,44 @@ export class OfferridePage {
       );
   }
 
+  vehicle(plate) {
+    console.log(plate);
+    this.fire.auth.onAuthStateChanged((user) => {
+      this.firebaseDB.database.ref(`vehicle/${user.uid}/${plate}`).on('value', (data) => {
+        this.offerride.vehiclePhotoURL = data.val().photoURL;
+        // console.log(data.val());
+      });
+    })  
+  }
+
   save() {
-   alert(JSON.stringify(this.offerride));
+    let confirm = this.alertCtrl.create({
+      title: `Add ride?`,
+      // message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.fire.auth.onAuthStateChanged((user) => {
+              this.firebaseDB.object(`/offerRides/${user.uid}/`)
+                .set(this.offerride);
+            })
+            this.navCtrl.setRoot('HomePage')
+
+          }
+        }
+      ]
+    });
+    confirm.present();
+
+
+
   }
 
 

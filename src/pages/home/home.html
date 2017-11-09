@@ -16,14 +16,14 @@
 
 <ion-content class="bg">
 
-    <ion-card>
+    <ion-card *ngFor="let trip of trips | keyobject">
         <ion-card-header>
             <ion-grid>
                 <ion-row>
                     <ion-col col-9>
-                        <h2>Kolej 14
-                            <ion-icon name="md-arrow-forward" color="primary"></ion-icon> DKAP</h2>
-                        <p class="date">Monday 28 Aug, 2017 - 7:45 am</p>
+                        <h2>{{trip.from}}
+                            <ion-icon name="md-arrow-forward" color="primary"></ion-icon> {{trip.destination}}</h2>
+                        <p class="date">{{trip.date}} - {{trip.time}}</p>
                     </ion-col>
                     <ion-col col-3>
                         <ion-chip color="danger">
@@ -37,176 +37,29 @@
         <ion-card-content>
             <ion-grid>
                 <ion-row>
-                    <ion-col col-2> <img class="profile" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"></ion-col>
+                    <ion-col col-2> <img class="profile" src="{{trip.userPhotoURL}}"></ion-col>
                     <ion-col col-7>
-                        <h2>Mohd Mazlan</h2>
-                        <p class="message">Test</p>
+                        <h2>{{trip.name}}</h2>
+                        <p class="message">{{trip.comment}}</p>
                         <ion-chip>
                             <ion-icon name="car" color="secondary"></ion-icon>
-                            <ion-label>3 Seats Available</ion-label>
+                            <ion-label>{{trip.seatOffered}} Seats Available</ion-label>
                         </ion-chip>
                     </ion-col>
                     <ion-col col-3>
-                        <button ion-button outline (click)="goDetail()">book!</button>
+                        <button ion-button outline (tap)="goDetail()">book!</button>
                     </ion-col>
                 </ion-row>
             </ion-grid>
         </ion-card-content>
     </ion-card>
-    <ion-card>
-        <ion-card-header>
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-9>
-                        <h2>Kolej 14
-                            <ion-icon name="md-arrow-forward" color="primary"></ion-icon> DKAP</h2>
-                        <p class="date">Monday 28 Aug, 2017 - 7:45 am</p>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-chip color="danger">
-                            <ion-label>RM 0.50</ion-label>
-                        </ion-chip>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-card-header>
-        <hr>
-        <ion-card-content>
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-2> <img class="profile" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"></ion-col>
-                    <ion-col col-7>
-                        <h2>Mohd Mazlan</h2>
-                        <p class="message">Bawak helmet sendiri ye.asdasdasdasdasdasdasdasdasdasda.</p>
-                        <ion-chip>
-                            <ion-icon name="car" color="secondary"></ion-icon>
-                            <ion-label>3 Seats Available</ion-label>
-                        </ion-chip>
-                    </ion-col>
-                    <ion-col col-3>
-                        <button ion-button outline>book!</button>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-card-content>
-    </ion-card>
-    <ion-card>
-        <ion-card-header>
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-9>
-                        <h2>Kolej 14
-                            <ion-icon name="md-arrow-forward" color="primary"></ion-icon> DKAP</h2>
-                        <p class="date">Monday 28 Aug, 2017 - 7:45 am</p>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-chip color="danger">
-                            <ion-label>RM 0.50</ion-label>
-                        </ion-chip>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-card-header>
-        <hr>
-        <ion-card-content>
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-2> <img class="profile" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"></ion-col>
-                    <ion-col col-7>
-                        <h2>Mohd Mazlan</h2>
-                        <p class="message">Bawak helmet sendiri ye.asdasdasdasdasdasdasdasdasdasda.</p>
-                        <ion-chip>
-                            <ion-icon name="car" color="secondary"></ion-icon>
-                            <ion-label>3 Seats Available</ion-label>
-                        </ion-chip>
-                    </ion-col>
-                    <ion-col col-3>
-                        <button ion-button outline>book!</button>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-card-content>
-    </ion-card>
-    <ion-card>
-        <ion-card-header>
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-9>
-                        <h2>Kolej 14
-                            <ion-icon name="md-arrow-forward" color="primary"></ion-icon> DKAP</h2>
-                        <p class="date">Monday 28 Aug, 2017 - 7:45 am</p>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-chip color="danger">
-                            <ion-label>RM 0.50</ion-label>
-                        </ion-chip>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-card-header>
-        <hr>
-        <ion-card-content>
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-2> <img class="profile" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"></ion-col>
-                    <ion-col col-7>
-                        <h2>Mohd Mazlan</h2>
-                        <p class="message">Bawak helmet sendiri ye.asdasdasdasdasdasdasdasdasdasda.</p>
-                        <ion-chip>
-                            <ion-icon name="car" color="secondary"></ion-icon>
-                            <ion-label>3 Seats Available</ion-label>
-                        </ion-chip>
-                    </ion-col>
-                    <ion-col col-3>
-                        <button ion-button outline>book!</button>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-card-content>
-    </ion-card>
-    <ion-card>
-        <ion-card-header>
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-9>
-                        <h2>Kolej 14
-                            <ion-icon name="md-arrow-forward" color="primary"></ion-icon> DKAP</h2>
-                        <p class="date">Monday 28 Aug, 2017 - 7:45 am</p>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-chip color="danger">
-                            <ion-label>RM 0.50</ion-label>
-                        </ion-chip>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-card-header>
-        <hr>
-        <ion-card-content>
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-2> <img class="profile" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"></ion-col>
-                    <ion-col col-7>
-                        <h2>Mohd Mazlan</h2>
-                        <p class="message">Bawak helmet sendiri ye.asdasdasdasdasdasdasdasdasdasda.</p>
-                        <ion-chip>
-                            <ion-icon name="car" color="secondary"></ion-icon>
-                            <ion-label>3 Seats Available</ion-label>
-                        </ion-chip>
-                    </ion-col>
-                    <ion-col col-3>
-                        <button ion-button outline>book!</button>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-card-content>
-    </ion-card>
+
     <div class="dummy-footer"></div>
     <div class="footer">
         <ion-grid no-padding>
             <ion-row>
                 <ion-col col-6 no-padding>
-                    <button ion-button block color="primary" icon-left (click)="offerride()">
+                    <button ion-button block color="primary" icon-left (tap)="offerride()">
                       <ion-icon name="car"></ion-icon>
                       OFfer a Ride
                     </button>

@@ -1,5 +1,6 @@
 export interface OfferRideModel{
-    uid:string,
+    uid: string,
+    name: string;
     destinationType: string;
     from: string;
     destination: string;
@@ -12,4 +13,6 @@ export interface OfferRideModel{
     vehiclePlate: string;
     seatOffered: number;
     comment: string;
+    vehiclePhotoURL: string;
+    userPhotoURL: string;
 }

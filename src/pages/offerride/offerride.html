@@ -131,7 +131,7 @@
             <ion-item>
                 <ion-icon name="car" item-start color="danger"></ion-icon>
                 <ion-label stacked>Select your vehicle</ion-label>
-                <ion-select [(ngModel)]="offerride.vehiclePlate" interface="popover">
+                <ion-select [(ngModel)]="offerride.vehiclePlate" interface="popover" (ionChange)="vehicle(offerride.vehiclePlate)">
                     <ion-option *ngFor="let vehicle of vehicles | keyobject" value="{{vehicle.plate}}">{{vehicle.plate}}</ion-option>
 
                 </ion-select>
