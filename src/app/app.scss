@@ -55,16 +55,8 @@
     margin-bottom: 10px;
 }
 
-.card-md .item-md.item-block:not(:last-child) .item-inner {
-    border-bottom: 1px solid #dedede;
-}
-
-.card-md .item-md.item-block:not(.item-input):not(.item-select):not(.item-radio):not(.item-checkbox) .item-inner {
-    border: 0;
-}
-
-.item-input ion-input,
-.item-input ion-textarea {
-    position: static;
-    border-bottom: 1px solid #dedede;
+ion-input,
+ion-select,
+ion-textarea {
+    border-bottom: 0.5px solid map-get($colors, secondary);
 }
