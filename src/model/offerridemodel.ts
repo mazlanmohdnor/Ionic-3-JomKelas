@@ -15,4 +15,5 @@ export interface OfferRideModel{
     comment: string;
     vehiclePhotoURL: string;
     userPhotoURL: string;
+    rate:number;
 }

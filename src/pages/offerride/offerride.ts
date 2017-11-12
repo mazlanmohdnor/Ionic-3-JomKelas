@@ -1,24 +1,30 @@
-import { Car } from './../../model/car';
-import { OfferRideModel } from './../../model/offerridemodel';
-import { Classes } from './../../model/classes';
-import { College } from './../../model/college';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Keyboard, AlertController } from 'ionic-angular';
-import { DatePicker } from '@ionic-native/date-picker';
+import { Car } from "./../../model/car";
+import { OfferRideModel } from "./../../model/offerridemodel";
+import { Classes } from "./../../model/classes";
+import { College } from "./../../model/college";
+import { AngularFireDatabase } from "angularfire2/database";
+import { AngularFireAuth } from "angularfire2/auth";
+import { Component } from "@angular/core";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  Keyboard,
+  AlertController
+} from "ionic-angular";
+import { DatePicker } from "@ionic-native/date-picker";
 
 @IonicPage()
 @Component({
-  selector: 'page-offerride',
-  templateUrl: 'offerride.html',
+  selector: "page-offerride",
+  templateUrl: "offerride.html"
 })
 export class OfferridePage {
   offerride = {} as OfferRideModel;
-  
+
   destinationData: any;
   fromData: any;
-  
+
   classes = {} as Classes;
   colleges = {} as College;
   vehicles = {} as Car;
@@ -30,63 +36,61 @@ export class OfferridePage {
     public fire: AngularFireAuth,
     public firebaseDB: AngularFireDatabase,
     public keyboard: Keyboard,
-    public alertCtrl: AlertController,
-  ) {
-   
-  }
+    public alertCtrl: AlertController
+  ) {}
 
   ionViewDidLoad() {
-    
-    this.firebaseDB.database.ref('college').on('value', (data) => {
+    this.firebaseDB.database.ref("college").on("value", data => {
       this.colleges = data.val();
-      });
-   
-    this.firebaseDB.database.ref('class').on('value', (data) => {
+    });
+
+    this.firebaseDB.database.ref("class").on("value", data => {
       this.classes = data.val();
     });
 
-    this.fire.auth.onAuthStateChanged((user) => {
-      this.firebaseDB.database.ref(`vehicle/${user.uid}`).on('value', (data) => {
+    //save user information
+    this.fire.auth.onAuthStateChanged(user => {
+      this.offerride.uid = user.uid;
+
+      this.firebaseDB.database.ref(`vehicle/${user.uid}`).on("value", data => {
         this.vehicles = data.val();
       });
 
-      this.firebaseDB.database.ref(`userProfile/${user.uid}`).on('value', (data) => {
-        this.offerride.name = data.val().fullname;
-        this.offerride.userPhotoURL = data.val().photoURL;
-      });
-    })  
-
-    
+      this.firebaseDB.database
+        .ref(`userProfile/${user.uid}`)
+        .on("value", data => {
+          this.offerride.name = data.val().fullname;
+          this.offerride.userPhotoURL = data.val().photoURL;
+          this.offerride.rate = (data.val().rate/100)*5;
+        });
+    });
   }
-
-
-
 
   destinationSelected(event) {
-    if (event ==='collegeToClass') {
-      this.destinationFromFunction('college');
-      this.destinationToFuntion('class');
-    } else if (event === 'classToCollege') {
-      this.destinationFromFunction('class');
-      this.destinationToFuntion('college');
-    }else if (event === 'collegeToCollege') {
-      this.destinationFromFunction('college');
-      this.destinationToFuntion('college');
-    } else if (event === 'classToClass') {
-      this.destinationFromFunction('class');
-      this.destinationToFuntion('class');
+    if (event === "collegeToClass") {
+      this.destinationFromFunction("college");
+      this.destinationToFuntion("class");
+    } else if (event === "classToCollege") {
+      this.destinationFromFunction("class");
+      this.destinationToFuntion("college");
+    } else if (event === "collegeToCollege") {
+      this.destinationFromFunction("college");
+      this.destinationToFuntion("college");
+    } else if (event === "classToClass") {
+      this.destinationFromFunction("class");
+      this.destinationToFuntion("class");
     }
   }
-  
+
   destinationFromFunction(from: string) {
-    this.firebaseDB.database.ref(from).on('value', (data) => {
+    this.firebaseDB.database.ref(from).on("value", data => {
       this.fromData = data.val();
       console.log(data.val());
     });
   }
 
   destinationToFuntion(to) {
-    this.firebaseDB.database.ref(to).on('value', (data) => {
+    this.firebaseDB.database.ref(to).on("value", data => {
       this.destinationData = data.val();
       console.log(data.val());
     });
@@ -94,105 +98,125 @@ export class OfferridePage {
 
   datepicker() {
     this.keyboard.close();
-    this.datePicker.show({
-      allowOldDates: false,
-      minDate:  new Date().valueOf(),
-      date: new Date(),
-      mode: 'date',
-      todayText: 'Today',
-      androidTheme: 5
-    }).then(date => {
-        console.log('Got date: ', date)
-        this.offerride.date = date.toDateString();
-      } ,
-      err => console.log('Error occurred while getting date: ', err)
+    this.datePicker
+      .show({
+        allowOldDates: false,
+        minDate: new Date().valueOf(),
+        date: new Date(),
+        mode: "date",
+        todayText: "Today",
+        androidTheme: 5
+      })
+      .then(
+        date => {
+          console.log("Got date: ", date);
+          this.offerride.date = date.toDateString();
+        },
+        err => console.log("Error occurred while getting date: ", err)
       );
   }
 
   timepicker() {
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'time',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
-    }).then(
-      time => {
-        console.log('Got date: ', time)
-        this.offerride.time = time.toLocaleTimeString();
-      },
-      err => console.log('Error occurred while getting date: ', err)
+    this.datePicker
+      .show({
+        date: new Date(),
+        mode: "time",
+        androidTheme: this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
+      })
+      .then(
+        time => {
+          console.log("Got date: ", time);
+          this.offerride.time = time.toLocaleTimeString();
+        },
+        err => console.log("Error occurred while getting date: ", err)
       );
   }
 
   datepickerisRoundTrip() {
     this.keyboard.close();
-    this.datePicker.show({
-      allowOldDates: false,
-      minDate: new Date().valueOf(),
-      date: new Date(),
-      mode: 'date',
-      todayText: 'Today',
-      androidTheme: 5
-    }).then(date => {
-      console.log('Got date: ', date)
-      this.offerride.dateRoundTrip = date.toDateString();
-    },
-      err => console.log('Error occurred while getting date: ', err)
+    this.datePicker
+      .show({
+        allowOldDates: false,
+        minDate: new Date().valueOf(),
+        date: new Date(),
+        mode: "date",
+        todayText: "Today",
+        androidTheme: 5
+      })
+      .then(
+        date => {
+          console.log("Got date: ", date);
+          this.offerride.dateRoundTrip = date.toDateString();
+        },
+        err => console.log("Error occurred while getting date: ", err)
       );
   }
 
   timepickerisRoundTrip() {
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'time',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
-    }).then(
-      time => {
-        console.log('Got date: ', time)
-        this.offerride.timeRoundTrip = time.toLocaleTimeString();
-      },
-      err => console.log('Error occurred while getting date: ', err)
+    this.datePicker
+      .show({
+        date: new Date(),
+        mode: "time",
+        androidTheme: this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
+      })
+      .then(
+        time => {
+          console.log("Got date: ", time);
+          this.offerride.timeRoundTrip = time.toLocaleTimeString();
+        },
+        err => console.log("Error occurred while getting date: ", err)
       );
   }
 
   vehicle(plate) {
     console.log(plate);
-    this.fire.auth.onAuthStateChanged((user) => {
-      this.firebaseDB.database.ref(`vehicle/${user.uid}/${plate}`).on('value', (data) => {
-        this.offerride.vehiclePhotoURL = data.val().photoURL;
-        // console.log(data.val());
-      });
-    })  
+    this.fire.auth.onAuthStateChanged(user => {
+      this.firebaseDB.database
+        .ref(`vehicle/${user.uid}/${plate}`)
+        .on("value", data => {
+          this.offerride.vehiclePhotoURL = data.val().photoURL;
+          // console.log(data.val());
+        });
+    });
   }
 
   save() {
     let confirm = this.alertCtrl.create({
-      title: `Add ride?`,
-      // message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+      title: `Add ride ${this.offerride.from} to ${this.offerride.destination}`,
+      message: `Time : ${this.offerride.date}-${this.offerride.time}?`,
       buttons: [
         {
-          text: 'Cancel',
+          text: "Cancel",
           handler: () => {
-            console.log('Disagree clicked');
+            console.log("Disagree clicked");
           }
         },
         {
-          text: 'Ok',
+          text: "Ok",
           handler: () => {
-            this.fire.auth.onAuthStateChanged((user) => {
-              this.firebaseDB.object(`/offerRides/${user.uid}/`)
+            this.fire.auth.onAuthStateChanged(user => {
+              this.firebaseDB
+                .object(
+                  `/offerRides/${user.uid}-${this.offerride.from}-${this
+                    .offerride.destination}:${this.offerride.date}-${this
+                    .offerride.time}`
+                )
                 .set(this.offerride);
-            })
-            this.navCtrl.setRoot('HomePage')
 
+              this.firebaseDB
+                .object(
+                  `/userProfile/${user.uid}/trips/${user.uid}-${this.offerride.from}-${this
+                    .offerride.destination}:${this.offerride.date}-${this
+                    .offerride.time}`
+                )
+                .set(this.offerride);
+            });
+
+            this.navCtrl.setRoot("HomePage");
           }
         }
       ]
     });
     confirm.present();
-
-
-
   }
-
-
 }

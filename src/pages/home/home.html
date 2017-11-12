@@ -1,8 +1,8 @@
 <ion-header>
     <ion-navbar color="primary">
         <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+        <ion-icon name="menu"></ion-icon>
+        </button>
         <ion-title>Nearby Rides</ion-title>
     </ion-navbar>
     <ion-searchbar [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)" placeholder="Quick Search">
@@ -39,15 +39,20 @@
                 <ion-row>
                     <ion-col col-2> <img class="profile" src="{{trip.userPhotoURL}}"></ion-col>
                     <ion-col col-7>
+
                         <h2>{{trip.name}}</h2>
+                        <rating [(ngModel)]="trip.rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
+                            <!--use it when you need to do something when user clicks on a star. in case you only need to change ngModel property, this property can be ommited.-->
+                        </rating>
                         <p class="message">{{trip.comment}}</p>
                         <ion-chip>
                             <ion-icon name="car" color="secondary"></ion-icon>
                             <ion-label>{{trip.seatOffered}} Seats Available</ion-label>
                         </ion-chip>
+
                     </ion-col>
                     <ion-col col-3>
-                        <button ion-button outline (tap)="goDetail()">book!</button>
+                        <button ion-button outline (tap)="goDetail(trip)">book!</button>
                     </ion-col>
                 </ion-row>
             </ion-grid>

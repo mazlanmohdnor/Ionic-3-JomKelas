@@ -14,7 +14,7 @@
 // automatically applied to the <body> element in the app.
 .bg {
     // background: #1e8af7;
-    background: #1e8af7;
+    background-color: map-get($colors, bg);
 }
 
 .activemenu {
@@ -29,7 +29,7 @@
     margin: 0px;
     padding-top: 30px;
     padding-bottom: 20px;
-    background: #1e8af7;
+    background: map-get($colors, primary);
     h2,
     p {
         color: #fff !important;

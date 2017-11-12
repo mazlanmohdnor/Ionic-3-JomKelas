@@ -1,8 +1,8 @@
 <ion-header>
 
     <ion-navbar color="primary">
-        <ion-title>Kolej 14
-            <ion-icon name="md-arrow-forward"></ion-icon> DKAP</ion-title>
+        <ion-title>{{trip.from}}
+            <ion-icon name="md-arrow-forward"></ion-icon> {{trip.destination}}</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -14,9 +14,9 @@
             <ion-grid>
                 <ion-row>
                     <ion-col col-9>
-                        <h2>Kolej 14
-                            <ion-icon name="md-arrow-forward" color="primary"></ion-icon> DKAP</h2>
-                        <p class="date">Monday 28 Aug, 2017 - 7:45 am</p>
+                        <h2>{{trip.from}}
+                            <ion-icon name="md-arrow-forward" color="primary"></ion-icon> {{trip.destination}}</h2>
+                        <p class="date">{{trip.date}} - {{trip.time}}</p>
                     </ion-col>
                     <ion-col col-3>
 
@@ -28,24 +28,24 @@
         <ion-card-content>
             <ion-grid>
                 <ion-row>
-                    <ion-col col-2> <img class="profile" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"></ion-col>
+                    <ion-col col-2> <img class="profile" src="{{trip.userPhotoURL}}"></ion-col>
                     <ion-col col-10>
-                        <h2>Mohd Mazlan</h2>
-                        <p class="message">Bawak helmet sendiri ye..</p>
+                        <h2>{{trip.name}}</h2>
+                        <p class="message">{{trip.comment}}</p>
                         <ion-chip color="secondary">
                             <ion-icon name="chatbubbles" color="secondary"></ion-icon>
                             <ion-label>0196749632</ion-label>
                         </ion-chip>
                         <h3>Pickup Location: Depan bus stop serumpun</h3>
                         <p>125zr | Black | BMN3452</p>
-                        <img class="vehicle" src="https://static.pexels.com/photos/170811/pexels-photo-170811.jpeg" alt="">
+                        <img class="vehicle" src="{{trip.vehiclePhotoURL}}" alt="">
                         <hr>
                         <ion-chip color="danger">
                             <ion-label>RM 0.50</ion-label>
                         </ion-chip>
                         <ion-chip>
                             <ion-icon name="car" color="secondary"></ion-icon>
-                            <ion-label>3 Seats Available</ion-label>
+                            <ion-label>{{trip.seatOffered}} Seats Available</ion-label>
                         </ion-chip>
                     </ion-col>
                 </ion-row>

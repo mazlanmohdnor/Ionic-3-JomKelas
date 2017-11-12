@@ -58,7 +58,7 @@ page-home {
         position: relative;
         width: 100%;
         height: 7vh;
-        background-color: map-get($colors, primary);
+        background-color: map-get($colors, bg);
     }
     .button-md {
         border-radius: 2px;
@@ -66,5 +66,23 @@ page-home {
         padding: 0 1.1em;
         border-radius: 0;
         height: 8vh;
+    }
+    //rating
+    ul {
+        padding: 0px;
+        margin: 0px;
+        &.rating li {
+            padding: 0px 0px !important;
+            background: none;
+            color: #ffb400;
+            ion-icon {
+                font-size: 18px;
+            }
+        }
+    }
+    .searchbar-md {
+        /* background: inherit; */
+        background: map-get($colors, primary);
+        padding: 8px;
     }
 }

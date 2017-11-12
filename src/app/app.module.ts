@@ -21,7 +21,7 @@ import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { Camera } from "@ionic-native/camera";
 
 //to use ionic storage
-import 'firebase/storage'; 
+import 'firebase/storage';
 
 const config = {
     apiKey: "AIzaSyC9fyMmIMAptUaevwGV_GLKltcFb-0fSf0",
@@ -42,7 +42,8 @@ const config = {
     IonicModule.forRoot(MyApp, {
       scrollPadding: false,
       scrollAssist: true,
-      autoFocusAssist: false
+      autoFocusAssist: false,
+      pageTransition:'md-transition'
     }),
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule,
@@ -63,7 +64,7 @@ const config = {
     Facebook,
     NativeStorage,
     InAppBrowser,
-    Camera
+    Camera,
   ]
 })
 export class AppModule {}

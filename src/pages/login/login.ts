@@ -54,16 +54,16 @@ export class LoginPage {
         loader.dismiss();
         this.navCtrl.setRoot('VerifymailPage')
         
-        let toast = this.toastCtrl.create({
-          message: 'Please verify your email address.',
-          showCloseButton: true
-        });
-        toast.present();
+        // let toast = this.toastCtrl.create({
+        //   message: 'Please verify your email address.',
+        //   showCloseButton: true
+        // });
+        // toast.present();
       }
     }, (error) => {
       loader.dismiss();
       let alert = this.alertCtrl.create({
-        title: 'Try again',
+        // title: 'Try again',
         subTitle: error.message,
         buttons: ['OK']
       });

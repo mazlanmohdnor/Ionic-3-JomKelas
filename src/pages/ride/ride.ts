@@ -1,25 +1,38 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the RidePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { AngularFireAuth } from "angularfire2/auth";
+import { AngularFireDatabase } from "angularfire2/database";
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { OfferRideModel } from "../../model/offerridemodel";
 
 @IonicPage()
 @Component({
-  selector: 'page-ride',
-  templateUrl: 'ride.html',
+  selector: "page-ride",
+  templateUrl: "ride.html"
 })
 export class RidePage {
+  trips = {} as OfferRideModel;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public firebaseDB: AngularFireDatabase,
+    public fire: AngularFireAuth
+  ) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RidePage');
+    this.fire.auth.onAuthStateChanged(user => {
+      this.firebaseDB.database
+        .ref(`userProfile/${user.uid}/trips`)
+        .on("value", data => {
+          this.trips = data.val();
+        });
+    });
   }
 
+  delete(trip) {
+    this.fire.auth.onAuthStateChanged(user => {
+      this.firebaseDB.database.ref(`userProfile/${user.uid}/trips/${trip.key}`).remove();
+      this.firebaseDB.database.ref(`offerRides/${trip.key}`).remove();
+    });
+  }
 }
