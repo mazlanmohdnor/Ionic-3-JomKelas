@@ -40,18 +40,18 @@ export class OfferridePage {
   ) {}
 
   ionViewDidLoad() {
+    //fetch colleges
     this.firebaseDB.database.ref("college").on("value", data => {
       this.colleges = data.val();
     });
 
+    //fetch classes
     this.firebaseDB.database.ref("class").on("value", data => {
       this.classes = data.val();
     });
 
-    //save user information
+    //save user and vehicle information
     this.fire.auth.onAuthStateChanged(user => {
-      this.offerride.uid = user.uid;
-
       this.firebaseDB.database.ref(`vehicle/${user.uid}`).on("value", data => {
         this.vehicles = data.val();
       });
@@ -59,9 +59,13 @@ export class OfferridePage {
       this.firebaseDB.database
         .ref(`userProfile/${user.uid}`)
         .on("value", data => {
+          // set user object + %rate to offerride object
+          this.offerride.uid = user.uid;
           this.offerride.name = data.val().fullname;
           this.offerride.userPhotoURL = data.val().photoURL;
-          this.offerride.rate = (data.val().rate/100)*5;
+          this.offerride.rate = data.val().rate / 100 * 5;
+          this.offerride.phone = data.val().phoneNumber;
+          // this.offerride = data.val();
         });
     });
   }
@@ -169,12 +173,16 @@ export class OfferridePage {
   }
 
   vehicle(plate) {
-    console.log(plate);
     this.fire.auth.onAuthStateChanged(user => {
+      //get the vehicle
       this.firebaseDB.database
         .ref(`vehicle/${user.uid}/${plate}`)
         .on("value", data => {
-          this.offerride.vehiclePhotoURL = data.val().photoURL;
+          (this.offerride.vehiclePlate = data.val().plate),
+            (this.offerride.brand = data.val().brand),
+            (this.offerride.model = data.val().model),
+            (this.offerride.color = data.val().color),
+            (this.offerride.vehiclePhotoURL = data.val().photoURL);
           // console.log(data.val());
         });
     });
@@ -205,9 +213,9 @@ export class OfferridePage {
 
               this.firebaseDB
                 .object(
-                  `/userProfile/${user.uid}/trips/${user.uid}-${this.offerride.from}-${this
-                    .offerride.destination}:${this.offerride.date}-${this
-                    .offerride.time}`
+                  `/userProfile/${user.uid}/trips/${user.uid}-${this.offerride
+                    .from}-${this.offerride.destination}:${this.offerride
+                    .date}-${this.offerride.time}`
                 )
                 .set(this.offerride);
             });

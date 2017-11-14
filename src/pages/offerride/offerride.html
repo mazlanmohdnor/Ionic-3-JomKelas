@@ -1,9 +1,9 @@
 <ion-header>
-
     <ion-navbar color="primary">
         <ion-title>Offer a ride</ion-title>
     </ion-navbar>
 </ion-header>
+
 <ion-content class="bg">
     <ion-card>
         <ion-card-header>
@@ -17,7 +17,7 @@
                 <ion-icon name="car" item-start color="secondary"></ion-icon>
                 <ion-label stacked>
                     Destination Type</ion-label>
-                <ion-select [(ngModel)]="offerride.destinationType" (ionChange)="destinationSelected($event)">
+                <ion-select [(ngModel)]="offerride.destinationType" (ionChange)="destinationSelected($event)" class="myCustomSelect">
 
                     <ion-option value="collegeToClass">College to Class</ion-option>
                     <ion-option value="classToCollege">Class to College</ion-option>
@@ -27,11 +27,12 @@
                 </ion-select>
             </ion-item>
 
-            <ion-item>
+            <ion-item *ngIf="offerride.destinationType">
                 <ion-icon name="locate" item-start color="primary"></ion-icon>
                 <ion-label stacked>
                     From</ion-label>
                 <ion-select [(ngModel)]="offerride.from">
+
                     <ion-option *ngFor="let from of fromData | keyobject" value="{{from.code}}">{{from.name}}</ion-option>
 
                 </ion-select>
@@ -40,7 +41,7 @@
 
 
 
-            <ion-item>
+            <ion-item *ngIf="offerride.destinationType">
                 <ion-icon name="pin" item-start color="danger"></ion-icon>
                 <ion-label stacked>Destination</ion-label>
                 <ion-select [(ngModel)]="offerride.destination">
@@ -50,7 +51,7 @@
             </ion-item>
 
 
-            <!-- <ion-chip>
+            <!-- <ion-chip *ngIf="offerride.destinationType">
                 <ion-icon name="pricetag" color="primary"></ion-icon>
                 <ion-label>RM 0.50</ion-label>
             </ion-chip> -->

@@ -1,3 +1,4 @@
+import { FIREBASE_CONFIG } from './app.firebase.config';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -23,14 +24,7 @@ import { Camera } from "@ionic-native/camera";
 //to use ionic storage
 import 'firebase/storage';
 
-const config = {
-    apiKey: "AIzaSyC9fyMmIMAptUaevwGV_GLKltcFb-0fSf0",
-    authDomain: "jomkelas.firebaseapp.com",
-    databaseURL: "https://jomkelas.firebaseio.com",
-    projectId: "jomkelas",
-    storageBucket: "jomkelas.appspot.com",
-    messagingSenderId: "95230060980"
-  };
+
 
 @NgModule({
   declarations: [
@@ -45,7 +39,7 @@ const config = {
       autoFocusAssist: false,
       pageTransition:'md-transition'
     }),
-    AngularFireModule.initializeApp(config),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     IonicStorageModule.forRoot(),

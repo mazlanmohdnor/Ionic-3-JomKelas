@@ -32,7 +32,8 @@ export class AuthProvider {
             matricNumber: profile.matric,
             bio: "",
             kolej: "",
-            gender: ""
+            gender: "",
+            rate: 0
           });
         });
       });

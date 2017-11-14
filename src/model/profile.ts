@@ -7,5 +7,6 @@ export interface Profile {
     matric: number;
     bio: string,
     kolej: string,
-    gender:string
+    gender:string,
+    rate:number
 }
