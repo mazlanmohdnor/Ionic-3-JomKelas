@@ -1,21 +1,27 @@
-import { Car } from './../../model/car';
-import { Observable } from 'rxjs/Observable';
-import { Profile } from './../../model/profile';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AuthProvider } from './../../providers/auth/auth';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { Car } from "./../../model/car";
+import { Observable } from "rxjs/Observable";
+import { Profile } from "./../../model/profile";
+import { AngularFireDatabase } from "angularfire2/database";
+import { AngularFireAuth } from "angularfire2/auth";
+import { AuthProvider } from "./../../providers/auth/auth";
+import { Component } from "@angular/core";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  AlertController,
+  LoadingController
+} from "ionic-angular";
 
 @IonicPage()
 @Component({
-  selector: 'page-profile',
-  templateUrl: 'profile.html',
+  selector: "page-profile",
+  templateUrl: "profile.html"
 })
 export class ProfilePage {
   car: Car;
-  profile: Observable<Profile>;
-  rate: any=(90/100)*5;
+  profile = {} as Profile;
+  rate: any = 90 / 100 * 5;
 
   constructor(
     public navCtrl: NavController,
@@ -24,44 +30,44 @@ export class ProfilePage {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     public fire: AngularFireAuth,
-    public firebaseDB: AngularFireDatabase,
-
-  ) {
-
-
-  }
+    public firebaseDB: AngularFireDatabase
+  ) {}
 
   ionViewDidLoad() {
-    this.fire.authState.subscribe((user) => {
-      this.profile = this.firebaseDB.object(`userProfile/${user.uid}`);
+    this.firebaseDB.database
+      .ref(`userProfile/${this.fire.auth.currentUser.uid}`)
+      .once("value", data => {
+        this.profile = data.val();
+      });
 
-      this.firebaseDB.database.ref(`vehicle/${user.uid}`).on('value', (data) => {
+    this.firebaseDB.database
+      .ref(`vehicle/${this.fire.auth.currentUser.uid}`)
+      .once("value", data => {
         this.car = data.val();
-      })
-    })
+      });
   }
 
-
   updateprofile() {
-    this.navCtrl.push('UpdateprofilePage');
+    this.navCtrl.push("UpdateprofilePage", {
+      profile2: this.profile
+    });
   }
 
   logout() {
     let confirm = this.alertCtrl.create({
-      message: 'Are you sure want to logout?',
+      message: "Are you sure want to logout?",
       buttons: [
         {
-          text: 'Cancel',
+          text: "Cancel",
           handler: () => {
-            console.log('Disagree clicked');
+            console.log("Disagree clicked");
           }
         },
         {
-          text: 'Logout',
+          text: "Logout",
           handler: () => {
-            console.log('Agree clicked');
+            console.log("Agree clicked");
             this.fire.auth.signOut();
-
           }
         }
       ]
@@ -70,45 +76,43 @@ export class ProfilePage {
   }
 
   addvehicle() {
-    
-      let prompt = this.alertCtrl.create({
-        title: 'Enter plate number',
-        message: "Enter plate number of your vehicle",
-        inputs: [
-          {
-            name: 'platenumber',
-            placeholder: 'BMN 3214'
-          },
-        ],
-        buttons: [
-          {
-            text: 'Cancel',
-            handler: data => {
-              console.log('Cancel clicked');
-            }
-          },
-          {
-            text: 'Save',
-            handler: data => {
-              this.fire.auth.onAuthStateChanged((user) => {
-                this.firebaseDB.object(`/vehicle/${user.uid}/${data.platenumber}`)
-                  .set({
-                   
-                    plate: data.platenumber
-                   
-                  }).then(_ => this.navCtrl.push('VehiclePage', { 'plate': data.platenumber}));
-              })
-              
-            }
+    let prompt = this.alertCtrl.create({
+      title: "Enter plate number",
+      message: "Enter plate number of your vehicle",
+      inputs: [
+        {
+          name: "platenumber",
+          placeholder: "BMN 3214"
+        }
+      ],
+      buttons: [
+        {
+          text: "Cancel",
+          handler: data => {
+            console.log("Cancel clicked");
           }
-        ]
-      });
-      prompt.present();
-    
-    
+        },
+        {
+          text: "Save",
+          handler: data => {
+            this.fire.auth.onAuthStateChanged(user => {
+              this.firebaseDB
+                .object(`/vehicle/${user.uid}/${data.platenumber}`)
+                .set({
+                  plate: data.platenumber
+                })
+                .then(_ =>
+                  this.navCtrl.push("VehiclePage", { plate: data.platenumber })
+                );
+            });
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   vehicledetail(car) {
-        this.navCtrl.push('VehicledetailPage', { 'vehicledata': car})
-  }  
+    this.navCtrl.push("VehicledetailPage", { vehicledata: car });
+  }
 }

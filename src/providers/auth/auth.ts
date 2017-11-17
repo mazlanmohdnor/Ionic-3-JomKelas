@@ -16,8 +16,6 @@ export class AuthProvider {
   }
   //Signup
   signup(profile) {
-    console.log(profile);
-
     var email = profile.matric + "@student.upm.edu.my";
     return this.fire.auth
       .createUserWithEmailAndPassword(email, profile.password)
@@ -33,10 +31,22 @@ export class AuthProvider {
             bio: "",
             kolej: "",
             gender: "",
-            rate: 0
+            rate: 0,
+            profileComplete: false
           });
         });
       });
+  }
+
+  //get Profile
+  getProfile() {
+    this.fire.auth.onAuthStateChanged(user => {
+      this.firebaseDB.database
+        .ref(`userProfile/${user.uid}`)
+        .on("value", data => {
+          data.val();
+        });
+    });
   }
 
   signout() {

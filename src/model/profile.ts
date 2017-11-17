@@ -8,5 +8,6 @@ export interface Profile {
     bio: string,
     kolej: string,
     gender:string,
-    rate:number
+    rate:number,
+    profileComplete:boolean
 }

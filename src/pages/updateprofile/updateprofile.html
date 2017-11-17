@@ -3,7 +3,7 @@
 
         <ion-title>Update Profile</ion-title>
         <ion-buttons end (click)="saveprofile()">
-            <button ion-button clear>SAVE</button>
+            <button ion-button clear [disabled]="!profile.fullname || !profile.phoneNumber ||!profile.gender || !profile.kolej || !profile.bio">SAVE</button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
@@ -96,7 +96,7 @@
 
 
         <!-- 3rd card start -->
-        <ion-card>
+        <!-- <ion-card>
             <ion-card-content>
                 <button ion-button (click)="fblogin()">
                     <ion-icon name="logo-facebook"></ion-icon> Integrate with Facebook
@@ -104,7 +104,7 @@
 
 
             </ion-card-content>
-        </ion-card>
+        </ion-card> -->
         <!-- 3rd card end -->
 
 

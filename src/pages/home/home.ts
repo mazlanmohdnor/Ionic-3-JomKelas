@@ -1,7 +1,14 @@
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  AlertController,
+  Events
+} from "ionic-angular";
+import { Profile } from "../../model/profile";
 
 @IonicPage()
 @Component({
@@ -9,29 +16,62 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
   templateUrl: "home.html"
 })
 export class HomePage {
-  rate: number=(90/100)*5;
   trips: any;
-  // rate: number=(this.trips.rate/100)*5;
-  user: any;
+  user = {} as Profile;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public fire: AngularFireAuth,
-    public firebaseDB: AngularFireDatabase
-  ) {
-    this.user = this.navParams.get("user");
-  }
+    public firebaseDB: AngularFireDatabase,
+    private alertCtrl: AlertController,
+    public event: Events
+  ) {}
 
   ionViewDidLoad() {
+    this.checkProfile();
+
     this.firebaseDB.database
       .ref("offerRides/")
       .orderByChild("time")
       .limitToLast(20)
       .on("value", data => {
         this.trips = data.val();
-        // this.rate = (data.val().rate/100)*5;
-        // console.log(data.val());
+      });
+  }
+
+  checkProfile() {
+    this.firebaseDB.database
+      .ref(`userProfile/${this.fire.auth.currentUser.uid}`)
+      .once("value", data => {
+        //check to complete profile, if not, ask user to complete first
+        if (!data.val().profileComplete) {
+          let alert = this.alertCtrl.create({
+            title: `Hi ${data.val().fullname}`,
+            message:
+              "Welcome to JomKelas application, now going to class much easier. Please complete your profile to continue using this application",
+            buttons: [
+              {
+                text: "Later",
+                role: "cancel",
+                handler: () => {
+                  console.log("Cancel clickedsdasd");
+                }
+              },
+              {
+                text: "Ok",
+                handler: () => {
+                  this.navCtrl.push("UpdateprofilePage", {
+                    profile: data.val()
+                  });
+                }
+              }
+            ]
+          });
+          alert.present();
+        } else {
+          console.log("profile complete");
+        }
       });
   }
 

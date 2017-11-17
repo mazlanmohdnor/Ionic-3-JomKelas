@@ -1,12 +1,9 @@
 import { Profile } from "./../model/profile";
-import {
-  AngularFireDatabase,
-  FirebaseObjectObservable
-} from "angularfire2/database";
+import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AuthProvider } from "./../providers/auth/auth";
 import { Component, ViewChild } from "@angular/core";
-import { Nav, Platform, Events } from "ionic-angular";
+import { Nav, Platform, Events, AlertController, MenuController } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { Storage } from "@ionic/storage";
@@ -16,7 +13,7 @@ import { Observable } from "rxjs/Observable";
   templateUrl: "app.html"
 })
 export class MyApp {
-  profile: Observable<Profile>;
+  profile = {} as Profile;
 
   @ViewChild(Nav) nav: Nav;
   pages: Array<{ title: string; subtitle: string; icon: string; page: string }>;
@@ -32,7 +29,10 @@ export class MyApp {
     public fire: AngularFireAuth,
     public firebaseDB: AngularFireDatabase,
     public storage: Storage,
-    public event: Events
+    public event: Events,
+    private alertCtrl: AlertController,
+    public menu:MenuController
+    
   ) {
     this.initializeApp();
 
@@ -76,6 +76,10 @@ export class MyApp {
         }
       });
 
+      this.event.subscribe("user:loggedIn", result => {
+        this.profile = result;
+        console.log(result);
+      });
       //WalkthroughPage
       // check whether user loggedin or not
       this.fire.authState.subscribe(user => {
@@ -83,18 +87,18 @@ export class MyApp {
         if (!user) {
           this.rootPage = "LoginPage";
         } else {
+           //update side menu
+        
+
+         
           //kalau logged in, set ke homepage
           if (this.fire.auth.currentUser.emailVerified) {
-            // this.storage.get(user.email).then(data => {
-            //   alert(data);
-            //   this.profile = data
-            // })
-            this.profile = this.firebaseDB.object(`userProfile/${user.uid}`);
-            // this.event.subscribe('user:loggedin', (profile) => {
-            //   console.log(profile);
-            //   // this.profile = profile;
-            // })
-            this.rootPage = "HomePage";
+            this.firebaseDB.database
+            .ref(`userProfile/${this.fire.auth.currentUser.uid}`)
+            .once("value", data => {
+              this.profile = data.val()
+            })
+                this.rootPage = "HomePage";
           } else {
             this.rootPage = "VerifymailPage";
           }
@@ -103,11 +107,19 @@ export class MyApp {
     });
   }
 
+  
+
+
   openPage(p) {
     this.nav.setRoot(p);
     this.activePage = p;
   }
   checkActive(p) {
     return p == this.activePage;
+  }
+
+  profilepage(){
+    this.nav.setRoot('ProfilePage')
+    this.menu.close();
   }
 }
