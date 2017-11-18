@@ -9,5 +9,6 @@ export interface Profile {
     kolej: string,
     gender:string,
     rate:number,
-    profileComplete:boolean
+    profileComplete:boolean,
+    vehicleComplete:boolean
 }

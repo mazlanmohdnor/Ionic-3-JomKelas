@@ -1,8 +1,8 @@
 <ion-menu [content]="content">
     <ion-card text-center class="hide-card">
         <img imageViewer src="{{profile.photoURL}}" class="custom-avatar" />
-        <p (click)="profilepage()"><b>{{profile.fullname}}</b></p>
-        <p>{{profile.email}}</p>
+        <p (tap)="profilepage()"><b>{{profile.fullname}}</b></p>
+        <p (tap)="profilepage()">{{profile.email}}</p>
     </ion-card>
 
     <ion-list no-lines>

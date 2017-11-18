@@ -10,7 +10,8 @@ import {
   NavController,
   NavParams,
   AlertController,
-  LoadingController
+  LoadingController,
+  ModalController
 } from "ionic-angular";
 
 @IonicPage()
@@ -30,22 +31,28 @@ export class ProfilePage {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     public fire: AngularFireAuth,
-    public firebaseDB: AngularFireDatabase
+    public firebaseDB: AngularFireDatabase,
+    public modal: ModalController
+    
   ) {}
 
   ionViewDidLoad() {
+    this.fire.authState.subscribe(user => {
     this.firebaseDB.database
-      .ref(`userProfile/${this.fire.auth.currentUser.uid}`)
+      .ref(`userProfile/${user.uid}`)
       .once("value", data => {
         this.profile = data.val();
       });
 
+       
+
     this.firebaseDB.database
-      .ref(`vehicle/${this.fire.auth.currentUser.uid}`)
-      .once("value", data => {
+      .ref(`vehicle/${user.uid}`)
+      .on("value", data => {
         this.car = data.val();
       });
-  }
+  })
+}
 
   updateprofile() {
     this.navCtrl.push("UpdateprofilePage", {
@@ -95,16 +102,18 @@ export class ProfilePage {
         {
           text: "Save",
           handler: data => {
-            this.fire.auth.onAuthStateChanged(user => {
+            let loader = this.loadingCtrl.create({
+              content: "Please wait..."
+            });
+            loader.present();
               this.firebaseDB
-                .object(`/vehicle/${user.uid}/${data.platenumber}`)
+                .object(`/vehicle/${this.fire.auth.currentUser.uid}/${data.platenumber}`)
                 .set({
                   plate: data.platenumber
                 })
                 .then(_ =>
-                  this.navCtrl.push("VehiclePage", { plate: data.platenumber })
+                  this.modal.create("VehiclePage", { plate: data.platenumber }).present().then(_=>loader.dismiss())
                 );
-            });
           }
         }
       ]

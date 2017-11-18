@@ -6,5 +6,5 @@ export interface Car{
     plate: string,
     color: string,
     seat: number,
-    photoURL:string
+    photoURL:string,
 }

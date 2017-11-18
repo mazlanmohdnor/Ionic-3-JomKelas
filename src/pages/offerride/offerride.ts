@@ -1,3 +1,4 @@
+import { Profile } from "./../../model/profile";
 import { Car } from "./../../model/car";
 import { OfferRideModel } from "./../../model/offerridemodel";
 import { Classes } from "./../../model/classes";
@@ -10,9 +11,11 @@ import {
   NavController,
   NavParams,
   Keyboard,
-  AlertController
+  AlertController,
+  LoadingController
 } from "ionic-angular";
 import { DatePicker } from "@ionic-native/date-picker";
+import { ModalController } from "ionic-angular/components/modal/modal-controller";
 
 @IonicPage()
 @Component({
@@ -25,6 +28,7 @@ export class OfferridePage {
   destinationData: any;
   fromData: any;
 
+  profile = {} as Profile;
   classes = {} as Classes;
   colleges = {} as College;
   vehicles = {} as Car;
@@ -36,7 +40,10 @@ export class OfferridePage {
     public fire: AngularFireAuth,
     public firebaseDB: AngularFireDatabase,
     public keyboard: Keyboard,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    public modal: ModalController
+    
   ) {}
 
   ionViewDidLoad() {
@@ -59,13 +66,14 @@ export class OfferridePage {
       this.firebaseDB.database
         .ref(`userProfile/${user.uid}`)
         .on("value", data => {
+          this.profile = data.val();
           // set user object + %rate to offerride object
           this.offerride.uid = user.uid;
           this.offerride.name = data.val().fullname;
           this.offerride.userPhotoURL = data.val().photoURL;
           this.offerride.rate = data.val().rate / 100 * 5;
           this.offerride.phone = data.val().phoneNumber;
-          // this.offerride = data.val();
+          // this.offerride.vehicleComplete = data.val().vehicleComplete;
         });
     });
   }
@@ -188,43 +196,50 @@ export class OfferridePage {
     });
   }
 
-  save() {
-    let confirm = this.alertCtrl.create({
-      title: `Add ride ${this.offerride.from} to ${this.offerride.destination}`,
-      message: `Time : ${this.offerride.date}-${this.offerride.time}?`,
+  review() {
+    console.log('review', this.offerride);
+    // this.modal.create('ReviewridePage', {offerride: this.offerride}).present();
+    this.navCtrl.push('ReviewridePage', {offerride: this.offerride})
+    
+ 
+  }
+
+  addvehicle() {
+    let prompt = this.alertCtrl.create({
+      title: "Enter plate number",
+      message: "Enter plate number of your vehicle",
+      inputs: [
+        {
+          name: "platenumber",
+          placeholder: "BMN 3214"
+        }
+      ],
       buttons: [
         {
           text: "Cancel",
-          handler: () => {
-            console.log("Disagree clicked");
+          handler: data => {
+            console.log("Cancel clicked");
           }
         },
         {
-          text: "Ok",
-          handler: () => {
-            this.fire.auth.onAuthStateChanged(user => {
-              this.firebaseDB
-                .object(
-                  `/offerRides/${user.uid}-${this.offerride.from}-${this
-                    .offerride.destination}:${this.offerride.date}-${this
-                    .offerride.time}`
-                )
-                .set(this.offerride);
-
-              this.firebaseDB
-                .object(
-                  `/userProfile/${user.uid}/trips/${user.uid}-${this.offerride
-                    .from}-${this.offerride.destination}:${this.offerride
-                    .date}-${this.offerride.time}`
-                )
-                .set(this.offerride);
+          text: "Save",
+          handler: data => {
+            let loader = this.loadingCtrl.create({
+              content: "Please wait..."
             });
-
-            this.navCtrl.setRoot("HomePage");
+            loader.present();
+              this.firebaseDB
+                .object(`/vehicle/${this.fire.auth.currentUser.uid}/${data.platenumber}`)
+                .set({
+                  plate: data.platenumber
+                })
+                .then(_ =>
+                  this.modal.create("VehiclePage", { plate: data.platenumber }).present().then(_=>loader.dismiss())
+                );
           }
         }
       ]
     });
-    confirm.present();
+    prompt.present();
   }
 }

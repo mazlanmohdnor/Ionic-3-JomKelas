@@ -32,21 +32,11 @@ export class AuthProvider {
             kolej: "",
             gender: "",
             rate: 0,
-            profileComplete: false
+            profileComplete: false,
+            vehicleComplete:false
           });
         });
       });
-  }
-
-  //get Profile
-  getProfile() {
-    this.fire.auth.onAuthStateChanged(user => {
-      this.firebaseDB.database
-        .ref(`userProfile/${user.uid}`)
-        .on("value", data => {
-          data.val();
-        });
-    });
   }
 
   signout() {

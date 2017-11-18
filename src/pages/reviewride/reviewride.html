@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>Confirm Ride</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="bg">
+    <ion-card>
+        <ion-card-header>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-9>
+                        <h2>{{offerride.from}}
+                            <ion-icon name="md-arrow-forward" color="primary"></ion-icon> {{offerride.destination}}</h2>
+                        <p class="date">{{offerride.date}} - {{offerride.time}}</p>
+                    </ion-col>
+                    <ion-col col-3>
+                        <ion-chip color="danger">
+                            <ion-label>RM 0.50</ion-label>
+                        </ion-chip>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-header>
+        <hr>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2> <img class="profile" src="{{offerride.userPhotoURL}}"></ion-col>
+                    <ion-col col-7>
+                        <h2>{{offerride.name}}</h2>
+                        <p class="message">{{offerride.comment}}</p>
+                        <ion-chip>
+                            <ion-icon name="car" color="secondary"></ion-icon>
+                            <ion-label>{{offerride.seatOffered}} Seats Available</ion-label>
+                        </ion-chip>
+                    </ion-col>
+                    <ion-col col-3>
+                        <button ion-button outline (tap)="delete(offerride)">delete!</button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <button ion-button block (tap)="confirm()">Publish Ride</button>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

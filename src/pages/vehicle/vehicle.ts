@@ -3,7 +3,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Car } from './../../model/car';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ActionSheetController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ActionSheetController, LoadingController, ViewController } from 'ionic-angular';
 import firebase from 'firebase';
 @IonicPage()
 @Component({
@@ -23,7 +23,8 @@ export class VehiclePage {
     public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     private camera: Camera,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public viewCtrl: ViewController
 
   ) {
     this.car.plate=this.navParams.get('plate')
@@ -61,10 +62,15 @@ export class VehiclePage {
                   plate: this.car.plate,
                   color: this.car.color,
                   seat: this.car.seat,
-                  photoURL:this.car.photoURL
+                  photoURL:this.car.photoURL,
+                  isComplete:false
+                });
+                this.firebaseDB.object(`/userProfile/${user.uid}`)
+                .update({
+                  vehicleComplete:true
                 });
             })
-            this.navCtrl.setRoot('ProfilePage')
+            this.viewCtrl.dismiss();
           
           }
         }
@@ -165,7 +171,7 @@ export class VehiclePage {
           // Log an error to the console if something goes wrong.
           console.log("ERROR -> " + JSON.stringify(error));
         });
-    })
+    }, err =>  console.log("ERROR -> " + JSON.stringify(err)))
   }
 
 }

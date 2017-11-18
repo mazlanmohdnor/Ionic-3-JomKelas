@@ -52,11 +52,7 @@ export class SignupPage {
             .then(
               user => {
                 //check whether email verified or Not
-                if (user.emailVerified) {
-                  loader.dismiss();
-                  //email verified, send to homepage
-                  // this.navCtrl.setRoot("HomePage");
-                } else {
+                if (!user.emailVerified) {
                   loader.dismiss();
                   //email not verified, send to verifyemail page
                   this.navCtrl.setRoot("VerifymailPage");

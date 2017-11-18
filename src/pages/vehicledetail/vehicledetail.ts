@@ -96,7 +96,6 @@ export class VehicledetailPage {
               const pictures = firebase
                 .storage()
                 .ref(this.fire.auth.currentUser.uid);
-
               pictures
                 .child(`vehiclePic/${this.car.plate}/${this.car.plate}.jpg`)
                 .delete()
@@ -105,15 +104,33 @@ export class VehicledetailPage {
                     .ref(`/vehicle/${auth.uid}/${this.car.plate}`)
                     .remove()
                     .then(() => {
+                      this.checkVehicle();
                       this.navCtrl.setRoot("ProfilePage");
                     });
-                });
+                }).catch(err=>console.log(err.message));
             });
           }
         }
       ]
     });
     confirm.present();
+  }
+
+  checkVehicle(){
+ this.fire.authState.subscribe(user => {
+      this.firebaseDB.database
+        .ref(`vehicle/${user.uid}`)
+        .on('value', result => {
+          console.log(result.numChildren());
+          if (result.numChildren()==0) {
+            this.firebaseDB.database
+            .ref(`userProfile/${user.uid}`)
+            .update({
+              vehicleComplete: false
+            })
+          }
+        });
+    });
   }
 
   cameraOption() {

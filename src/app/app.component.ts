@@ -3,7 +3,13 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AuthProvider } from "./../providers/auth/auth";
 import { Component, ViewChild } from "@angular/core";
-import { Nav, Platform, Events, AlertController, MenuController } from "ionic-angular";
+import {
+  Nav,
+  Platform,
+  Events,
+  AlertController,
+  MenuController
+} from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { Storage } from "@ionic/storage";
@@ -31,8 +37,7 @@ export class MyApp {
     public storage: Storage,
     public event: Events,
     private alertCtrl: AlertController,
-    public menu:MenuController
-    
+    public menu: MenuController
   ) {
     this.initializeApp();
 
@@ -76,10 +81,7 @@ export class MyApp {
         }
       });
 
-      this.event.subscribe("user:loggedIn", result => {
-        this.profile = result;
-        console.log(result);
-      });
+   
       //WalkthroughPage
       // check whether user loggedin or not
       this.fire.authState.subscribe(user => {
@@ -87,18 +89,19 @@ export class MyApp {
         if (!user) {
           this.rootPage = "LoginPage";
         } else {
-           //update side menu
-        
-
-         
+          //update side menu
+          this.event.subscribe("user:loggedIn", result => {
+            this.profile = result;
+            console.log(result);
+          });
           //kalau logged in, set ke homepage
           if (this.fire.auth.currentUser.emailVerified) {
             this.firebaseDB.database
-            .ref(`userProfile/${this.fire.auth.currentUser.uid}`)
-            .once("value", data => {
-              this.profile = data.val()
-            })
-                this.rootPage = "HomePage";
+              .ref(`userProfile/${this.fire.auth.currentUser.uid}`)
+              .once("value", data => {
+                this.profile = data.val();
+              });
+            this.rootPage = "HomePage";
           } else {
             this.rootPage = "VerifymailPage";
           }
@@ -106,9 +109,6 @@ export class MyApp {
       });
     });
   }
-
-  
-
 
   openPage(p) {
     this.nav.setRoot(p);
@@ -118,8 +118,8 @@ export class MyApp {
     return p == this.activePage;
   }
 
-  profilepage(){
-    this.nav.setRoot('ProfilePage')
+  profilepage() {
+    this.nav.setRoot("ProfilePage");
     this.menu.close();
   }
 }

@@ -3,7 +3,7 @@
 
         <ion-title>Vehicle</ion-title>
         <ion-buttons end (click)="savevehicle()">
-            <button ion-button clear>SAVE</button>
+            <button ion-button clear [disabled]="car.photoURL == 'assets/no-vehicle.png' || !car.type || !car.brand ||!car.model || !car.color || !car.seat">SAVE</button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>

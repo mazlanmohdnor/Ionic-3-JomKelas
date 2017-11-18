@@ -113,11 +113,12 @@ export class VerifymailPage {
   }
 
   home() {
-    this.navCtrl.setRoot("HomePage");
-    this.firebaseDB.database
-    .ref(`userProfile/${this.firebase.auth.currentUser.uid}`)
-    .once("value", result => {
-    this.event.publish("user:loggedIn", result.val());
-    })
+    this.navCtrl.setRoot("HomePage").then(_=>{
+      this.firebaseDB.database
+      .ref(`userProfile/${this.firebase.auth.currentUser.uid}`)
+      .once("value", result => {
+      this.event.publish("user:loggedIn", result.val());
+      })
+    });
   }
 }
