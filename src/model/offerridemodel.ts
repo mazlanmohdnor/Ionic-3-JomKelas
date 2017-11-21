@@ -4,6 +4,7 @@ export interface OfferRideModel{
     userPhotoURL: string;
     rate:number;
     phone:number;
+    gender:string;
     //destination
     destinationType: string;
     from: string;
@@ -22,4 +23,6 @@ export interface OfferRideModel{
     model: string;
     color: string;
     vehiclePhotoURL: string;
+    //metadata
+    timestamp: number
 }

@@ -40,7 +40,7 @@ export class ProfilePage {
     this.fire.authState.subscribe(user => {
     this.firebaseDB.database
       .ref(`userProfile/${user.uid}`)
-      .once("value", data => {
+      .on("value", data => {
         this.profile = data.val();
       });
 

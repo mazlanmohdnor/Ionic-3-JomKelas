@@ -18,7 +18,8 @@ import { Profile } from "../../model/profile";
 export class HomePage {
   trips: any;
   user = {} as Profile;
-
+  datenow = new Date();
+ 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -33,8 +34,8 @@ export class HomePage {
 
     this.firebaseDB.database
       .ref("offerRides/")
-      .orderByChild("time")
-      .limitToLast(20)
+      .orderByChild("timestamp")
+      // .limitToLast(1)
       .on("value", data => {
         this.trips = data.val();
       });

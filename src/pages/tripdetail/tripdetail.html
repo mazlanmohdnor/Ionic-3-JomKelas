@@ -37,24 +37,18 @@
 
                         <p class="message">{{trip.comment}}</p>
 
-                        <!-- Float the icon left -->
-                        <button ion-button icon-left round color="secondary" (click)="whatsapp(trip.phone)">
-                            <ion-icon name="logo-whatsapp"></ion-icon>
-                            {{trip.phone}}
-                        </button>
+
 
 
                         <h3>Pickup Location: {{trip.meetingPoint}}</h3>
                         <p>{{trip.brand}} {{trip.model}} | {{trip.color}} | {{trip.vehiclePlate}}</p>
                         <img class="vehicle" src="{{trip.vehiclePhotoURL}}" alt="">
                         <hr>
-                        <ion-chip color="danger">
-                            <ion-label>RM 0.50</ion-label>
-                        </ion-chip>
-                        <ion-chip>
-                            <ion-icon name="car" color="secondary"></ion-icon>
-                            <ion-label>{{trip.seatOffered}} Seats Available</ion-label>
-                        </ion-chip>
+                        <!-- Float the icon left -->
+                        <button ion-button icon-left round color="secondary" (click)="whatsapp(trip.phone)">
+                            <ion-icon name="logo-whatsapp"></ion-icon>
+                            {{trip.phone}}
+                        </button>
                     </ion-col>
                 </ion-row>
                 <!-- 2nd row -->

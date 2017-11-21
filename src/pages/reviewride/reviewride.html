@@ -10,8 +10,8 @@
             <ion-grid>
                 <ion-row>
                     <ion-col col-9>
-                        <h2>{{offerride.from}}
-                            <ion-icon name="md-arrow-forward" color="primary"></ion-icon> {{offerride.destination}}</h2>
+                        <h2><b>{{offerride.from}}
+                            <ion-icon name="md-arrow-forward" color="primary"></ion-icon> {{offerride.destination}}</b></h2>
                         <p class="date">{{offerride.date}} - {{offerride.time}}</p>
                     </ion-col>
                     <ion-col col-3>
@@ -27,17 +27,17 @@
             <ion-grid>
                 <ion-row>
                     <ion-col col-2> <img class="profile" src="{{offerride.userPhotoURL}}"></ion-col>
-                    <ion-col col-7>
+                    <ion-col col-10>
                         <h2>{{offerride.name}}</h2>
+                        <h2>{{offerride.gender}}</h2>
+                        <h2>timestamp: {{offerride.timestamp}}</h2>
                         <p class="message">{{offerride.comment}}</p>
                         <ion-chip>
                             <ion-icon name="car" color="secondary"></ion-icon>
                             <ion-label>{{offerride.seatOffered}} Seats Available</ion-label>
                         </ion-chip>
                     </ion-col>
-                    <ion-col col-3>
-                        <button ion-button outline (tap)="delete(offerride)">delete!</button>
-                    </ion-col>
+
                 </ion-row>
             </ion-grid>
 

@@ -41,16 +41,16 @@ export class UpdateprofilePage {
   ) {}
 
   ionViewDidLoad() {
-    // this.firebaseDB.database
-    //   .ref(`userProfile/${this.fire.auth.currentUser.uid}`)
-    //   .on("value", result => {
-    //     console.log(result.val());
-    //     this.profile = result.val();
-    //   });
+    this.firebaseDB.database
+      .ref(`userProfile/${this.fire.auth.currentUser.uid}`)
+      .on("value", result => {
+        console.log(result.val());
+        this.profile = result.val();
+      });
 
     // get data from home.ts
-    this.profile = this.navParams.get("profile");
-    this.profile = this.navParams.get("profile2");
+    // this.profile = this.navParams.get("profile");
+    // this.profile = this.navParams.get("profile2");
   }
 
   //save to firebase

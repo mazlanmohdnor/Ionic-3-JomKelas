@@ -3,7 +3,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Car } from './../../model/car';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ActionSheetController, LoadingController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ActionSheetController, LoadingController, ViewController, Events } from 'ionic-angular';
 import firebase from 'firebase';
 @IonicPage()
 @Component({
@@ -24,7 +24,8 @@ export class VehiclePage {
     public actionSheetCtrl: ActionSheetController,
     private camera: Camera,
     public loadingCtrl: LoadingController,
-    public viewCtrl: ViewController
+    public viewCtrl: ViewController,
+    public event: Events
 
   ) {
     this.car.plate=this.navParams.get('plate')
@@ -70,16 +71,14 @@ export class VehiclePage {
                   vehicleComplete:true
                 });
             })
-            this.viewCtrl.dismiss();
-          
+            this.viewCtrl.dismiss().then(()=>{
+              this.event.publish('plate', this.car.plate)
+            });
           }
         }
       ]
     });
     confirm.present();
-
-
-
   }
 
   cameraOption() {

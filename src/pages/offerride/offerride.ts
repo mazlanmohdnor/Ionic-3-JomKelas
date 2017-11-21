@@ -12,7 +12,8 @@ import {
   NavParams,
   Keyboard,
   AlertController,
-  LoadingController
+  LoadingController,
+  Events
 } from "ionic-angular";
 import { DatePicker } from "@ionic-native/date-picker";
 import { ModalController } from "ionic-angular/components/modal/modal-controller";
@@ -42,7 +43,8 @@ export class OfferridePage {
     public keyboard: Keyboard,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    public modal: ModalController
+    public modal: ModalController,
+    public event: Events
     
   ) {}
 
@@ -73,9 +75,21 @@ export class OfferridePage {
           this.offerride.userPhotoURL = data.val().photoURL;
           this.offerride.rate = data.val().rate / 100 * 5;
           this.offerride.phone = data.val().phoneNumber;
-          // this.offerride.vehicleComplete = data.val().vehicleComplete;
+          this.offerride.gender = data.val().gender;
         });
     });
+
+      //after user add a vehicle, auto set the vehicle
+      this.event.subscribe('plate',((plate)=>{
+        this.offerride.vehiclePlate = plate;
+      }))
+
+     
+
+  }
+
+  ionViewWillLeave(){
+    this.event.unsubscribe('plate')
   }
 
   destinationSelected(event) {
@@ -97,14 +111,14 @@ export class OfferridePage {
   destinationFromFunction(from: string) {
     this.firebaseDB.database.ref(from).on("value", data => {
       this.fromData = data.val();
-      console.log(data.val());
+      // console.log(data.val());
     });
   }
 
   destinationToFuntion(to) {
     this.firebaseDB.database.ref(to).on("value", data => {
       this.destinationData = data.val();
-      console.log(data.val());
+      // console.log(data.val());
     });
   }
 
@@ -196,13 +210,7 @@ export class OfferridePage {
     });
   }
 
-  review() {
-    console.log('review', this.offerride);
-    // this.modal.create('ReviewridePage', {offerride: this.offerride}).present();
-    this.navCtrl.push('ReviewridePage', {offerride: this.offerride})
-    
- 
-  }
+
 
   addvehicle() {
     let prompt = this.alertCtrl.create({
@@ -234,12 +242,24 @@ export class OfferridePage {
                   plate: data.platenumber
                 })
                 .then(_ =>
-                  this.modal.create("VehiclePage", { plate: data.platenumber }).present().then(_=>loader.dismiss())
+                  this.modal.create("VehiclePage", { plate: data.platenumber })
+                  .present()
+                  .then(_=>loader.dismiss())
                 );
           }
         }
       ]
     });
     prompt.present();
+
+  
+  }
+
+  //after all forms filled in, send the object to be review
+  review() {
+  
+   const date = new Date().valueOf();
+   this.offerride.timestamp = date;
+    this.navCtrl.push('ReviewridePage', {'offerride': this.offerride})
   }
 }
