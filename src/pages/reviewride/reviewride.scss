@@ -1,3 +1,54 @@
 page-reviewride {
-
+    .mymodal {
+        position: relative;
+        // overflow: hidden;
+        // max-width: 280px;
+        // border-radius: 2px;
+        width: 90%;
+        height: 90%;
+        // top: 0;
+        // bottom: 0;
+        // left: 0;
+        // right: 0;
+        margin: 20px;
+        border: 0;
+        // box-shadow: 0 16px 20px rgba(0, 0, 0, .4);
+        // background-color: #fafafa;
+    }
+    .message {
+        color: rgba(60, 60, 60, 0.688);
+        font-size: 0.8em;
+    }
+    .vehicle {
+        background-color: rgb(0, 0, 0);
+        box-shadow: 0px 7px 15px 0px rgba(0, 0, 0, 0.1);
+        width: 45px;
+        height: auto;
+    }
+    .footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        margin: 0p;
+        // height: 15vh;
+        width: 100%;
+        // background-color: #EEE;
+        /*to make it visible*/
+    }
+    .modalbg {
+        background-color: rgba(0, 0, 0, 0.7) !important;
+        // background-color: map-get($colors, bg);
+    }
+    .destination {
+        margin-left: 10px;
+    }
+    h2 {
+        word-break: break-word;
+        white-space: normal;
+        text-align: left;
+    }
+    .fare {
+        margin-top: 20px;
+        color: map-get($colors, secondary);
+    }
 }

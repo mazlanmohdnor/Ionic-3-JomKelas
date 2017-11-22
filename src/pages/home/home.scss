@@ -85,4 +85,9 @@ page-home {
         background: map-get($colors, primary);
         padding: 8px;
     }
+    h2 {
+        word-break: break-word;
+        white-space: normal;
+        text-align: left;
+    }
 }

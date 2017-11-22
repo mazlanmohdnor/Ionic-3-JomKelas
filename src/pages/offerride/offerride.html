@@ -33,7 +33,7 @@
                     From</ion-label>
                 <ion-select [(ngModel)]="offerride.from">
 
-                    <ion-option *ngFor="let from of fromData | keyobject" value="{{from.code}}">{{from.name}}</ion-option>
+                    <ion-option *ngFor="let from of fromData | keyobject" value="{{from.name}}">{{from.name}}</ion-option>
 
                 </ion-select>
                 <!-- (ionChange)="fromSelected($event)" -->
@@ -45,7 +45,7 @@
                 <ion-icon name="pin" item-start color="danger"></ion-icon>
                 <ion-label stacked>Destination</ion-label>
                 <ion-select [(ngModel)]="offerride.destination">
-                    <ion-option *ngFor="let destination of destinationData | keyobject" value="{{destination.code}}">{{destination.name}}</ion-option>
+                    <ion-option *ngFor="let destination of destinationData | keyobject" value="{{destination.name}}">{{destination.name}}</ion-option>
 
                 </ion-select>
             </ion-item>
@@ -163,12 +163,19 @@
         </ion-card-header>
         <ion-card-content>
             <ion-item>
+                <ion-label>Women passenger only?</ion-label>
+                <ion-toggle checked="false" [(ngModel)]="offerride.onlyWomen"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
                 <ion-label stacked>
                     <ion-icon name="chatbubbles"></ion-icon> Message
                 </ion-label>
                 <ion-textarea elastic placeholder="Ex: Im a cool guy" [(ngModel)]="offerride.comment"></ion-textarea>
             </ion-item>
-            <button ion-button full large (click)="review()" [disabled]="!offerride.from || !offerride.destination ||!offerride.meetingPoint || !offerride.date || !offerride.time || !offerride.date || !offerride.vehiclePlate || !offerride.seatOffered || !offerride.comment">Review Ride</button>
+            <button ion-button full large (click)="review()">Review Ride</button>
         </ion-card-content>
     </ion-card>
 </ion-content>
+
+<!-- [disabled]="!offerride.from || !offerride.destination ||!offerride.meetingPoint || !offerride.date || !offerride.time || !offerride.date || !offerride.vehiclePlate || !offerride.seatOffered || !offerride.comment" -->

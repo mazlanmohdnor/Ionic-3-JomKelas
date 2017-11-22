@@ -37,7 +37,8 @@ import 'firebase/storage';
       scrollPadding: false,
       scrollAssist: true,
       autoFocusAssist: false,
-      pageTransition:'md-transition'
+      pageTransition:'md-transition',
+
     }),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireDatabaseModule,

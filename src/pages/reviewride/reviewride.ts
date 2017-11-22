@@ -1,5 +1,5 @@
 import { OfferRideModel } from "./../../model/offerridemodel";
-import { Component } from "@angular/core";
+import { Component, Renderer } from "@angular/core";
 import {
   IonicPage,
   NavController,
@@ -26,7 +26,7 @@ export class ReviewridePage {
     public alertCtrl: AlertController,
     public fire: AngularFireAuth,
     public firebaseDB: AngularFireDatabase,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
   ) {
     this.offerride = navParams.get("offerride");
   }
@@ -82,5 +82,8 @@ export class ReviewridePage {
       ]
     });
     confirm.present();
+  }
+  cancel(){
+    this.viewCtrl.dismiss();
   }
 }

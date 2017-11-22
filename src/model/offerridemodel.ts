@@ -24,5 +24,6 @@ export interface OfferRideModel{
     color: string;
     vehiclePhotoURL: string;
     //metadata
-    timestamp: number
+    timestamp: number,
+    onlyWomen: boolean
 }

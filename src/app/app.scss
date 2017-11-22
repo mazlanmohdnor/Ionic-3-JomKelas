@@ -69,3 +69,9 @@ ion-select,
 ion-textarea {
     border-bottom: 0.5px solid map-get($colors, primary);
 }
+
+ion-textarea {
+    // border-style: dashed;
+    margin-top: 5px;
+    border: 0.5px dashed map-get($colors, primary);
+}

@@ -16,20 +16,20 @@
 
 <ion-content class="bg">
 
-    <ion-card *ngFor="let trip of trips | keyobject | filterride | sortlatest">
+    <ion-card *ngFor="let trip of trips | keyobject | filterride">
         <!-- <span *ngIf="trip.from==='k14'"> -->
         <ion-card-header>
             <ion-grid>
                 <ion-row>
-                    <ion-col col-8>
+                    <ion-col col-9>
                         <h2>{{trip.from}}
                             <ion-icon name="md-arrow-forward" color="primary"></ion-icon> {{trip.destination}}</h2>
                         <p class="date">{{trip.date}} - {{trip.time}}</p>
                     </ion-col>
-                    <ion-col col-4>
-                        <ion-chip>
+                    <ion-col col-3>
+                        <!-- <ion-chip>
                             <ion-icon [color]="trip.gender==='male' ? 'primary' : 'purple'" [name]="trip.gender==='male' ? 'ios-man' : 'ios-woman'"></ion-icon>
-                        </ion-chip>
+                        </ion-chip> -->
                         <ion-chip color="danger">
                             <ion-label>RM 0.50</ion-label>
                         </ion-chip>

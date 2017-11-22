@@ -45,7 +45,6 @@ export class OfferridePage {
     public loadingCtrl: LoadingController,
     public modal: ModalController,
     public event: Events
-    
   ) {}
 
   ionViewDidLoad() {
@@ -79,17 +78,14 @@ export class OfferridePage {
         });
     });
 
-      //after user add a vehicle, auto set the vehicle
-      this.event.subscribe('plate',((plate)=>{
-        this.offerride.vehiclePlate = plate;
-      }))
-
-     
-
+    //after user add a vehicle, auto set the vehicle
+    this.event.subscribe("plate", plate => {
+      this.offerride.vehiclePlate = plate;
+    });
   }
 
-  ionViewWillLeave(){
-    this.event.unsubscribe('plate')
+  ionViewWillLeave() {
+    this.event.unsubscribe("plate");
   }
 
   destinationSelected(event) {
@@ -210,8 +206,6 @@ export class OfferridePage {
     });
   }
 
-
-
   addvehicle() {
     let prompt = this.alertCtrl.create({
       title: "Enter plate number",
@@ -236,30 +230,41 @@ export class OfferridePage {
               content: "Please wait..."
             });
             loader.present();
-              this.firebaseDB
-                .object(`/vehicle/${this.fire.auth.currentUser.uid}/${data.platenumber}`)
-                .set({
-                  plate: data.platenumber
-                })
-                .then(_ =>
-                  this.modal.create("VehiclePage", { plate: data.platenumber })
+            this.firebaseDB
+              .object(
+                `/vehicle/${this.fire.auth.currentUser.uid}/${data.platenumber}`
+              )
+              .set({
+                plate: data.platenumber
+              })
+              .then(_ =>
+                this.modal
+                  .create("VehiclePage", { plate: data.platenumber })
                   .present()
-                  .then(_=>loader.dismiss())
-                );
+                  .then(_ => loader.dismiss())
+              );
           }
         }
       ]
     });
     prompt.present();
-
-  
   }
 
   //after all forms filled in, send the object to be review
   review() {
-  
-   const date = new Date().valueOf();
-   this.offerride.timestamp = date;
-    this.navCtrl.push('ReviewridePage', {'offerride': this.offerride})
+    const date = new Date().valueOf();
+    this.offerride.timestamp = date;
+    // this.navCtrl.push('ReviewridePage', {'offerride': this.offerride})
+    this.modal
+      .create(
+        "ReviewridePage",
+        { offerride: this.offerride },
+        {
+          showBackdrop: true,
+          enableBackdropDismiss: true,
+          cssClass:"mymodal"
+        }
+      )
+      .present();
   }
 }

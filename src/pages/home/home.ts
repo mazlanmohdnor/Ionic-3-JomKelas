@@ -34,11 +34,12 @@ export class HomePage {
 
     this.firebaseDB.database
       .ref("offerRides/")
-      .orderByChild("timestamp")
+      // .orderByChild("timestamp")
       // .limitToLast(1)
       .on("value", data => {
         this.trips = data.val();
       });
+      console.log(this.trips);
   }
 
   checkProfile() {
