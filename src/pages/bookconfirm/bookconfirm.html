@@ -1,0 +1,57 @@
+<ion-content class="modalbg">
+    <ion-card class="mymodal">
+        <ion-card-content text-center>
+            <h1 text-center><b>Book Confirmation</b></h1>
+            <h2 text-center><b>{{trip.date}} : {{trip.time}}</b></h2>
+            <hr>
+
+            <ion-row>
+                <h2 class="destination"><b><ion-icon name="arrow-dropright-circle" color="secondary"></ion-icon>  {{trip.from}}</b></h2>
+            </ion-row>
+            <ion-row>
+                <h2 class="destination"><b> <ion-icon name="arrow-dropleft-circle" color="danger"></ion-icon>  {{trip.destination}}</b></h2>
+            </ion-row>
+            <ion-row>
+                <h2 class="destination">
+                    <ion-icon name="locate" color="primary"></ion-icon><b>  Pickup: {{trip.meetingPoint}}</b></h2>
+            </ion-row>
+            <ion-row>
+                <h2 class="destination">
+                    <ion-icon name="people" color="primary"></ion-icon><b>  Seat Available: {{trip.seatOffered}}</b></h2>
+            </ion-row>
+
+
+            <hr>
+            <h1 text-center class="fare"><b>No of Seat to Book</b></h1>
+            <div class="flex_row">
+                <button ion-button clear icon-only large color="danger" (tap)="decrement()">
+                    <ion-icon name="remove-circle"></ion-icon>
+                </button>
+                <h1 class="seat">{{currentNumber}} </h1>
+                <button ion-button icon-only large color="secondary" (tap)="increment()" clear [disabled]="btnInc">
+                    <ion-icon name="add-circle"></ion-icon>
+                </button>
+            </div>
+            <ion-footer>
+                <ion-row no-padding>
+                    <ion-col col-6 no-padding>
+                        <button ion-button item-start color="danger" full icon-left (tap)="cancel()">
+                            <ion-icon name="car"></ion-icon>Cancel
+                        </button>
+                    </ion-col>
+                    <ion-col col-6 no-padding>
+                        <button ion-button full item-end (tap)="confirm()">
+                            <ion-icon name="search"></ion-icon>Book
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-footer>
+
+
+
+
+
+
+        </ion-card-content>
+    </ion-card>
+</ion-content>

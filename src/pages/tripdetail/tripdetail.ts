@@ -1,7 +1,7 @@
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { OfferRideModel } from "./../../model/offerridemodel";
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { IonicPage, NavController, NavParams, ModalController } from "ionic-angular";
 
 @IonicPage()
 @Component({
@@ -14,7 +14,8 @@ export class TripdetailPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public iab:InAppBrowser
+    public iab:InAppBrowser,
+    public modal: ModalController
   ) {}
 
   ionViewDidLoad() {
@@ -25,4 +26,21 @@ export class TripdetailPage {
     console.log(phone);
     this.iab.create(`https://api.whatsapp.com/send?phone=6${phone}&text=hai%0D%0Anama+saya+mohd+mazlan%0D%0Asaya+berminat+nak+ride+kl+-+selangor+%3A+22%3A20AM`,"_system")
   }
+
+   //after all forms filled in, send the object to be review
+   confirmBook() {
+    
+     // this.navCtrl.push('ReviewridePage', {'offerride': this.offerride})
+     this.modal
+       .create(
+         "BookconfirmPage",
+        {'trip':this.trip},
+         {
+           showBackdrop: true,
+           enableBackdropDismiss: true,
+           cssClass:"mymodal"
+         }
+       )
+       .present();
+   }
 }

@@ -6,6 +6,7 @@ export interface OfferRideModel{
     phone:number;
     gender:string;
     //destination
+    rideid:string;
     destinationType: string;
     from: string;
     destination: string;
@@ -18,6 +19,7 @@ export interface OfferRideModel{
     seatOffered: number;
     comment: string;
     //vehicle
+    vehicleType:string,
     vehiclePlate: string;
     brand: string;
     model: string;

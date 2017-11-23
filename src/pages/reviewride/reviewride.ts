@@ -28,6 +28,7 @@ export class ReviewridePage {
     public firebaseDB: AngularFireDatabase,
     public loadingCtrl: LoadingController,
   ) {
+    //this come from OfferRide
     this.offerride = navParams.get("offerride");
   }
 

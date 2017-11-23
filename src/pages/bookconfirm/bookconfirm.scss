@@ -1,0 +1,37 @@
+page-bookconfirm {
+    .mymodal {
+        position: relative;
+        overflow: hidden;
+        width: 90%;
+        height: auto;
+        margin: 20px;
+        border: 0;
+    }
+    .scroll-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .modalbg {
+        background-color: rgba(0, 0, 0, 0.7) !important;
+        // background-color: map-get($colors, bg);
+    }
+    .fare {
+        margin-top: 20px;
+        // color: map-get($colors, );
+    }
+    .flex_row {
+        display: -webkit-flex;
+        -webkit-flex-direction: row;
+        flex-direction: row;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+    .seat {
+        // margin-top: 5px;
+        padding: 5px 15px;
+        border: 0.5px solid map-get($colors, primary);
+    }
+}

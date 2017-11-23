@@ -48,9 +48,9 @@
                         <rating [(ngModel)]="trip.rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
                             <!--use it when you need to do something when user clicks on a star. in case you only need to change ngModel property, this property can be ommited.-->
                         </rating>
-                        <p class="message">{{trip.comment}}</p>
+                        <!-- <p class="message">{{trip.comment}}</p> -->
                         <ion-chip>
-                            <ion-icon name="car" color="secondary"></ion-icon>
+                            <ion-icon [name]="trip.vehicleType==='car' ? 'car' : 'bicycle'" [color]="trip.vehicleType==='car' ? 'primary' : 'danger'"></ion-icon>
                             <ion-label>{{trip.seatOffered}} Seats Available</ion-label>
                         </ion-chip>
 

@@ -31,7 +31,7 @@
                     <ion-col col-10>
                         <h2>{{trip.name}}</h2>
 
-                        <rating [(ngModel)]="trip.rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
+                        <rating [(ngModel)]="trip.rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="true">
                             <!--use it when you need to do something when user clicks on a star. in case you only need to change ngModel property, this property can be ommited.-->
                         </rating>
 
@@ -42,7 +42,9 @@
 
                         <h3>Pickup Location: {{trip.meetingPoint}}</h3>
                         <p>{{trip.brand}} {{trip.model}} | {{trip.color}} | {{trip.vehiclePlate}}</p>
-                        <img class="vehicle" src="{{trip.vehiclePhotoURL}}" alt="">
+
+                        <img src="{{trip.vehiclePhotoURL}}" class="vehicle" />
+
                         <hr>
                         <!-- Float the icon left -->
                         <button ion-button icon-left round color="secondary" (click)="whatsapp(trip.phone)">
@@ -53,7 +55,7 @@
                 </ion-row>
                 <!-- 2nd row -->
                 <ion-row>
-                    <button ion-button block large>Book</button>
+                    <button ion-button block large (tap)="confirmBook()">Book</button>
                 </ion-row>
             </ion-grid>
         </ion-card-content>

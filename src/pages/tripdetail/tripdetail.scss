@@ -13,10 +13,13 @@ page-tripdetail {
         font-size: 0.8em;
     }
     .vehicle {
-        background-color: rgb(0, 0, 0);
-        box-shadow: 0px 7px 15px 0px rgba(0, 0, 0, 0.1);
+        // background-color: rgb(0, 0, 0);
+        // box-shadow: 0px 7px 15px 0px rgba(0, 0, 0, 0.1);
         width: 100%;
         height: auto;
+    }
+    .img-loaded+ion-spinner {
+        display: none;
     }
     .card-header-md {
         padding: 10px 0 0 10px;

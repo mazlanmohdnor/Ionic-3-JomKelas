@@ -62,6 +62,8 @@ export class OfferridePage {
     this.fire.auth.onAuthStateChanged(user => {
       this.firebaseDB.database.ref(`vehicle/${user.uid}`).on("value", data => {
         this.vehicles = data.val();
+        // this.offerride.vehicleType = data.val().type;
+        // console.log('vehicle',this.vehicles);
       });
 
       this.firebaseDB.database
@@ -116,6 +118,11 @@ export class OfferridePage {
       this.destinationData = data.val();
       // console.log(data.val());
     });
+  }
+
+  //to select vehicle type
+  vehicletype(result){
+    console.log(result);
   }
 
   datepicker() {
@@ -201,6 +208,7 @@ export class OfferridePage {
             (this.offerride.model = data.val().model),
             (this.offerride.color = data.val().color),
             (this.offerride.vehiclePhotoURL = data.val().photoURL);
+            this.offerride.vehicleType = data.val().type;
           // console.log(data.val());
         });
     });

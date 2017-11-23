@@ -102,4 +102,5 @@
         <variable name="APP_NAME" value="jomkelasapp" />
     </plugin>
     <plugin name="cordova-plugin-camera" spec="^2.4.1" />
+    <plugin name="cordova-plugin-file" spec="^4.3.3" />
 </widget>
