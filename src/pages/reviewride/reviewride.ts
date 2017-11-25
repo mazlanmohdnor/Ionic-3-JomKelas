@@ -33,7 +33,13 @@ export class ReviewridePage {
   }
 
   ionViewDidLoad() {
-    console.log(this.offerride);
+    // console.log(this.offerride);
+    this.fire.auth.onAuthStateChanged(user => {
+      //set ride id
+      this.offerride.rideid = `${user.uid}-${this.offerride.from}-${this
+        .offerride.destination}:${this.offerride.date}-${this
+        .offerride.time}`;
+    })
   }
 
   confirm() {
@@ -55,6 +61,8 @@ export class ReviewridePage {
             });
             loading.present();
             this.fire.auth.onAuthStateChanged(user => {
+            
+                
               this.firebaseDB
                 .object(
                   `/offerRides/${user.uid}-${this.offerride.from}-${this
@@ -70,8 +78,9 @@ export class ReviewridePage {
                     .date}-${this.offerride.time}`
                 )
                 .set(this.offerride).then(_=>{
-              
-                  this.navCtrl.setRoot("HomePage").then(_=>loading.dismiss());
+              this.viewCtrl.dismiss().then(_=>loading.dismiss())
+            
+                 
                   
                 });
             });

@@ -121,7 +121,7 @@ export class OfferridePage {
   }
 
   //to select vehicle type
-  vehicletype(result){
+  vehicletype(result) {
     console.log(result);
   }
 
@@ -208,7 +208,7 @@ export class OfferridePage {
             (this.offerride.model = data.val().model),
             (this.offerride.color = data.val().color),
             (this.offerride.vehiclePhotoURL = data.val().photoURL);
-            this.offerride.vehicleType = data.val().type;
+          this.offerride.vehicleType = data.val().type;
           // console.log(data.val());
         });
     });
@@ -263,16 +263,19 @@ export class OfferridePage {
     const date = new Date().valueOf();
     this.offerride.timestamp = date;
     // this.navCtrl.push('ReviewridePage', {'offerride': this.offerride})
-    this.modal
-      .create(
-        "ReviewridePage",
-        { offerride: this.offerride },
-        {
-          showBackdrop: true,
-          enableBackdropDismiss: true,
-          cssClass:"mymodal"
-        }
-      )
-      .present();
+    let modal = this.modal.create(
+      "ReviewridePage",
+      { offerride: this.offerride },
+      {
+        showBackdrop: true,
+        enableBackdropDismiss: true,
+        cssClass: "mymodal"
+      }
+    );
+
+    modal.present();
+    modal.onDidDismiss(() => {
+      this.navCtrl.setRoot("HomePage");
+    });
   }
 }

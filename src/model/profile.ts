@@ -1,7 +1,7 @@
 export interface Profile {
     fullname: string,
-    password:string,
     photoURL: string,
+    password:string,
     email: string,
     phoneNumber: string,
     matric: number;

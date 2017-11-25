@@ -31,8 +31,7 @@ export class TripdetailPage {
    confirmBook() {
     
      // this.navCtrl.push('ReviewridePage', {'offerride': this.offerride})
-     this.modal
-       .create(
+     let modal = this.modal.create(
          "BookconfirmPage",
         {'trip':this.trip},
          {
@@ -40,7 +39,12 @@ export class TripdetailPage {
            enableBackdropDismiss: true,
            cssClass:"mymodal"
          }
-       )
-       .present();
+       );
+
+       modal.present();
+
+       modal.onDidDismiss(() => {
+        this.navCtrl.setRoot("HomePage");
+      });
    }
 }
