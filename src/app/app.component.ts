@@ -71,6 +71,8 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
+      // set status bar to white
+      this.statusBar.backgroundColorByHexString('#00BAE1');
       this.splashScreen.hide();
 
       //check whether user had open the app, if not, set walkthrough

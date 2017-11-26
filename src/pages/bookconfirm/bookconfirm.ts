@@ -68,9 +68,16 @@ export class BookconfirmPage {
     });
     loading.present().then(() => {
       // save ride detail
+      let time = new Date().valueOf
       this.firebaseDB
         .object(`request/${this.request.dId}/${this.request.rideid}/${this.request.pUid}`)
         .set(this.request)
+        // .set({
+        //   rideid: this.request.rideid,
+        //   passengerId: this.request.pUid,
+        //   booktime: 2342,
+        //   seatBooked: this.request.seatBooked
+        // })
     }).then(()=>{
       loading.dismiss().then(()=>{
         //booking done

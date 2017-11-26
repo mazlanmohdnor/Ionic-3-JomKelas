@@ -21,7 +21,7 @@
     <ion-list inset>
         <ion-item *ngFor="let req of riderequest | keyobject" (tap)="review(req)" text-wrap>
             <h2> {{ req.key }}</h2>
-            <!-- <p>{{req.key}}</p> -->
+            <p>{{req.pName}}</p>
         </ion-item>
     </ion-list>
 </ion-content>
