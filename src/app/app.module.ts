@@ -21,6 +21,8 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { Camera } from "@ionic-native/camera";
 import { IonicImageLoader } from "ionic-image-loader";
+import { DeviceFeedback } from "@ionic-native/device-feedback";
+
 //to use ionic storage
 import 'firebase/storage';
 
@@ -62,6 +64,7 @@ import 'firebase/storage';
     NativeStorage,
     InAppBrowser,
     Camera,
+    DeviceFeedback
   ]
 })
 export class AppModule {}

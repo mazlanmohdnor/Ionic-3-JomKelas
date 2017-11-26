@@ -23,6 +23,7 @@
     "@ionic-native/camera": "^4.3.3",
     "@ionic-native/core": "3.12.1",
     "@ionic-native/date-picker": "^4.3.3",
+    "@ionic-native/device-feedback": "^4.4.2",
     "@ionic-native/facebook": "^4.3.3",
     "@ionic-native/file": "^4.4.2",
     "@ionic-native/file-transfer": "^4.4.2",
@@ -56,7 +57,8 @@
     "promise-polyfill": "^6.0.2",
     "rxjs": "5.4.0",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.12"
+    "zone.js": "0.8.12",
+    "cordova-plugin-velda-devicefeedback": "~0.0.2"
   },
   "devDependencies": {
     "@ionic/app-scripts": "^3.1.0",
@@ -79,7 +81,8 @@
         "APP_NAME": "jomkelasapp"
       },
       "cordova-plugin-camera": {},
-      "cordova-plugin-file": {}
+      "cordova-plugin-file": {},
+      "cordova-plugin-velda-devicefeedback": {}
     },
     "platforms": [
       "android"

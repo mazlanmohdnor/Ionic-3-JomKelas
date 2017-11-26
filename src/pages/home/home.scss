@@ -23,6 +23,19 @@ page-home {
         font-size: 1.4rem;
         line-height: 1.5;
     }
+    #notification-button {
+        position: relative;
+        border-radius: 100%;
+        top: 3px;
+        right: 3px;
+    }
+    #notifications-badge {
+        background-color: red;
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        border-radius: 100%;
+    }
     // .md-chip {
     //     display: inline-block;
     //     padding: 3px 8px;

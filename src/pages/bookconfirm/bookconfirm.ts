@@ -69,12 +69,8 @@ export class BookconfirmPage {
     loading.present().then(() => {
       // save ride detail
       this.firebaseDB
-        .object(`request/${this.request.rideid}`)
-        .set(this.request).then(()=>{
-          this.firebaseDB.database.ref(`offerRides/${this.request.rideid}`).update({
-            seatOffered: this.request.seatOffered-this.request.seatBooked
-          });
-        });
+        .object(`request/${this.request.dId}/${this.request.rideid}/${this.request.pUid}`)
+        .set(this.request)
     }).then(()=>{
       loading.dismiss().then(()=>{
         //booking done
@@ -137,9 +133,9 @@ export class BookconfirmPage {
     });
 
     //set metadata
-    this.request.rideid = `${this.request.dId}-${this.request.from}-${
+    this.request.rideid = `${this.request.from} - ${
       this.request.destination
-    }:${this.request.date}-${this.request.time}`;
+    } : ${this.request.date} - ${this.request.time}`;
     this.request.ridestatus = false;
     this.request.seatBooked = this.currentNumber;
   }

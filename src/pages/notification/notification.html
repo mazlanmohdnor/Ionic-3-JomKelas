@@ -1,0 +1,27 @@
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-title>Notification</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="bg">
+    <!-- <ion-list inset>
+
+        <button *ngFor="let req of riderequest | keyobject" (tap)="review(req)">
+
+            <h2 text-wrap>{{req.key}}</h2>
+
+
+        </button>
+    </ion-list> -->
+
+    <ion-list inset>
+        <ion-item *ngFor="let req of riderequest | keyobject" (tap)="review(req)" text-wrap>
+            <h2> {{ req.key }}</h2>
+            <!-- <p>{{req.key}}</p> -->
+        </ion-item>
+    </ion-list>
+</ion-content>

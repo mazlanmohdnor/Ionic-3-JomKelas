@@ -4,7 +4,17 @@
         <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>Nearby Rides</ion-title>
+
+        <ion-buttons end>
+            <button id="notification-button" ion-button icon-only (tap)="notification()">
+            <ion-icon name="notifications"></ion-icon> 
+              <ion-badge id="notifications-badge" color="danger">5</ion-badge>
+        </button>
+        </ion-buttons>
     </ion-navbar>
+
+
+
     <ion-searchbar [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)" placeholder="Quick Search">
     </ion-searchbar>
 
@@ -74,7 +84,7 @@
                     </button>
                 </ion-col>
                 <ion-col col-6>
-                    <button ion-button block color="purple" icon-left>
+                    <button ion-button block color="purple" icon-left (click)="findride()">
                       <ion-icon name="search"></ion-icon>
                       Find a Ride
                     </button>
