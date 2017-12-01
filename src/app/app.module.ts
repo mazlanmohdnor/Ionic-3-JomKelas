@@ -23,6 +23,7 @@ import { Camera } from "@ionic-native/camera";
 import { IonicImageLoader } from "ionic-image-loader";
 import { DeviceFeedback } from "@ionic-native/device-feedback";
 import { LocalNotifications } from "@ionic-native/local-notifications";
+import { BackgroundMode } from "@ionic-native/background-mode";
 
 //to use ionic storage
 import 'firebase/storage';
@@ -66,7 +67,8 @@ import 'firebase/storage';
     InAppBrowser,
     Camera,
     DeviceFeedback,
-    LocalNotifications
+    LocalNotifications,
+    BackgroundMode,
   ]
 })
 export class AppModule {}

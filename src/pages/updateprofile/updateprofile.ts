@@ -1,6 +1,5 @@
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook";
-import { Observable } from "rxjs/Observable";
 import { Profile } from "./../../model/profile";
 import { Component } from "@angular/core";
 import {

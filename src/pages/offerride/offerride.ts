@@ -275,7 +275,7 @@ export class OfferridePage {
 
     modal.present();
     modal.onDidDismiss(() => {
-      this.navCtrl.setRoot("HomePage");
+      this.navCtrl.setRoot("RidePage");
     });
   }
 }

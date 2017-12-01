@@ -2,9 +2,9 @@
     <ion-navbar color="primary">
 
         <ion-title>Update Profile</ion-title>
-        <ion-buttons end (click)="saveprofile()">
+        <!-- <ion-buttons end (click)="saveprofile()">
             <button ion-button clear [disabled]="!profile.fullname || !profile.phoneNumber ||!profile.gender || !profile.kolej || !profile.bio">SAVE</button>
-        </ion-buttons>
+        </ion-buttons> -->
     </ion-navbar>
 </ion-header>
 
@@ -88,6 +88,8 @@
                     <ion-textarea elastic placeholder="Enter a description" [(ngModel)]="profile.bio"></ion-textarea>
                 </ion-item>
 
+                <button ion-button block [disabled]="!profile.fullname || !profile.phoneNumber ||!profile.gender || !profile.kolej || !profile.bio" (click)="saveprofile()">SAVE</button>
+                <!-- <button ion-button block ></button> -->
 
             </ion-card-content>
         </ion-card>

@@ -19,6 +19,7 @@ export class TripdetailPage {
   ) {}
 
   ionViewDidLoad() {
+    //get from home.ts
     this.trip = this.navParams.get("trip");
     console.log(this.trip);
   }

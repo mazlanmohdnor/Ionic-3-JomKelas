@@ -48,7 +48,9 @@ page-reviewride {
         text-align: left;
     }
     .fare {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin-top: 20px;
-        color: map-get($colors, secondary);
     }
 }

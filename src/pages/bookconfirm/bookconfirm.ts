@@ -5,7 +5,6 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ModalController,
   ViewController,
   AlertController,
   LoadingController
@@ -19,6 +18,7 @@ import { Requestmodel } from "../../model/requestmodel";
   templateUrl: "bookconfirm.html"
 })
 export class BookconfirmPage {
+  btnDec: boolean;
   request = {} as Requestmodel;
   trip = {} as OfferRideModel;
 
@@ -39,7 +39,10 @@ export class BookconfirmPage {
   }
 
   ionViewDidLoad() {
-    // console.log(this.trip);
+    if (this.trip.seatOffered==0) {
+      this.btnInc = true;
+      this.btnDec = true;
+    }
   }
 
   public increment() {
@@ -50,7 +53,7 @@ export class BookconfirmPage {
   }
 
   public decrement() {
-    if (this.currentNumber > 0) {
+    if (this.currentNumber >= 0) {
       this.currentNumber = this.currentNumber - 1;
       this.btnInc = false;
     }
@@ -68,7 +71,7 @@ export class BookconfirmPage {
     });
     loading.present().then(() => {
       // save ride detail
-      let time = new Date().valueOf
+      // let time = new Date().valueOf
       this.firebaseDB
         .object(`request/${this.request.dId}/${this.request.rideid}/${this.request.pUid}`)
         .set(this.request)

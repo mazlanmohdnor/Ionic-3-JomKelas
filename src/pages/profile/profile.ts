@@ -1,5 +1,4 @@
 import { Car } from "./../../model/car";
-import { Observable } from "rxjs/Observable";
 import { Profile } from "./../../model/profile";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";

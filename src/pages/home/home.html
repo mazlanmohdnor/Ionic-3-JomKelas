@@ -8,7 +8,7 @@
         <ion-buttons end>
             <button id="notification-button" ion-button icon-only (tap)="notification()">
             <ion-icon name="notifications"></ion-icon> 
-              <ion-badge id="notifications-badge" color="danger">5</ion-badge>
+              <ion-badge *ngIf="noti" id="notifications-badge" color="danger">{{noti}}</ion-badge>
         </button>
         </ion-buttons>
     </ion-navbar>

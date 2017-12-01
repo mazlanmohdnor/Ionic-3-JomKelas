@@ -7,13 +7,11 @@ import {
   Nav,
   Platform,
   Events,
-  AlertController,
   MenuController
 } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { Storage } from "@ionic/storage";
-import { Observable } from "rxjs/Observable";
 
 @Component({
   templateUrl: "app.html"
@@ -36,8 +34,7 @@ export class MyApp {
     public firebaseDB: AngularFireDatabase,
     public storage: Storage,
     public event: Events,
-    private alertCtrl: AlertController,
-    public menu: MenuController
+    public menu: MenuController,
   ) {
     this.initializeApp();
 
@@ -110,7 +107,10 @@ export class MyApp {
         }
       });
     });
+
   }
+
+  
 
   openPage(p) {
     this.nav.setRoot(p);

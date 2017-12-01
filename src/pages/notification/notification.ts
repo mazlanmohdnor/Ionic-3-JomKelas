@@ -11,6 +11,7 @@ import { Requestmodel } from "../../model/requestmodel";
   templateUrl: "notification.html"
 })
 export class NotificationPage {
+  child: any;
   riderequest = {} as Requestmodel;
 
   constructor(
@@ -22,14 +23,13 @@ export class NotificationPage {
   ) {}
 
   ionViewDidLoad() {
-    let ref = this.firebaseDB.database.ref().child(`request/${this.fire.auth.currentUser.uid}`);
-    
+    let ref = this.firebaseDB.database
+      .ref()
+      .child(`request/${this.fire.auth.currentUser.uid}`);
     ref.on("value", data => {
-       console.log(data.val());
-       this.riderequest = data.val();
-    })
-       
-}
+      this.riderequest = data.val();
+    });
+  }
 
   review(req) {
     // console.log(req.key);

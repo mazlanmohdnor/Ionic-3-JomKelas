@@ -11,7 +11,7 @@ import {
   ToastController,
   Events
 } from "ionic-angular";
-import firebase from "firebase";
+// import firebase from "firebase";
 import { NativeStorage } from "@ionic-native/native-storage";
 
 @IonicPage()

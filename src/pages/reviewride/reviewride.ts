@@ -1,5 +1,5 @@
 import { OfferRideModel } from "./../../model/offerridemodel";
-import { Component, Renderer } from "@angular/core";
+import { Component } from "@angular/core";
 import {
   IonicPage,
   NavController,
@@ -26,7 +26,7 @@ export class ReviewridePage {
     public alertCtrl: AlertController,
     public fire: AngularFireAuth,
     public firebaseDB: AngularFireDatabase,
-    public loadingCtrl: LoadingController,
+    public loadingCtrl: LoadingController
   ) {
     //this come from OfferRide
     this.offerride = navParams.get("offerride");
@@ -36,10 +36,10 @@ export class ReviewridePage {
     // console.log(this.offerride);
     this.fire.auth.onAuthStateChanged(user => {
       //set ride id
-      this.offerride.rideid = `${user.uid}-${this.offerride.from}-${this
-        .offerride.destination}:${this.offerride.date}-${this
-        .offerride.time}`;
-    })
+      this.offerride.rideid = `${user.uid}-${this.offerride.from} - ${
+        this.offerride.destination
+      } : ${this.offerride.date} - ${this.offerride.time}`;
+    });
   }
 
   confirm() {
@@ -61,27 +61,23 @@ export class ReviewridePage {
             });
             loading.present();
             this.fire.auth.onAuthStateChanged(user => {
-            
-                
               this.firebaseDB
                 .object(
-                  `/offerRides/${user.uid}-${this.offerride.from}-${this
-                    .offerride.destination}:${this.offerride.date}-${this
-                    .offerride.time}`
+                  `/offerRides/${user.uid}-${this.offerride.from} - ${
+                    this.offerride.destination
+                  } : ${this.offerride.date} - ${this.offerride.time}`
                 )
                 .set(this.offerride);
 
               this.firebaseDB
                 .object(
-                  `/userProfile/${user.uid}/trips/${user.uid}-${this.offerride
-                    .from}-${this.offerride.destination}:${this.offerride
-                    .date}-${this.offerride.time}`
+                  `/userProfile/${user.uid}/trips/${user.uid}-${this.offerride.from} - ${
+                    this.offerride.destination
+                  } : ${this.offerride.date} - ${this.offerride.time}`
                 )
-                .set(this.offerride).then(_=>{
-              this.viewCtrl.dismiss().then(_=>loading.dismiss())
-            
-                 
-                  
+                .set(this.offerride)
+                .then(_ => {
+                  this.viewCtrl.dismiss().then(_ => loading.dismiss());
                 });
             });
 
@@ -93,7 +89,7 @@ export class ReviewridePage {
     });
     confirm.present();
   }
-  cancel(){
+  cancel() {
     this.viewCtrl.dismiss();
   }
 }

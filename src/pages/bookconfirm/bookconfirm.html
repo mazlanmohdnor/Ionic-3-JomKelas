@@ -24,7 +24,7 @@
             <hr>
             <h1 text-center class="fare"><b>No of Seat to Book</b></h1>
             <div class="flex_row">
-                <button ion-button clear icon-only large color="danger" (tap)="decrement()">
+                <button ion-button clear icon-only large color="danger" (tap)="decrement()" [disabled]="btnDec">
                     <ion-icon name="remove-circle"></ion-icon>
                 </button>
                 <span class="seat">{{currentNumber}}</span>
