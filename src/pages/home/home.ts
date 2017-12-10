@@ -1,4 +1,4 @@
-import { LocalNotifications } from "@ionic-native/local-notifications";
+// import { LocalNotifications } from "@ionic-native/local-notifications";
 import { DeviceFeedback } from "@ionic-native/device-feedback";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -32,7 +32,7 @@ export class HomePage {
     private alertCtrl: AlertController,
     public event: Events,
     private deviceFeedback: DeviceFeedback,
-    private localNotifications: LocalNotifications
+    // private localNotifications: LocalNotifications
   ) {}
 
   ionViewDidLoad() {

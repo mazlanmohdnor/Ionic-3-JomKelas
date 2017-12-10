@@ -76,7 +76,7 @@
         <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
     </platform>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://10.114.22.62:8100" />
     <allow-navigation href="http://10.114.26.196:8101" />
     <allow-navigation href="http://10.114.26.196:8100" />
     <allow-navigation href="http://10.101.2.162:8100" />
@@ -89,7 +89,9 @@
     <allow-navigation href="http://10.206.1.78:8100" />
     <allow-navigation href="http://10.104.27.114:8100" />
     <allow-navigation href="http://10.206.3.183:8100" />
-    <engine name="android" spec="~6.3.0" />
+    <allow-navigation href="http://192.168.0.197:8100" />
+    <allow-navigation href="http://10.114.22.62:8100" />
+    <engine name="android" spec="6.4.0" />
     <plugin name="cordova-plugin-console" spec="^1.1.0" />
     <plugin name="cordova-plugin-device" spec="^1.1.7" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.1.0" />
