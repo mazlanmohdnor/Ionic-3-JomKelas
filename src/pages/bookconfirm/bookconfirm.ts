@@ -18,10 +18,10 @@ import { Requestmodel } from "../../model/requestmodel";
   templateUrl: "bookconfirm.html"
 })
 export class BookconfirmPage {
-  btnDec: boolean;
   request = {} as Requestmodel;
   trip = {} as OfferRideModel;
-
+  
+  btnDec: boolean;
   btnInc: boolean = false;
   currentNumber: number = 0;
 
@@ -67,7 +67,7 @@ export class BookconfirmPage {
     this.getDriverDetail();
     console.log(this.request);
     let loading = this.loadingCtrl.create({
-      content: "Publishing..."
+      content: "Requesting..."
     });
     loading.present().then(() => {
       // save ride detail

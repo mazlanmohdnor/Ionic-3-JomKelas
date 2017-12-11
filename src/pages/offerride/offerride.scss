@@ -4,4 +4,19 @@ page-offerride {
         padding-right: 15px;
         margin: 10px;
     }
+    .flex_row {
+        display: -webkit-flex;
+        -webkit-flex-direction: row;
+        flex-direction: row;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // margin-bottom: 40px;
+    }
+    .seat {
+        // margin-top: 5px;
+        // padding: 5px 15px;
+        // border: 0.5px solid map-get($colors, primary);
+        // width: 90px;
+    }
 }

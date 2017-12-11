@@ -11,7 +11,8 @@ import {
   Events
 } from "ionic-angular";
 import { Profile } from "../../model/profile";
-declare var cordova;
+import { Storage } from "@ionic/storage";
+
 @IonicPage()
 @Component({
   selector: "page-home",
@@ -32,12 +33,46 @@ export class HomePage {
     private alertCtrl: AlertController,
     public event: Events,
     private deviceFeedback: DeviceFeedback,
+    public storage: Storage
     // private localNotifications: LocalNotifications
   ) {}
 
   ionViewDidLoad() {
     // this.checkNoti();
-    this.checkProfile();
+    //check whether user had open the app, if not, set walkthrough
+  
+    // this.storage.get("profileComplete").then(data => {
+    //   if (!data) {
+    //     // alert('!data');
+    //      let alert = this.alertCtrl.create({
+    //       //  title: `Hi ${data.val().fullname}`,
+    //        message:
+    //          "Welcome to JomKelas application, now going to class much easier. Please complete your profile to continue using this application",
+    //        buttons: [
+    //          {
+    //            text: "Later",
+    //            role: "cancel",
+    //            handler: () => {
+    //              this.deviceFeedback.acoustic();
+    //              console.log("Cancel clickedsdasd");
+    //            }
+    //          },
+    //          {
+    //            text: "Ok",
+    //            handler: () => {
+    //              this.deviceFeedback.acoustic();
+    //              this.navCtrl.push("UpdateprofilePage", {
+    //                profile: data.val()
+    //              });
+    //            }
+    //          }
+    //        ]
+    //      });
+    //      alert.present();
+    //   } else {
+    //     alert('data')
+    //   }
+    // });
 
     this.firebaseDB.database.ref("offerRides/").on("value", data => {
       this.trips = data.val();
@@ -49,8 +84,7 @@ export class HomePage {
     let ref = await this.firebaseDB.database.ref(
       `request/${this.fire.auth.currentUser.uid}`
     );
-    ref.on("value", data => {
-
+    ref.once("value", data => {
       // data.forEach(child=>{
       //    // key will be "ada" the first time and "alan" the second time
       // console.log('child.key: ', child.key);
@@ -68,11 +102,10 @@ export class HomePage {
       //   for (const key in data.val()[keys]) {
       //     console.log("data key inner" + key.length);
       //   }
-    //     let arr = Object.keys(data.val())
-    //     console.log(arr);
-      
-       
-    // }
+      //     let arr = Object.keys(data.val())
+      //     console.log(arr);
+
+      // }
 
       let arr = Object.keys(data.val()).map(key => data.val()[key]);
       // console.log('test', arr);
@@ -96,43 +129,7 @@ export class HomePage {
     });
   }
 
-  async checkProfile() {
-    let ref = await this.firebaseDB.database.ref(
-      `userProfile/${this.fire.auth.currentUser.uid}`
-    );
-    ref.once("value", data => {
-      //check to complete profile, if not, ask user to complete first
-      if (!data.val().profileComplete) {
-        let alert = this.alertCtrl.create({
-          title: `Hi ${data.val().fullname}`,
-          message:
-            "Welcome to JomKelas application, now going to class much easier. Please complete your profile to continue using this application",
-          buttons: [
-            {
-              text: "Later",
-              role: "cancel",
-              handler: () => {
-                this.deviceFeedback.acoustic();
-                console.log("Cancel clickedsdasd");
-              }
-            },
-            {
-              text: "Ok",
-              handler: () => {
-                this.deviceFeedback.acoustic();
-                this.navCtrl.push("UpdateprofilePage", {
-                  profile: data.val()
-                });
-              }
-            }
-          ]
-        });
-        alert.present();
-      } else {
-        console.log("profile complete");
-      }
-    });
-  }
+ 
 
   goDetail(trip) {
     this.deviceFeedback.acoustic();

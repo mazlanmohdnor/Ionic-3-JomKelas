@@ -1,7 +1,7 @@
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { IonicPage, NavController, NavParams, AlertController } from "ionic-angular";
 import { OfferRideModel } from "../../model/offerridemodel";
 
 @IonicPage()
@@ -10,16 +10,18 @@ import { OfferRideModel } from "../../model/offerridemodel";
   templateUrl: "ride.html"
 })
 export class RidePage {
+  isComplete: boolean = true;
   trips = {} as OfferRideModel;
-
+  segment = "trips";
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public firebaseDB: AngularFireDatabase,
-    public fire: AngularFireAuth
+    public fire: AngularFireAuth,
+    private alertCtrl: AlertController
   ) {}
 
-  ionViewDidLoad() {
+  ionViewWillLoad() {
     this.fire.auth.onAuthStateChanged(user => {
       this.firebaseDB.database
         .ref(`userProfile/${user.uid}/trips`)
@@ -27,12 +29,99 @@ export class RidePage {
           this.trips = data.val();
         });
     });
+    this.updateRideList();
   }
 
   delete(trip) {
+    let alert = this.alertCtrl.create({
+      title: "Cancel Trip?",
+      subTitle: `Are you sure to cancel ${trip.from} to ${
+        trip.destination
+      } trip?`,
+      buttons: [
+        {
+          text: "Yes",
+          handler: () => {
+            this.fire.auth.onAuthStateChanged(user => {
+              this.firebaseDB.database
+                .ref(`userProfile/${user.uid}/trips/${trip.key}`)
+                .remove();
+              this.firebaseDB.database.ref(`offerRides/${trip.key}`).remove();
+            });
+          }
+        },
+        {
+          text: "No",
+          handler: () => {
+            console.log("Disagree clicked");
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  deleteCompleted(trip) {
+    let alert = this.alertCtrl.create({
+      title: "Delete Trip?",
+      subTitle: `Are you sure to delete ${trip.from} to ${
+        trip.destination
+      } trip?`,
+      buttons: [
+        {
+          text: "Yes",
+          handler: () => {
+            this.fire.auth.onAuthStateChanged(user => {
+              this.firebaseDB.database.ref(`userProfile/${user.uid}/tripcomplete/${trip.key}`).remove();
+            });
+          }
+        },
+        {
+          text: "No",
+          handler: () => {
+            console.log("Disagree clicked");
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  ridecomplete(trip) {
+    console.log(trip);
+    //1st remove from list, and 2nd move to new node under userProfile/${user.uid}/tripcomplete
     this.fire.auth.onAuthStateChanged(user => {
-      this.firebaseDB.database.ref(`userProfile/${user.uid}/trips/${trip.key}`).remove();
-      this.firebaseDB.database.ref(`offerRides/${trip.key}`).remove();
+      this.firebaseDB.database
+        .ref(`userProfile/${user.uid}/trips/${trip.key}`)
+        .remove()
+        .then(() => {
+          this.firebaseDB.database.ref(`offerRides/${trip.key}`).remove();
+        })
+        //2nd move to new node under userProfile/${user.uid}/tripcomplete
+        .then(() => {
+          this.firebaseDB.database
+            .ref(`userProfile/${user.uid}/tripcomplete/${trip.key}`)
+            .set(trip);
+        });
+    });
+  }
+
+  updateRideList() {
+    //variable untuk hide button kat segment completedride
+    if (this.segment == "tripcomplete") {
+      this.isComplete = false;
+    } else {
+      this.isComplete = true;
+    }
+    //kat sini kena listen to 2 variable, trips dgn tripcomplete
+    //activeride fetch from userProfile/${user.uid}/trips
+    //completedride fetch from userProfile/${user.uid}/tripcomplete
+    this.fire.auth.onAuthStateChanged(user => {
+      this.firebaseDB.database
+        .ref(`userProfile/${user.uid}/${this.segment}`)
+        .on("value", data => {
+          this.trips = data.val();
+        });
     });
   }
 }

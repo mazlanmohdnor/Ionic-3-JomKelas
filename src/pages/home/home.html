@@ -27,7 +27,6 @@
 <ion-content class="bg">
 
     <ion-card *ngFor="let trip of trips | keyobject | filterride">
-        <!-- <span *ngIf="trip.from==='k14'"> -->
         <ion-card-header>
             <ion-grid>
                 <ion-row>
@@ -37,9 +36,6 @@
                         <p class="date">{{trip.date}} - {{trip.time}}</p>
                     </ion-col>
                     <ion-col col-3>
-                        <!-- <ion-chip>
-                            <ion-icon [color]="trip.gender==='male' ? 'primary' : 'purple'" [name]="trip.gender==='male' ? 'ios-man' : 'ios-woman'"></ion-icon>
-                        </ion-chip> -->
                         <ion-chip color="danger">
                             <ion-label>RM 0.50</ion-label>
                         </ion-chip>

@@ -43,19 +43,19 @@ export class ReviewridePage {
   }
 
   confirm() {
-    let confirm = this.alertCtrl.create({
-      title: `Add ride ${this.offerride.from} to ${this.offerride.destination}`,
-      message: `Time : ${this.offerride.date}-${this.offerride.time}?`,
-      buttons: [
-        {
-          text: "Cancel",
-          handler: () => {
-            console.log("Disagree clicked");
-          }
-        },
-        {
-          text: "Ok",
-          handler: () => {
+    // let confirm = this.alertCtrl.create({
+    //   title: `Add ride ${this.offerride.from} to ${this.offerride.destination}`,
+    //   message: `Time : ${this.offerride.date}-${this.offerride.time}?`,
+    //   buttons: [
+    //     {
+    //       text: "Cancel",
+    //       handler: () => {
+    //         console.log("Disagree clicked");
+    //       }
+    //     },
+    //     {
+    //       text: "Ok",
+    //       handler: () => {
             let loading = this.loadingCtrl.create({
               content: "Publishing..."
             });
@@ -83,11 +83,11 @@ export class ReviewridePage {
 
             // review the ride first
             // this.viewCtrl.dismiss().then(_ => this.navCtrl.setRoot("HomePage"));
-          }
-        }
-      ]
-    });
-    confirm.present();
+    //       }
+    //     }
+    //   ]
+    // });
+    // confirm.present();
   }
   cancel() {
     this.viewCtrl.dismiss();

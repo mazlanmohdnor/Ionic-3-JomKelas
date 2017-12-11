@@ -34,7 +34,7 @@ export class MyApp {
     public firebaseDB: AngularFireDatabase,
     public storage: Storage,
     public event: Events,
-    public menu: MenuController,
+    public menu: MenuController
   ) {
     this.initializeApp();
 
@@ -69,7 +69,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       // set status bar to white
-      this.statusBar.backgroundColorByHexString('#00BAE1');
+      this.statusBar.backgroundColorByHexString("#00BAE1");
       this.splashScreen.hide();
 
       //check whether user had open the app, if not, set walkthrough
@@ -79,8 +79,11 @@ export class MyApp {
           this.rootPage = "WalkthroughPage";
         }
       });
-
    
+
+      //check user profile
+      // this.checkProfile();
+
       //WalkthroughPage
       // check whether user loggedin or not
       this.fire.authState.subscribe(user => {
@@ -99,6 +102,11 @@ export class MyApp {
               .ref(`userProfile/${this.fire.auth.currentUser.uid}`)
               .once("value", data => {
                 this.profile = data.val();
+                // if (!data.val().profileComplete) {
+                  // this.storage.set("profileComplete", false);
+                // } else {
+                  // this.storage.set("profileComplete", true);
+                // }
               });
             this.rootPage = "HomePage";
           } else {
@@ -107,10 +115,20 @@ export class MyApp {
         }
       });
     });
-
   }
 
-  
+  // checkProfile() {
+  //  this.firebaseDB.database
+  //    .ref(`userProfile/${this.fire.auth.currentUser.uid}`)
+  //    .once("value", data => {
+  //      //check to complete profile, if not, ask user to complete first
+  //      if (!data.val().profileComplete) {
+  //        this.storage.set("profileComplete", false);
+  //      } else {
+  //        this.storage.set("profileComplete", true);
+  //      }
+  //    });
+  // }
 
   openPage(p) {
     this.nav.setRoot(p);

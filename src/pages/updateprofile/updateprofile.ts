@@ -15,6 +15,7 @@ import {
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
 import firebase from "firebase";
+import { Storage } from "@ionic/storage";
 
 @IonicPage()
 @Component({
@@ -36,7 +37,8 @@ export class UpdateprofilePage {
     private camera: Camera,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public event: Events
+    public event: Events,
+    public storage: Storage
   ) {}
 
   ionViewDidLoad() {
@@ -67,6 +69,8 @@ export class UpdateprofilePage {
         })
         .then(
           () => {
+            this.storage.set("profileComplete", true);
+
             let loading = this.loadingCtrl.create({
               content: "Saving..."
             });
@@ -226,8 +230,9 @@ export class UpdateprofilePage {
     const pictures = firebase
       .storage()
       .ref(
-        `${this.fire.auth.currentUser.uid}/profilepic/avatar-${this.fire.auth
-          .currentUser.uid}.jpg`
+        `${this.fire.auth.currentUser.uid}/profilepic/avatar-${
+          this.fire.auth.currentUser.uid
+        }.jpg`
       );
     console.log(pictures.getDownloadURL);
     pictures.getDownloadURL().then(

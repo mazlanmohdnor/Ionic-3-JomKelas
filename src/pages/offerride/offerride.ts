@@ -24,7 +24,11 @@ import { ModalController } from "ionic-angular/components/modal/modal-controller
   templateUrl: "offerride.html"
 })
 export class OfferridePage {
-  offerride = {} as OfferRideModel;
+  offerride = {
+    date: new Date().toDateString(),
+    time: new Date().toLocaleTimeString(),
+    seatOffered : 0
+  } as OfferRideModel;
 
   destinationData: any;
   fromData: any;
@@ -33,6 +37,11 @@ export class OfferridePage {
   classes = {} as Classes;
   colleges = {} as College;
   vehicles = {} as Car;
+
+  //number for seat
+  currentNumber: number = 0;
+  btnDec: boolean;
+  btnInc: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -111,6 +120,21 @@ export class OfferridePage {
       this.fromData = data.val();
       // console.log(data.val());
     });
+  }
+
+  increment() {
+    this.currentNumber = this.currentNumber + 1;
+    if (this.currentNumber == this.offerride.seatOffered) {
+      this.btnInc = true;
+    }
+  }
+
+  decrement() {
+    
+    if (this.currentNumber > 0) {
+      this.currentNumber = this.currentNumber - 1;
+      this.btnInc = false;
+    }
   }
 
   destinationToFuntion(to) {
@@ -207,11 +231,13 @@ export class OfferridePage {
             (this.offerride.brand = data.val().brand),
             (this.offerride.model = data.val().model),
             (this.offerride.color = data.val().color),
-            (this.offerride.vehiclePhotoURL = data.val().photoURL);
-          this.offerride.vehicleType = data.val().type;
+            (this.offerride.vehiclePhotoURL = data.val().photoURL),
+          this.offerride.vehicleType = data.val().type,
+          this.offerride.seatOffered = data.val().seat
           // console.log(data.val());
         });
     });
+    
   }
 
   addvehicle() {
