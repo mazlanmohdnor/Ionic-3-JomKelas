@@ -45,7 +45,6 @@ export class ReviewrequestPage {
         //we need to set the seat, if the driver approve the passanger, and all seat are required, then we need to remove the rideoffered from dashbord
         this.seatBalance = data.val().seatOffered - req.seatBooked;
         //check seat
-        alert(this.seatBalance);
 
         if (this.seatBalance == 0) {
           //update the seat and check wheater the seat is 0

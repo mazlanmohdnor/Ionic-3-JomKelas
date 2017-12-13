@@ -75,6 +75,13 @@ export class BookconfirmPage {
       this.firebaseDB
         .object(`request/${this.request.dId}/${this.request.rideid}/${this.request.pUid}`)
         .set(this.request)
+        .then(() => {
+           this.firebaseDB
+             .object(
+               `userProfile/${this.fire.auth.currentUser.uid}/mybooking/${this.request.rideid}`
+             )
+             .set(this.request);
+        })
         // .set({
         //   rideid: this.request.rideid,
         //   passengerId: this.request.pUid,

@@ -27,6 +27,7 @@ import { DeviceFeedback } from "@ionic-native/device-feedback";
 
 //to use ionic storage
 import 'firebase/storage';
+import { DataProvider } from '../providers/data/data';
 
 
 
@@ -67,6 +68,7 @@ import 'firebase/storage';
     InAppBrowser,
     Camera,
     DeviceFeedback,
+    DataProvider,
     // LocalNotifications,
     // BackgroundMode,
   ]

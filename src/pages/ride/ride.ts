@@ -22,13 +22,13 @@ export class RidePage {
   ) {}
 
   ionViewWillLoad() {
-    this.fire.auth.onAuthStateChanged(user => {
-      this.firebaseDB.database
-        .ref(`userProfile/${user.uid}/trips`)
-        .on("value", data => {
-          this.trips = data.val();
-        });
-    });
+    // this.fire.auth.onAuthStateChanged(user => {
+    //   this.firebaseDB.database
+    //     .ref(`userProfile/${user.uid}/trips`)
+    //     .on("value", data => {
+    //       this.trips = data.val();
+    //     });
+    // });
     this.updateRideList();
   }
 
@@ -72,7 +72,9 @@ export class RidePage {
           text: "Yes",
           handler: () => {
             this.fire.auth.onAuthStateChanged(user => {
-              this.firebaseDB.database.ref(`userProfile/${user.uid}/tripcomplete/${trip.key}`).remove();
+              this.firebaseDB.database.ref(`userProfile/${user.uid}/tripcomplete/${trip.key}`).remove().then(_ => {
+    this.updateRideList();
+              });
             });
           }
         },
@@ -110,18 +112,26 @@ export class RidePage {
     //variable untuk hide button kat segment completedride
     if (this.segment == "tripcomplete") {
       this.isComplete = false;
+        this.fire.auth.onAuthStateChanged(user => {
+          this.firebaseDB.database
+            .ref(`userProfile/${user.uid}/tripcomplete`)
+            .on("value", data => {
+              this.trips = data.val();
+            });
+        });
     } else {
       this.isComplete = true;
+        this.fire.auth.onAuthStateChanged(user => {
+          this.firebaseDB.database
+            .ref(`userProfile/${user.uid}/trips`)
+            .on("value", data => {
+              this.trips = data.val();
+            });
+        });
     }
     //kat sini kena listen to 2 variable, trips dgn tripcomplete
     //activeride fetch from userProfile/${user.uid}/trips
     //completedride fetch from userProfile/${user.uid}/tripcomplete
-    this.fire.auth.onAuthStateChanged(user => {
-      this.firebaseDB.database
-        .ref(`userProfile/${user.uid}/${this.segment}`)
-        .on("value", data => {
-          this.trips = data.val();
-        });
-    });
+  
   }
 }

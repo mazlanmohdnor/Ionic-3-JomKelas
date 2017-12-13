@@ -1,3 +1,30 @@
 page-booking {
-
+    .txtwrap {
+        word-break: break-word;
+        white-space: normal;
+        text-align: left;
+    }
+    .card-header-md {
+        font-size: 1.6rem;
+        color: #222;
+        padding: 0;
+    }
+    .card-content-md {
+        padding: 0;
+        font-size: 1.4rem;
+        line-height: 1.5;
+    }
+    .footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        margin: 0p;
+        // height: 15vh;
+        width: 100%;
+        // background-color: #EEE;
+        /*to make it visible*/
+    }
+    ion-segment {
+        background: map-get($colors, primary);
+    }
 }

@@ -1,3 +1,4 @@
+import { DataProvider } from './../../providers/data/data';
 // import { LocalNotifications } from "@ionic-native/local-notifications";
 import { DeviceFeedback } from "@ionic-native/device-feedback";
 import { AngularFireDatabase } from "angularfire2/database";
@@ -24,7 +25,7 @@ export class HomePage {
   user = {} as Profile;
 
   notificationAlreadyReceived = false;
-
+  searchTerm: string = "";
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -33,14 +34,14 @@ export class HomePage {
     private alertCtrl: AlertController,
     public event: Events,
     private deviceFeedback: DeviceFeedback,
-    public storage: Storage
-    // private localNotifications: LocalNotifications
+    public storage: Storage,
+    public data: DataProvider // private localNotifications: LocalNotifications
   ) {}
 
   ionViewDidLoad() {
     // this.checkNoti();
     //check whether user had open the app, if not, set walkthrough
-  
+
     // this.storage.get("profileComplete").then(data => {
     //   if (!data) {
     //     // alert('!data');
@@ -78,6 +79,16 @@ export class HomePage {
       this.trips = data.val();
     });
   }
+  setFilteredItems() {
+    this.trips = this.data.filterItems(this.searchTerm)
+    console.log(this.trips);
+    // this.firebaseDB.database.ref("offerRides/").on("value", data => {
+    //   let trips = data.val();
+    //   trips.filter((item) => {
+    //     console.log(item);
+    //   })
+    // });
+  };
 
   async checkNoti() {
     //check notification
@@ -128,8 +139,6 @@ export class HomePage {
       // }
     });
   }
-
- 
 
   goDetail(trip) {
     this.deviceFeedback.acoustic();
