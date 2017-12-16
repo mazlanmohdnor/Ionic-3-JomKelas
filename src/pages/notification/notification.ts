@@ -23,13 +23,15 @@ export class NotificationPage {
   ) {}
 
   ionViewDidLoad() {
-    let ref = this.firebaseDB.database
-      .ref()
-      .child(`request/${this.fire.auth.currentUser.uid}`);
-    ref.on("value", data => {
-      this.riderequest = data.val();
-    });
-  }
+    this.fire.auth.onAuthStateChanged(user => {
+      let ref = this.firebaseDB.database
+        .ref()
+        .child(`request/${user.uid}`);
+      ref.on("value", data => {
+        this.riderequest = data.val();
+      });
+    })
+  }  
 
   review(req) {
     // console.log(req.key);

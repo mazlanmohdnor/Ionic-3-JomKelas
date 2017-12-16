@@ -39,6 +39,8 @@ export class BookconfirmPage {
   }
 
   ionViewDidLoad() {
+    this.getDriverDetail();
+    
     if (this.trip.seatOffered==0) {
       this.btnInc = true;
       this.btnDec = true;
@@ -65,16 +67,15 @@ export class BookconfirmPage {
   }
 
   confirm() {
-    this.getDriverDetail();
     console.log(this.request);
     let loading = this.loadingCtrl.create({
       content: "Requesting..."
     });
     loading.present().then(() => {
-      // save ride detail
-      // let time = new Date().valueOf
-      this.firebaseDB
-        .object(`request/${this.request.dId}/${this.request.rideid}/${this.request.pUid}`)
+    //   // save ride detail
+    //   // let time = new Date().valueOf
+      this.firebaseDB.database
+        .ref(`request/${this.request.dId}/${this.request.rideid}/${this.request.pUid}`)
         .set(this.request)
         .then(() => {
            this.firebaseDB

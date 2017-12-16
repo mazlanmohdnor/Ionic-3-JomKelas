@@ -27,4 +27,14 @@ page-ride {
     ion-segment {
         background: map-get($colors, primary);
     }
+    .button-md {
+        margin: 0;
+    }
+    .profile {
+        object-fit: cover;
+        width: 45px;
+        height: 45px;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+    }
 }

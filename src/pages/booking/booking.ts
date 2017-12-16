@@ -1,9 +1,14 @@
-import { AngularFireDatabase } from 'angularfire2/database';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { OfferRideModel } from '../../model/offerridemodel';
-
+import { AngularFireDatabase } from "angularfire2/database";
+import { Component } from "@angular/core";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  AlertController
+} from "ionic-angular";
+import { AngularFireAuth } from "angularfire2/auth";
+import { OfferRideModel } from "../../model/offerridemodel";
+import { Requestmodel } from "../../model/requestmodel";
 
 @IonicPage()
 @Component({
@@ -12,7 +17,8 @@ import { OfferRideModel } from '../../model/offerridemodel';
 })
 export class BookingPage {
   isComplete: boolean = true;
-  books = {} as OfferRideModel;
+  isApproved:boolean = false;
+  books = {} as Requestmodel;
   segment = "book";
 
   constructor(
@@ -23,14 +29,16 @@ export class BookingPage {
     private alertCtrl: AlertController
   ) {}
   ionViewWillLoad() {
+    this.updateBookList();
+    //get data from ratebooking, after set completed
+    this.isComplete = this.navParams.get("isComplete");
     // this.fire.auth.onAuthStateChanged(user => {
     //   this.firebaseDB.database
-    //     .ref(`userProfile/${user.uid}/trips`)
-    //     .on("value", data => {
-    //       this.trips = data.val();
-    //     });
+    //     .ref(`userProfile/${user.uid}/mybooking/`)
+    //     .on('value', (data) => {
+    //       console.log(data.val());
+    //     })
     // });
-    this.updateBookList();
   }
 
   delete(book) {
@@ -64,26 +72,25 @@ export class BookingPage {
 
   deleteCompleted(book) {
     let alert = this.alertCtrl.create({
-      title: "Delete book?",
+      title: "Delete Record?",
       subTitle: `Are you sure to delete ${book.from} to ${
         book.destination
-      } book?`,
+      } history?`,
       buttons: [
+        {
+          text: "No",
+          handler: () => {
+            console.log("Disagree clicked");
+          }
+        },
         {
           text: "Yes",
           handler: () => {
             this.fire.auth.onAuthStateChanged(user => {
               this.firebaseDB.database
                 .ref(`userProfile/${user.uid}/bookcomplete/${book.key}`)
-                .remove()
-           
+                .remove();
             });
-          }
-        },
-        {
-          text: "No",
-          handler: () => {
-            console.log("Disagree clicked");
           }
         }
       ]
@@ -92,23 +99,8 @@ export class BookingPage {
   }
 
   ridecomplete(book) {
-    // console.log(book);
-    this.navCtrl.push("RatebookingPage", {'currentbook':book});
-    //1st remove from list, and 2nd move to new node under userProfile/${user.uid}/bookcomplete
-    // this.fire.auth.onAuthStateChanged(user => {
-    //   this.firebaseDB.database
-    //     .ref(`userProfile/${user.uid}/books/${book.key}`)
-    //     .remove()
-    //     .then(() => {
-    //       this.firebaseDB.database.ref(`offerRides/${book.key}`).remove();
-    //     })
-    //     //2nd move to new node under userProfile/${user.uid}/bookcomplete
-    //     .then(() => {
-    //       this.firebaseDB.database
-    //         .ref(`userProfile/${user.uid}/bookcomplete/${book.key}`)
-    //         .set(book);
-    //     });
-    // });
+    console.log(book);
+    this.navCtrl.push("RatebookingPage", { currentbook: book });
   }
 
   updateBookList() {
@@ -120,16 +112,20 @@ export class BookingPage {
           .ref(`userProfile/${user.uid}/mybooking/`)
           .on("value", data => {
             this.books = data.val();
-            // console.log(this.books);
+            console.log(data.val());
           });
       });
     } else {
       this.isComplete = true;
       this.fire.auth.onAuthStateChanged(user => {
         this.firebaseDB.database
-          .ref(`userProfile/${user.uid}/books`)
+          .ref(`userProfile/${user.uid}/bookcomplete`)
           .on("value", data => {
-            // this.books = data.val();
+            if (data) {
+              this.books = data.val();
+            } else {
+              console.log('no data der');
+            }
           });
       });
     }

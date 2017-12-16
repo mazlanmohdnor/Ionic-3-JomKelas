@@ -65,6 +65,8 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      // this.nav.getActive().component.name
+      console.log('this.nav.getActive().component.name: ', this.nav.getActive());
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
@@ -79,7 +81,6 @@ export class MyApp {
           this.rootPage = "WalkthroughPage";
         }
       });
-   
 
       //check user profile
       // this.checkProfile();
@@ -103,9 +104,9 @@ export class MyApp {
               .once("value", data => {
                 this.profile = data.val();
                 // if (!data.val().profileComplete) {
-                  // this.storage.set("profileComplete", false);
+                // this.storage.set("profileComplete", false);
                 // } else {
-                  // this.storage.set("profileComplete", true);
+                // this.storage.set("profileComplete", true);
                 // }
               });
             this.rootPage = "HomePage";
@@ -134,8 +135,8 @@ export class MyApp {
     this.nav.setRoot(p);
     this.activePage = p;
   }
-  checkActive(p) {
-    return p == this.activePage;
+  checkActive(page) {
+    return page == this.activePage;
   }
 
   profilepage() {

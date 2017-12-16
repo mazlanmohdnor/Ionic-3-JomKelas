@@ -1,7 +1,12 @@
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams, AlertController } from "ionic-angular";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  AlertController
+} from "ionic-angular";
 import { OfferRideModel } from "../../model/offerridemodel";
 
 @IonicPage()
@@ -69,19 +74,22 @@ export class RidePage {
       } trip?`,
       buttons: [
         {
-          text: "Yes",
-          handler: () => {
-            this.fire.auth.onAuthStateChanged(user => {
-              this.firebaseDB.database.ref(`userProfile/${user.uid}/tripcomplete/${trip.key}`).remove().then(_ => {
-    this.updateRideList();
-              });
-            });
-          }
-        },
-        {
           text: "No",
           handler: () => {
             console.log("Disagree clicked");
+          }
+        },
+        {
+          text: "Yes",
+          handler: () => {
+            this.fire.auth.onAuthStateChanged(user => {
+              this.firebaseDB.database
+                .ref(`userProfile/${user.uid}/tripcomplete/${trip.key}`)
+                .remove()
+                .then(_ => {
+                  this.updateRideList();
+                });
+            });
           }
         }
       ]
@@ -91,47 +99,68 @@ export class RidePage {
 
   ridecomplete(trip) {
     console.log(trip);
-    //1st remove from list, and 2nd move to new node under userProfile/${user.uid}/tripcomplete
-    this.fire.auth.onAuthStateChanged(user => {
-      this.firebaseDB.database
-        .ref(`userProfile/${user.uid}/trips/${trip.key}`)
-        .remove()
-        .then(() => {
-          this.firebaseDB.database.ref(`offerRides/${trip.key}`).remove();
-        })
-        //2nd move to new node under userProfile/${user.uid}/tripcomplete
-        .then(() => {
-          this.firebaseDB.database
-            .ref(`userProfile/${user.uid}/tripcomplete/${trip.key}`)
-            .set(trip);
-        });
+    let alert = this.alertCtrl.create({
+      title: "Trip Completed?",
+      buttons: [
+        {
+          text: "No",
+          handler: () => {
+            console.log("Disagree clicked");
+          }
+        },
+        {
+          text: "Yes",
+          handler: () => {
+            //1st remove from list, and 2nd move to new node under userProfile/${user.uid}/tripcomplete
+            this.fire.auth.onAuthStateChanged(user => {
+              this.firebaseDB.database
+                .ref(`userProfile/${user.uid}/trips/${trip.key}`)
+                .remove()
+                .then(() => {
+                  this.firebaseDB.database
+                    .ref(`offerRides/${trip.key}`)
+                    .remove();
+                })
+                //2nd move to new node under userProfile/${user.uid}/tripcomplete
+                .then(() => {
+                  this.firebaseDB.database
+                    .ref(`userProfile/${user.uid}/tripcomplete/${trip.key}`)
+                    .set(trip);
+                })
+                .then(() => {
+                this.navCtrl.setRoot('RidePage')
+              })
+            });
+          }
+        }
+      ]
     });
+    alert.present();
   }
 
   updateRideList() {
     //variable untuk hide button kat segment completedride
     if (this.segment == "tripcomplete") {
       this.isComplete = false;
-        this.fire.auth.onAuthStateChanged(user => {
-          this.firebaseDB.database
-            .ref(`userProfile/${user.uid}/tripcomplete`)
-            .on("value", data => {
-              this.trips = data.val();
-            });
-        });
+      this.fire.auth.onAuthStateChanged(user => {
+        this.firebaseDB.database
+          .ref(`userProfile/${user.uid}/tripcomplete`)
+          .on("value", data => {
+            this.trips = data.val();
+          });
+      });
     } else {
       this.isComplete = true;
-        this.fire.auth.onAuthStateChanged(user => {
-          this.firebaseDB.database
-            .ref(`userProfile/${user.uid}/trips`)
-            .on("value", data => {
-              this.trips = data.val();
-            });
-        });
+      this.fire.auth.onAuthStateChanged(user => {
+        this.firebaseDB.database
+          .ref(`userProfile/${user.uid}/trips`)
+          .on("value", data => {
+            this.trips = data.val();
+          });
+      });
     }
     //kat sini kena listen to 2 variable, trips dgn tripcomplete
     //activeride fetch from userProfile/${user.uid}/trips
     //completedride fetch from userProfile/${user.uid}/tripcomplete
-  
   }
 }

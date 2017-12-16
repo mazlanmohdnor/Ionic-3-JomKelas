@@ -1,5 +1,6 @@
 export interface Requestmodel{
     //info about request
+    key:string,
     rideid:string,
     ridestatus:boolean,
     rideRemaining:number,
