@@ -27,4 +27,7 @@ page-booking {
     ion-segment {
         background: map-get($colors, primary);
     }
+    .button-md {
+        margin: 0;
+    }
 }

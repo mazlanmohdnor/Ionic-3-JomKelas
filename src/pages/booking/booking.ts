@@ -92,22 +92,23 @@ export class BookingPage {
   }
 
   ridecomplete(book) {
-    console.log(book);
+    // console.log(book);
+    this.navCtrl.push("RatebookingPage", {'currentbook':book});
     //1st remove from list, and 2nd move to new node under userProfile/${user.uid}/bookcomplete
-    this.fire.auth.onAuthStateChanged(user => {
-      this.firebaseDB.database
-        .ref(`userProfile/${user.uid}/books/${book.key}`)
-        .remove()
-        .then(() => {
-          this.firebaseDB.database.ref(`offerRides/${book.key}`).remove();
-        })
-        //2nd move to new node under userProfile/${user.uid}/bookcomplete
-        .then(() => {
-          this.firebaseDB.database
-            .ref(`userProfile/${user.uid}/bookcomplete/${book.key}`)
-            .set(book);
-        });
-    });
+    // this.fire.auth.onAuthStateChanged(user => {
+    //   this.firebaseDB.database
+    //     .ref(`userProfile/${user.uid}/books/${book.key}`)
+    //     .remove()
+    //     .then(() => {
+    //       this.firebaseDB.database.ref(`offerRides/${book.key}`).remove();
+    //     })
+    //     //2nd move to new node under userProfile/${user.uid}/bookcomplete
+    //     .then(() => {
+    //       this.firebaseDB.database
+    //         .ref(`userProfile/${user.uid}/bookcomplete/${book.key}`)
+    //         .set(book);
+    //     });
+    // });
   }
 
   updateBookList() {
@@ -119,7 +120,7 @@ export class BookingPage {
           .ref(`userProfile/${user.uid}/mybooking/`)
           .on("value", data => {
             this.books = data.val();
-            console.log(this.books);
+            // console.log(this.books);
           });
       });
     } else {
@@ -128,7 +129,7 @@ export class BookingPage {
         this.firebaseDB.database
           .ref(`userProfile/${user.uid}/books`)
           .on("value", data => {
-            this.books = data.val();
+            // this.books = data.val();
           });
       });
     }

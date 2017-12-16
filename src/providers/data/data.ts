@@ -11,12 +11,16 @@ export class DataProvider {
     public firebaseDB: AngularFireDatabase
   ) {
     this.firebaseDB.database.ref("offerRides/").on("value", data => {
-      this.items = [];
-      Object.getOwnPropertyNames(data.val()).forEach(key => {
-        let value = data.val()[ key ];
-        this.items.push(value)
-      });
-      console.log(this.items)
+      if (data.val()) {
+           this.items = [];
+           Object.getOwnPropertyNames(data.val()).forEach(key => {
+             let value = data.val()[key];
+             this.items.push(value);
+           });
+      } else {
+        console.log('no value');
+      }
+   
     })
   }  
   

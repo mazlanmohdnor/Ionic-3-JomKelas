@@ -6,6 +6,8 @@ page-bookconfirm {
         height: auto;
         margin: 20px;
         border: 0;
+        border-radius: 10px;
+        box-shadow: 0 16px 20px rgba(0, 0, 0, .4);
     }
     .scroll-content {
         display: flex;
@@ -13,8 +15,8 @@ page-bookconfirm {
         align-items: center;
     }
     .modalbg {
-        background-color: rgba(0, 0, 0, 0.7) !important;
-        // background-color: map-get($colors, bg);
+        // background-color: rgba(0, 0, 0, 0.7) !important;
+        background-color: map-get($colors, primary);
     }
     .fare {
         margin-top: 20px;
@@ -33,5 +35,8 @@ page-bookconfirm {
         // margin-top: 5px;
         padding: 5px 15px;
         border: 0.5px solid map-get($colors, primary);
+    }
+    .button-md {
+        margin: 0;
     }
 }

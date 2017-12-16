@@ -188,7 +188,12 @@
                 </ion-label>
                 <ion-textarea elastic placeholder="Ex: Im a cool guy" [(ngModel)]="offerride.comment"></ion-textarea>
             </ion-item>
-            <button ion-button full large (click)="review()">Review Ride</button>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-content no-padding>
+
+            <button ion-button block large (click)="review()" color="secondary">Review Ride</button>
         </ion-card-content>
     </ion-card>
 </ion-content>

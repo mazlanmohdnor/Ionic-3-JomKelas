@@ -60,7 +60,8 @@ export class BookconfirmPage {
   }
 
   cancel() {
-    this.viewCtrl.dismiss();
+    // this.viewCtrl.dismiss();
+    this.navCtrl.pop();
   }
 
   confirm() {
@@ -98,7 +99,8 @@ export class BookconfirmPage {
             {
               text: 'Ok',
               handler: () => {
-                this.viewCtrl.dismiss()
+                // this.viewCtrl.dismiss()
+                this.navCtrl.setRoot('BookingPage')
               }
             }
           ]

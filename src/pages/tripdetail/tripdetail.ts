@@ -31,21 +31,21 @@ export class TripdetailPage {
    //after all forms filled in, send the object to be review
    confirmBook() {
     
-     // this.navCtrl.push('ReviewridePage', {'offerride': this.offerride})
-     let modal = this.modal.create(
-         "BookconfirmPage",
-        {'trip':this.trip},
-         {
-           showBackdrop: true,
-           enableBackdropDismiss: true,
-           cssClass:"mymodal"
-         }
-       );
+     this.navCtrl.push("BookconfirmPage", { trip: this.trip });
+    //  let modal = this.modal.create(
+    //      "BookconfirmPage",
+    //     {'trip':this.trip},
+    //      {
+    //        showBackdrop: true,
+    //        enableBackdropDismiss: true,
+    //        cssClass:"mymodal"
+    //      }
+    //    );
 
-       modal.present();
+    //    modal.present();
 
-       modal.onDidDismiss(() => {
-        this.navCtrl.setRoot("HomePage");
-      });
+    //    modal.onDidDismiss(() => {
+    //     this.navCtrl.setRoot("HomePage");
+    //   });
    }
 }

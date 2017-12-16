@@ -156,5 +156,6 @@ export class HomePage {
   }
   findride() {
     this.deviceFeedback.acoustic();
+    this.navCtrl.push('FindridePage')
   }
 }

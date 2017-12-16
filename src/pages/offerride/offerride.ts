@@ -288,20 +288,21 @@ export class OfferridePage {
   review() {
     const date = new Date().valueOf();
     this.offerride.timestamp = date;
-    // this.navCtrl.push('ReviewridePage', {'offerride': this.offerride})
-    let modal = this.modal.create(
-      "ReviewridePage",
-      { offerride: this.offerride },
-      {
-        showBackdrop: true,
-        enableBackdropDismiss: true,
-        cssClass: "mymodal"
-      }
-    );
+    this.navCtrl.push('ReviewridePage', {'offerride': this.offerride})
+    // let modal = this.modal.create(
+    //   "ReviewridePage",
+    //   { offerride: this.offerride },
+    //   {
+    //     showBackdrop: true,
+    //     enableBackdropDismiss: true,
+    //     cssClass: "mymodal"
+    //   }
+    // );
 
-    modal.present();
-    modal.onDidDismiss(() => {
-      this.navCtrl.setRoot("RidePage");
-    });
+    // modal.present();
+    // modal.onDidDismiss((data) => {
+    //   // this.navCtrl.pop("RidePage");
+    //   console.log(data);
+    // });
   }
 }

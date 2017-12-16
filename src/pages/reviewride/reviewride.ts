@@ -6,7 +6,8 @@ import {
   NavParams,
   ViewController,
   AlertController,
-  LoadingController
+  LoadingController,
+  ModalController
 } from "ionic-angular";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
@@ -26,7 +27,8 @@ export class ReviewridePage {
     public alertCtrl: AlertController,
     public fire: AngularFireAuth,
     public firebaseDB: AngularFireDatabase,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public modal: ModalController
   ) {
     //this come from OfferRide
     this.offerride = navParams.get("offerride");
@@ -56,33 +58,36 @@ export class ReviewridePage {
     //     {
     //       text: "Ok",
     //       handler: () => {
-            let loading = this.loadingCtrl.create({
-              content: "Publishing..."
-            });
-            loading.present();
-            this.fire.auth.onAuthStateChanged(user => {
-              this.firebaseDB
-                .object(
-                  `/offerRides/${user.uid}-${this.offerride.from} - ${
-                    this.offerride.destination
-                  } : ${this.offerride.date} - ${this.offerride.time}`
-                )
-                .set(this.offerride);
+    let loading = this.loadingCtrl.create({
+      content: "Publishing..."
+    });
+    loading.present();
+    this.fire.auth.onAuthStateChanged(user => {
+      this.firebaseDB
+        .object(
+          `/offerRides/${user.uid}-${this.offerride.from} - ${
+            this.offerride.destination
+          } : ${this.offerride.date} - ${this.offerride.time}`
+        )
+        .set(this.offerride);
 
-              this.firebaseDB
-                .object(
-                  `/userProfile/${user.uid}/trips/${user.uid}-${this.offerride.from} - ${
-                    this.offerride.destination
-                  } : ${this.offerride.date} - ${this.offerride.time}`
-                )
-                .set(this.offerride)
-                .then(_ => {
-                  this.viewCtrl.dismiss().then(_ => loading.dismiss());
-                });
-            });
+      this.firebaseDB
+        .object(
+          `/userProfile/${user.uid}/trips/${user.uid}-${
+            this.offerride.from
+          } - ${this.offerride.destination} : ${this.offerride.date} - ${
+            this.offerride.time
+          }`
+        )
+        .set(this.offerride)
+        .then(_ => {
+          loading.dismiss();
+          // this.viewCtrl.dismiss();
+          this.navCtrl.setRoot('RidePage')
+        });
+    });
 
-            // review the ride first
-            // this.viewCtrl.dismiss().then(_ => this.navCtrl.setRoot("HomePage"));
+    // review the ride first
     //       }
     //     }
     //   ]
@@ -90,6 +95,7 @@ export class ReviewridePage {
     // confirm.present();
   }
   cancel() {
-    this.viewCtrl.dismiss();
+    // this.viewCtrl.dismiss();
+    this.navCtrl.pop();
   }
 }

@@ -1,0 +1,71 @@
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-title>Review</ion-title>
+    </ion-navbar>
+
+</ion-header>
+<ion-content class="bg">
+    <h1 text-center>
+        <b>Your last ride</b>
+    </h1>
+    <p text-center>
+        <b>{{book.date}} - {{book.time}}</b>
+    </p>
+    <ion-card class="mymodal">
+        <ion-card-header>
+            <h3>
+                <b>
+          {{book.from}}
+          <ion-icon name="md-arrow-forward" color="primary"></ion-icon>
+          {{book.destination}}
+        </b>
+            </h3>
+            <hr>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-3>
+                        <img class="profile" src="{{book.dUserPhotoURL}}">
+                    </ion-col>
+                    <ion-col col-9>
+
+                        <h2>{{book.dName}}</h2>
+                        <ion-chip>
+                            <ion-icon name="car" color="primary" ion-icon></ion-icon>
+                            <ion-label>{{book.seatBooked}} Seats Booked</ion-label>
+                        </ion-chip>
+
+                    </ion-col>
+
+                </ion-row>
+                <ion-row class="flexcenter">
+                    <h3>Rating for driver</h3>
+                    <rating [(ngModel)]="rating" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
+                        <!--use it when you need to do something when user clicks on a star. in case you only need to change ngModel property, this property can be ommited.-->
+                    </rating>
+                    <br>
+                    <ion-item>
+                        <ion-label floating>Laeve a comment</ion-label>
+                        <ion-input type="text" [(ngModel)]="review"></ion-input>
+                    </ion-item>
+                    <div class="spacer"></div>
+                </ion-row>
+            </ion-grid>
+
+
+            <div class="footer" no-padding>
+                <ion-row no-padding>
+                    <ion-col col-12 no-padding>
+                        <button ion-button item-start large full icon-left color="secondary" (tap)="submit()">
+              <ion-icon name="car"></ion-icon>
+              Submit
+            </button>
+                    </ion-col>
+                </ion-row>
+            </div> -->
+
+        </ion-card-content>
+    </ion-card>
+</ion-content>
