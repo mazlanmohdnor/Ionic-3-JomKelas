@@ -19,7 +19,7 @@
             </div>
 
             <h2><b>{{profile.fullname}}</b></h2> Phone No: {{profile.phoneNumber}} <br>Email : {{profile.email}}
-            <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
+            <rating [(ngModel)]="profile.ratePercentage" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
                 <!--use it when you need to do something when user clicks on a star. in case you only need to change ngModel property, this property can be ommited.-->
             </rating>
         </div>
@@ -32,17 +32,13 @@
         <ion-card class="overlap">
             <ion-card-header>
                 <ion-row class="profile-numbers" text-center>
-                    <ion-col col-4>
-                        <p>Total Rides</p>
-                        <span>4</span>
-                    </ion-col>
-                    <ion-col col-4>
+                    <ion-col col-6>
                         <p>Ride Offered</p>
-                        <span>4</span>
+                        <span>{{profile.totalRideOffered}}</span>
                     </ion-col>
-                    <ion-col col-4>
+                    <ion-col col-6>
                         <p>Ride Joined</p>
-                        <span>4</span>
+                        <span>{{profile.totalRideJoined}}</span>
                     </ion-col>
                 </ion-row>
                 <hr>

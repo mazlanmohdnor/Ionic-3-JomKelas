@@ -43,6 +43,7 @@
                     <ion-col col-10>
                         <h2>{{book.dName}}</h2>
                         <h2>{{book.ridestatus?'test':'Waiting respond from the driver'}}</h2>
+                        <h2>is rejected: {{book.isRejected}}</h2>
                         <ion-chip>
                             <ion-icon name="car" color="secondary"></ion-icon>
                             <ion-label>{{book.seatBooked}} Booked</ion-label>
@@ -72,6 +73,11 @@
             <button ion-button item-start color="danger" full icon-left (tap)="deleteCompleted(book)" *ngIf="isComplete">
                     <ion-icon name="trash"></ion-icon>
                      Delete
+                    </button>
+
+            <button ion-button item-start color="danger" full icon-left (tap)="deleteNotApproved(book)" *ngIf="book.isRejected">
+                    <ion-icon name="trash"></ion-icon>
+                     Not approved.
                     </button>
         </ion-card-content>
     </ion-card>

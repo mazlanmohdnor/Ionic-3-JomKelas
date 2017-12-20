@@ -21,7 +21,7 @@ export class BookconfirmPage {
   request = {} as Requestmodel;
   trip = {} as OfferRideModel;
   price: any;
-  
+
   btnDec: boolean;
   btnInc: boolean = false;
   currentNumber: number = 0;
@@ -42,7 +42,7 @@ export class BookconfirmPage {
 
   ionViewDidLoad() {
     console.log(this.trip);
-    if (this.trip.seatOffered==0) {
+    if (this.trip.seatOffered == 0) {
       this.btnInc = true;
       this.btnDec = true;
     }
@@ -59,7 +59,7 @@ export class BookconfirmPage {
   public decrement() {
     if (this.currentNumber > 0) {
       this.currentNumber = this.currentNumber - 1;
-        this.price = (this.trip.price * this.currentNumber).toFixed(2);
+      this.price = (this.trip.price * this.currentNumber).toFixed(2);
       this.btnInc = false;
     }
   }
@@ -71,82 +71,83 @@ export class BookconfirmPage {
 
   confirm() {
     this.getDriverDetail();
-    
+
     this.request.seatBooked = this.currentNumber;
     this.request.totalPrice = this.price;
-    
+
     console.log(this.request);
     let loading = this.loadingCtrl.create({
       content: "Requesting..."
     });
-    loading.present().then(() => {
-    //   // save ride detail
-    //   // let time = new Date().valueOf
-      this.firebaseDB.database
-        .ref(`request/${this.request.dId}/${this.request.rideid}/${this.request.pUid}`)
-        .set(this.request)
-        .then(() => {
-          this.fire.auth.onAuthStateChanged(user => {
-            this.firebaseDB
-              .object(
-                `userProfile/${user.uid}/mybooking/${
-                  this.request.rideid
-                }`
-              )
-              .set(this.request);
-          })
-        })
+    loading
+      .present()
+      .then(() => {
+        console.log('requert:', this.request);
+        //   // save ride detail
+        //   // let time = new Date().valueOf
+        this.firebaseDB.database
+          .ref(
+            `request/${this.request.dId}/${this.request.rideid}/${this.request.pUid}`)
+          .set(this.request)
+          .then(() => {
+            this.fire.auth.onAuthStateChanged(user => {
+              this.firebaseDB
+                .object(
+                  `userProfile/${user.uid}/mybooking/${this.request.rideid}`
+                )
+                .set(this.request);
+            });
+          });
         // .set({
         //   rideid: this.request.rideid,
         //   passengerId: this.request.pUid,
         //   booktime: 2342,
         //   seatBooked: this.request.seatBooked
         // })
-    }).then(()=>{
-      loading.dismiss().then(()=>{
-        //booking done
-        let alert = this.alertCtrl.create({
-          title: "Request Sent to Driver.",
-          subTitle: "We will notify you when the driver respond",
-          buttons: [
-            {
-              text: 'Ok',
-              handler: () => {
-                // this.viewCtrl.dismiss()
-                this.navCtrl.setRoot('BookingPage')
-              }
-            }
-          ]
-        });
-        alert.present();
       })
-    });
-
-   
+      .then(() => {
+        loading.dismiss().then(() => {
+          //booking done
+          let alert = this.alertCtrl.create({
+            title: "Request Sent to Driver.",
+            subTitle: "We will notify you when the driver respond",
+            buttons: [
+              {
+                text: "Ok",
+                handler: () => {
+                  // this.viewCtrl.dismiss()
+                  this.navCtrl.setRoot("BookingPage");
+                }
+              }
+            ]
+          });
+          alert.present();
+        });
+      });
   }
 
   //fetch driver info, this ride info, and passenger info
   getDriverDetail() {
-
-        //driver info
-        this.request.dId = this.trip.uid;
-        this.request.dName = this.trip.name;
-        this.request.dUserPhotoURL = this.trip.userPhotoURL;
-        this.request.dRate = this.trip.rate;
-        this.request.dPhone = this.trip.phone;
-        //ride info
-        this.request.from = this.trip.from;
-        this.request.destination = this.trip.destination;
-        this.request.meetingPoint = this.trip.meetingPoint;
-        this.request.date = this.trip.date;
-        this.request.time = this.trip.time;
-        this.request.seatOffered = this.trip.seatOffered;
+    //driver info
+    this.request.dId = this.trip.uid;
+    this.request.dName = this.trip.name;
+    this.request.dUserPhotoURL = this.trip.userPhotoURL;
+    this.request.dRate = this.trip.rate;
+    this.request.dPhone = this.trip.phone;
+    //ride info
+    this.request.from = this.trip.from;
+    this.request.destination = this.trip.destination;
+    this.request.meetingPoint = this.trip.meetingPoint;
+    this.request.date = this.trip.date;
+    this.request.time = this.trip.time;
+    this.request.seatOffered = this.trip.seatOffered;
 
     //current user profile
     this.fire.auth.onAuthStateChanged(user => {
       this.firebaseDB.database
         .ref(`userProfile/${user.uid}`)
         .on("value", data => {
+          console.log(data.val().ratePercentage);
           this.request.pUid = this.fire.auth.currentUser.uid;
           this.request.pName = data.val().fullname;
           this.request.pPhotoURL = data.val().photoURL;
@@ -156,7 +157,10 @@ export class BookconfirmPage {
           this.request.pBio = data.val().bio;
           this.request.pKolej = data.val().kolej;
           this.request.pGender = data.val().gender;
-          this.request.pRate = data.val().rate / 100 * 5;
+          this.request.pRate = data.val().rate;
+          this.request.ptotalRideJoined = data.val().totalRideJoined;
+          this.request.ptotalRideOffered = data.val().totalRideJoined;
+          this.request.pRatePercentage = data.val().ratePercentage;
           this.request.p_profileComplete = data.val().profileComplete;
         });
     });
@@ -166,5 +170,8 @@ export class BookconfirmPage {
       this.request.destination
     } : ${this.request.date} - ${this.request.time}`;
     this.request.ridestatus = false;
+    this.request.isRejected = false;
   }
+
+ 
 }

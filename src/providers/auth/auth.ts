@@ -32,6 +32,9 @@ export class AuthProvider {
             kolej: "",
             gender: "",
             rate: 0,
+            ratePercentage: 0,
+            totalRideJoined: 0,
+            totalRideOfferd:0,
             profileComplete: false,
             vehicleComplete: false
           });

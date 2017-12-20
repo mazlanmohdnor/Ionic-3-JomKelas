@@ -84,9 +84,12 @@ export class OfferridePage {
           this.offerride.uid = user.uid;
           this.offerride.name = data.val().fullname;
           this.offerride.userPhotoURL = data.val().photoURL;
-          this.offerride.rate = data.val().rate / 100 * 5;
+          this.offerride.rate = data.val().rate;
+          this.offerride.ratePercentage = data.val().ratePercentage;
           this.offerride.phone = data.val().phoneNumber;
           this.offerride.gender = data.val().gender;
+          this.offerride.totalRideOffered = data.val().totalRideOffered;
+          this.offerride.totalRideJoined = data.val().totalRideJoined;
         });
     });
 

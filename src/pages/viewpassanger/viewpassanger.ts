@@ -20,6 +20,7 @@ export class ViewpassangerPage {
   ) {
     //get data from ride.ts
     this.ride = navParams.get("ride");
+    console.log(this.approvedpassangers);
   }
 
   ionViewDidLoad() {
@@ -27,6 +28,8 @@ export class ViewpassangerPage {
       .ref(`approvedPassanger/${this.ride.rideid}`)
       .on("value", data => {
         this.approvedpassangers = data.val();
+    console.log(this.approvedpassangers);
+        
       });
   }
 

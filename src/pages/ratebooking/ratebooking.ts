@@ -17,6 +17,7 @@ import {
   templateUrl: "ratebooking.html"
 })
 export class RatebookingPage {
+  totalReviewer: number;
   profile = {} as Profile;
   book = {} as Requestmodel;
   rating: number;
@@ -36,30 +37,31 @@ export class RatebookingPage {
   ionViewDidLoad() {
     // get data from booking.ts
     console.log("ionViewDidLoad RatebookingPage", this.book);
-    //get the current rating, add to the rating that user gave
-    this.fire.auth.onAuthStateChanged(user => {
-      this.firebaseDB.database
-        .ref(`userProfile/${user.uid}/`)
-        .on("value", data => {
-          this.profile = data.val();
-        });
-    });
+
+    //get the total number of people that give feedback
+    this.firebaseDB.database.ref(`userreviews/${this.book.dId}/`).on("value", data => {
+        this.totalReviewer = data.numChildren()
+        console.log('data.numChildren(): ', data.numChildren());
+      })
+      
   }
   submit() {
     let loading = this.loadingCtrl.create({ content: "Submitting..." });
     loading.present();
 
-    this.fire.auth.onAuthStateChanged(user => {
-      this.firebaseDB.database.ref(`/userProfile/${user.uid}`).update({
-        rate: this.profile.rate + this.rating //new rating
+    this.firebaseDB.database
+      .ref(`/userProfile/${this.book.pUid}`)
+      .update({
+        rate: this.book.dRate + this.rating,
+        //rating mean, total rating/total user giving the rating
+        ratePercentage:(this.book.dRate + this.rating) / (this.totalReviewer + 1),
+        totalRideJoined: (this.book.ptotalRideJoined + 1)
       });
-
       //add review
-      this.firebaseDB.database.ref(`/userreviews/${user.uid}/`).push({
+      this.firebaseDB.database.ref(`/userreviews/${this.book.pUid}/`).push({
         reviewerName: this.book.pName,
         review: this.review
       });
-    });
 
     loading.dismiss();
 
@@ -88,6 +90,6 @@ export class RatebookingPage {
       ]
     });
     alert.present();
-    // console.log("rating", this.rating, "review", this.review);
+    console.log("rating", this.rating, "review", this.review);
   }
 }

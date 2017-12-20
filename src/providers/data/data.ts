@@ -24,32 +24,32 @@ export class DataProvider {
   }
 
   filterItems(searchTerm) {
-    // if (isWomen === false) {
-    return this.items.filter(item => {
-      return (
-        item.destination.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 )|| (item.from.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
-      );
-    });
-    // } else {
-    // return this.items.filter(item => {
-    // return item.destination.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 || item.from.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
-    // return item.onlyWomen;
-    // || item.onlyWomen == isWomen;
-    //   // return item.destination.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
-    //   // });
+    if (this.items) {
+         return this.items.filter(item => {
+        return (
+          item.destination.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) || (item.from.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
+          );
+      });
+    } else {
+      console.log('data xde bro untuk term');
+    }
+   
   }
 
-  // }
-  // }
 
   filterWomen(isWomen) {
     if (isWomen === false) {
       console.log("women false");
       return this.itemdefault;
     } else {
-      return this.items.filter(item => {
-        return item.onlyWomen;
-      });
+          if (this.items) {
+            return this.items.filter(item => {
+    
+              return item.onlyWomen;
+            })
+        } else {
+          console.log('data xde bro untuk women');
+        }
     }
   }
 }

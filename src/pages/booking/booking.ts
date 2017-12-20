@@ -17,7 +17,7 @@ import { Requestmodel } from "../../model/requestmodel";
 })
 export class BookingPage {
   isComplete: boolean = true;
-  isApproved:boolean = false;
+  isApproved: boolean = false;
   books = {} as Requestmodel;
   segment = "book";
 
@@ -31,7 +31,8 @@ export class BookingPage {
   ionViewWillLoad() {
     this.updateBookList();
     //get data from ratebooking, after set completed
-    this.isComplete = this.navParams.get("isComplete");
+    // this.isComplete = this.navParams.get("isComplete");
+    // console.log('booking page',this.isComplete);
     // this.fire.auth.onAuthStateChanged(user => {
     //   this.firebaseDB.database
     //     .ref(`userProfile/${user.uid}/mybooking/`)
@@ -98,6 +99,37 @@ export class BookingPage {
     alert.present();
   }
 
+  deleteNotApproved(book) { 
+    let alert = this.alertCtrl.create({
+      title: "Delete Record?",
+      subTitle: `Are you sure to delete ${book.from} to ${
+        book.destination
+      } history?`,
+      buttons: [
+        {
+          text: "No",
+          handler: () => {
+            console.log("Disagree clicked");
+          }
+        },
+        {
+          text: "Yes",
+          handler: () => {
+            this.fire.auth.onAuthStateChanged(user => {
+              this.firebaseDB.database.ref(`userProfile/${user.uid}/mybooking/${book.key}`)
+                .remove();
+               this.firebaseDB.database.ref(`declinedPassanger/${book.dId}-${book.key}/${user.uid}/`)
+                 .remove();
+            });
+            
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+  
+
   ridecomplete(book) {
     console.log(book);
     this.navCtrl.push("RatebookingPage", { currentbook: book });
@@ -124,7 +156,7 @@ export class BookingPage {
             if (data) {
               this.books = data.val();
             } else {
-              console.log('no data der');
+              console.log("no data der");
             }
           });
       });

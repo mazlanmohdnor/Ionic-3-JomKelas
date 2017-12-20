@@ -120,23 +120,35 @@ export class RidePage {
                 .remove()
                 .then(() => {
                   this.firebaseDB.database
+                    .ref(`userProfile/${user.uid}`)
+                    .update({
+                      totalRideOffered: (trip.totalRideOffered+1)
+                    });
+                })
+                .then(() => {
+                  this.firebaseDB.database
                     .ref(`offerRides/${trip.key}`)
                     .remove();
                 })
                 //2nd move to new node under userProfile/${user.uid}/tripcomplete
                 .then(() => {
                   this.firebaseDB.database
-                    .ref(`userProfile/${user.uid}/tripcomplete/${trip.key}`)
+                    .ref(
+                      `userProfile/${user.uid}/tripcomplete/${
+                        trip.key
+                      }`
+                    )
                     .set(trip);
                 })
                 //then remove from approvedPassanger
                 .then(() => {
                   this.firebaseDB.database
-                    .ref(`approvedPassanger/${trip.rideid}`).remove()
+                    .ref(`approvedPassanger/${trip.rideid}`)
+                    .remove();
                 })
                 .then(() => {
-                this.navCtrl.setRoot('RidePage')
-              })
+                  this.navCtrl.setRoot("RidePage");
+                });
             });
           }
         }

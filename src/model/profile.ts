@@ -8,7 +8,8 @@ export interface Profile {
     bio: string,
     kolej: string,
     gender:string,
-    rate:number,
+    rate: number,
+    ratePercentage:number,
     profileComplete:boolean,
     vehicleComplete:boolean
 }

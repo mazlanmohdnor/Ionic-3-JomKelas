@@ -95,7 +95,7 @@ export class HomePage {
   }
   setFilteredItems() {
     // console.log(this.isCar);
-    console.log(this.isWomen);
+    // console.log(this.isWomen);
     // console.log(this.searchTerm);
     this.trips = this.data.filterItems(this.searchTerm);
     // console.log(this.trips);

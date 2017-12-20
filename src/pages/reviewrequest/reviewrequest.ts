@@ -78,7 +78,7 @@ export class ReviewrequestPage {
         .ref(`userProfile/${req.pUid}/mybooking/${req.rideid}/`)
         .update({ ridestatus: true });
       //then set ke home
-      this.navCtrl.setRoot("HomePage");
+      this.navCtrl.pop()
       console.log("seat 0");
     } else {
       // //update the seat and check wheater the seat is 0
@@ -110,7 +110,10 @@ export class ReviewrequestPage {
           })
           //then redirect to home(for now)
           .then(() => {
-            this.navCtrl.setRoot("HomePage");
+            // this.navCtrl.setRoot("ReviewrequestPage");
+      this.navCtrl.pop();
+            
+            // this.ionViewDidLoad();
           });
       });
       console.log("seat tak 0");
@@ -122,8 +125,11 @@ export class ReviewrequestPage {
     console.log(req);
     this.fire.auth.onAuthStateChanged(user => {
       this.firebaseDB.database
-        .ref(`userProfile/${user.uid}/mybooking/${req.rideid}`)
-        .update({ ridestatus: false })
+        .ref(`userProfile/${req.pUid}/mybooking/${req.rideid}/`)
+        .update({
+          ridestatus: false,
+          isRejected: true
+        })
         //then it will move this user to declinedPassanger node
         .then(() => {
           this.firebaseDB.database
@@ -138,7 +144,9 @@ export class ReviewrequestPage {
         })
         //then redirect to home(for now)
         .then(() => {
-          this.navCtrl.setRoot("RidePage");
+          // this.navCtrl.setRoot("ReviewrequestPage");
+      this.navCtrl.pop();
+          
         });
     });
   }
