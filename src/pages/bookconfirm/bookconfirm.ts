@@ -20,10 +20,12 @@ import { Requestmodel } from "../../model/requestmodel";
 export class BookconfirmPage {
   request = {} as Requestmodel;
   trip = {} as OfferRideModel;
+  price: any;
   
   btnDec: boolean;
   btnInc: boolean = false;
   currentNumber: number = 0;
+  newNumber: number;
 
   constructor(
     public navCtrl: NavController,
@@ -39,8 +41,7 @@ export class BookconfirmPage {
   }
 
   ionViewDidLoad() {
-    this.getDriverDetail();
-    
+    console.log(this.trip);
     if (this.trip.seatOffered==0) {
       this.btnInc = true;
       this.btnDec = true;
@@ -49,14 +50,16 @@ export class BookconfirmPage {
 
   public increment() {
     this.currentNumber = this.currentNumber + 1;
+    this.price = (this.trip.price * this.currentNumber).toFixed(2);
     if (this.currentNumber == this.trip.seatOffered) {
       this.btnInc = true;
     }
   }
 
   public decrement() {
-    if (this.currentNumber >= 0) {
+    if (this.currentNumber > 0) {
       this.currentNumber = this.currentNumber - 1;
+        this.price = (this.trip.price * this.currentNumber).toFixed(2);
       this.btnInc = false;
     }
   }
@@ -67,6 +70,11 @@ export class BookconfirmPage {
   }
 
   confirm() {
+    this.getDriverDetail();
+    
+    this.request.seatBooked = this.currentNumber;
+    this.request.totalPrice = this.price;
+    
     console.log(this.request);
     let loading = this.loadingCtrl.create({
       content: "Requesting..."
@@ -78,11 +86,15 @@ export class BookconfirmPage {
         .ref(`request/${this.request.dId}/${this.request.rideid}/${this.request.pUid}`)
         .set(this.request)
         .then(() => {
-           this.firebaseDB
-             .object(
-               `userProfile/${this.fire.auth.currentUser.uid}/mybooking/${this.request.rideid}`
-             )
-             .set(this.request);
+          this.fire.auth.onAuthStateChanged(user => {
+            this.firebaseDB
+              .object(
+                `userProfile/${user.uid}/mybooking/${
+                  this.request.rideid
+                }`
+              )
+              .set(this.request);
+          })
         })
         // .set({
         //   rideid: this.request.rideid,
@@ -115,30 +127,27 @@ export class BookconfirmPage {
 
   //fetch driver info, this ride info, and passenger info
   getDriverDetail() {
-    this.firebaseDB.database
-      .ref(`offerRides/${this.trip.rideid}`)
-      .on("value", data => {
+
         //driver info
-        this.request.dId = data.val().uid;
-        this.request.dName = data.val().name;
-        this.request.dUserPhotoURL = data.val().userPhotoURL;
-        this.request.dRate = data.val().rate;
-        this.request.dPhone = data.val().phone;
+        this.request.dId = this.trip.uid;
+        this.request.dName = this.trip.name;
+        this.request.dUserPhotoURL = this.trip.userPhotoURL;
+        this.request.dRate = this.trip.rate;
+        this.request.dPhone = this.trip.phone;
         //ride info
-        this.request.from = data.val().from;
-        this.request.destination = data.val().destination;
-        this.request.meetingPoint = data.val().meetingPoint;
-        this.request.date = data.val().date;
-        this.request.time = data.val().time;
-        this.request.seatOffered = data.val().seatOffered;
-      });
+        this.request.from = this.trip.from;
+        this.request.destination = this.trip.destination;
+        this.request.meetingPoint = this.trip.meetingPoint;
+        this.request.date = this.trip.date;
+        this.request.time = this.trip.time;
+        this.request.seatOffered = this.trip.seatOffered;
 
     //current user profile
     this.fire.auth.onAuthStateChanged(user => {
       this.firebaseDB.database
         .ref(`userProfile/${user.uid}`)
         .on("value", data => {
-          this.request.pUid = user.uid;
+          this.request.pUid = this.fire.auth.currentUser.uid;
           this.request.pName = data.val().fullname;
           this.request.pPhotoURL = data.val().photoURL;
           this.request.pEmail = data.val().email;
@@ -157,6 +166,5 @@ export class BookconfirmPage {
       this.request.destination
     } : ${this.request.date} - ${this.request.time}`;
     this.request.ridestatus = false;
-    this.request.seatBooked = this.currentNumber;
   }
 }

@@ -29,7 +29,7 @@
                     </ion-col>
                     <ion-col col-3>
                         <ion-chip color="danger">
-                            <ion-label>RM 0.50</ion-label>
+                            <ion-label>RM {{trip.price}}</ion-label>
                         </ion-chip>
                     </ion-col>
                 </ion-row>
@@ -43,10 +43,7 @@
                     <ion-col col-10>
                         <h2>{{trip.name}}</h2>
                         <p class="message">{{trip.comment}}</p>
-                        <ion-chip>
-                            <ion-icon name="car" color="secondary"></ion-icon>
-                            <ion-label>{{trip.seatOffered}} Seats Available</ion-label>
-                        </ion-chip>
+                        <button ion-button outline (tap)="detail(trip)">view passanger</button>
                     </ion-col>
 
                 </ion-row>

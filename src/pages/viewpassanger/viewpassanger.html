@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>My Passanger</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content class="bg">
+    <ion-card *ngFor="let passanger of approvedpassangers | keyobject">
+        <ion-card-header>
+            <h2 class="txtwrap"><b>{{passanger.from}}
+                <ion-icon name="md-arrow-forward" color="primary"></ion-icon> {{passanger.destination}}</b></h2><br>
+            <p>{{passanger.date}} - {{passanger.time}}</p>
+        </ion-card-header>
+        <hr>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row (tap)="viewProfile(passanger)">
+                    <ion-col col-2> <img class="profile" src="{{passanger.pPhotoURL}}"></ion-col>
+                    <ion-col col-10>
+                        <h2>{{passanger.pName }}</h2>
+                        <rating [(ngModel)]="passanger.pRate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
+                            <!--use it when you need to do something when user clicks on a star. in case you only need to change ngModel property, this property can be ommited.-->
+                        </rating>
+                        <p class="message">{{passanger.comment}}</p>
+                        <p class="message">{{passanger.pGender}}</p>
+                        <p class="message">{{passanger.pKolej}}</p>
+                        <p class="message">{{passanger.pMatric}}</p>
+                        <p class="message">{{passanger.pPhoneNumber}}</p>
+                        <p class="message">{{passanger.pRate}}</p>
+                        <p class="message">{{passanger.p_profileComplete}}</p>
+                    </ion-col>
+
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

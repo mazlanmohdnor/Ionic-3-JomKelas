@@ -55,7 +55,7 @@ export class RatebookingPage {
       });
 
       //add review
-      this.firebaseDB.database.ref(`/userProfile/${user.uid}/reviews`).push({
+      this.firebaseDB.database.ref(`/userreviews/${user.uid}/`).push({
         reviewerName: this.book.pName,
         review: this.review
       });

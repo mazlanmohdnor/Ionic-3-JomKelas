@@ -91,6 +91,8 @@
     <allow-navigation href="http://10.206.3.183:8100" />
     <allow-navigation href="http://192.168.0.197:8100" />
     <allow-navigation href="http://10.114.22.62:8100" />
+    <allow-navigation href="http://192.168.0.132:8100" />
+    <allow-navigation href="http://192.168.0.147:8100" />
     <engine name="android" spec="6.4.0" />
     <plugin name="cordova-plugin-console" spec="^1.1.0" />
     <plugin name="cordova-plugin-device" spec="^1.1.7" />

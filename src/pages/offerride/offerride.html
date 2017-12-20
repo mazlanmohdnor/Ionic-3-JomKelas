@@ -178,6 +178,23 @@
         </ion-card-header>
         <ion-card-content>
             <ion-item>
+                <ion-icon name="cash" item-start color="danger"></ion-icon>
+                <ion-label stacked>Price:</ion-label>
+                <ion-select [(ngModel)]="offerride.price">
+                    <ion-option value="0.10">RM 0.10</ion-option>
+                    <ion-option value="0.20">RM 0.20</ion-option>
+                    <ion-option value="0.30">RM 0.30</ion-option>
+                    <ion-option value="0.40">RM 0.40</ion-option>
+                    <ion-option value="0.50">RM 0.50</ion-option>
+                    <ion-option value="0.60">RM 0.60</ion-option>
+                    <ion-option value="0.70">RM 0.70</ion-option>
+                    <ion-option value="0.80">RM 0.80</ion-option>
+                    <ion-option value="0.90">RM 0.90</ion-option>
+                    <ion-option value="1.00">RM 1.00</ion-option>
+
+                </ion-select>
+            </ion-item>
+            <ion-item>
                 <ion-label>Women passenger only?</ion-label>
                 <ion-toggle checked="false" [(ngModel)]="offerride.onlyWomen"></ion-toggle>
             </ion-item>

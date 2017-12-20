@@ -15,6 +15,7 @@ import { OfferRideModel } from "../../model/offerridemodel";
   templateUrl: "ride.html"
 })
 export class RidePage {
+  rideid: any;
   isComplete: boolean = true;
   trips = {} as OfferRideModel;
   segment = "trips";
@@ -27,9 +28,10 @@ export class RidePage {
   ) {}
 
   ionViewWillLoad() {
+    // //approved passanger
     // this.fire.auth.onAuthStateChanged(user => {
     //   this.firebaseDB.database
-    //     .ref(`userProfile/${user.uid}/trips`)
+    //     .ref(`approvedPassanger/`)
     //     .on("value", data => {
     //       this.trips = data.val();
     //     });
@@ -127,6 +129,11 @@ export class RidePage {
                     .ref(`userProfile/${user.uid}/tripcomplete/${trip.key}`)
                     .set(trip);
                 })
+                //then remove from approvedPassanger
+                .then(() => {
+                  this.firebaseDB.database
+                    .ref(`approvedPassanger/${trip.rideid}`).remove()
+                })
                 .then(() => {
                 this.navCtrl.setRoot('RidePage')
               })
@@ -158,9 +165,15 @@ export class RidePage {
             this.trips = data.val();
           });
       });
+     
     }
     //kat sini kena listen to 2 variable, trips dgn tripcomplete
     //activeride fetch from userProfile/${user.uid}/trips
     //completedride fetch from userProfile/${user.uid}/tripcomplete
+  }
+
+  detail(ride) {
+    // console.log(ride);
+    this.navCtrl.push("ViewpassangerPage", {'ride':ride});
   }
 }

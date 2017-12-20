@@ -33,11 +33,12 @@ export class AuthProvider {
             gender: "",
             rate: 0,
             profileComplete: false,
-            vehicleComplete:false
+            vehicleComplete: false
           });
         });
       });
   }
+
 
   signout() {
     return this.fire.auth.signOut();

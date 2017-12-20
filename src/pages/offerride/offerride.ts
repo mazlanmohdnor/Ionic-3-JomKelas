@@ -24,10 +24,11 @@ import { ModalController } from "ionic-angular/components/modal/modal-controller
   templateUrl: "offerride.html"
 })
 export class OfferridePage {
+  price: number = 0.0;
   offerride = {
     date: new Date().toDateString(),
     time: new Date().toLocaleTimeString(),
-    seatOffered : 0
+    seatOffered: 0
   } as OfferRideModel;
 
   destinationData: any;
@@ -130,11 +131,26 @@ export class OfferridePage {
   }
 
   decrement() {
-    
     if (this.currentNumber > 0) {
       this.currentNumber = this.currentNumber - 1;
       this.btnInc = false;
     }
+  }
+
+  //price
+  incrementPrice() {
+    this.price += 0.1;
+    if (this.price == 1.0) {
+      this.btnInc = true;
+    }
+  }
+
+  decrementPrice() {
+    if (this.price > 0.0) {
+      this.price -= 0.1;
+    } else {
+      this.btnInc = false;
+    }  
   }
 
   destinationToFuntion(to) {
@@ -232,12 +248,11 @@ export class OfferridePage {
             (this.offerride.model = data.val().model),
             (this.offerride.color = data.val().color),
             (this.offerride.vehiclePhotoURL = data.val().photoURL),
-          this.offerride.vehicleType = data.val().type,
-          this.offerride.seatOffered = data.val().seat
+            (this.offerride.vehicleType = data.val().type),
+            (this.offerride.seatOffered = data.val().seat);
           // console.log(data.val());
         });
     });
-    
   }
 
   addvehicle() {
@@ -288,7 +303,7 @@ export class OfferridePage {
   review() {
     const date = new Date().valueOf();
     this.offerride.timestamp = date;
-    this.navCtrl.push('ReviewridePage', {'offerride': this.offerride})
+    this.navCtrl.push("ReviewridePage", { offerride: this.offerride });
     // let modal = this.modal.create(
     //   "ReviewridePage",
     //   { offerride: this.offerride },

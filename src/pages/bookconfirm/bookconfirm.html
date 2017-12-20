@@ -20,6 +20,10 @@
                     <ion-icon name="people" color="primary"></ion-icon><b>  Seat Available: {{trip.seatOffered}}</b></h2>
             </ion-row>
 
+            <ion-row>
+                <h2 class="destination">
+                    <ion-icon name="cash" color="primary"></ion-icon><b>  Per head: RM {{price}}</b></h2>
+            </ion-row>
             <hr>
             <h1 text-center class="fare"><b>No of Seat to Book</b></h1>
             <div class="flex_row">
@@ -27,6 +31,7 @@
                     <ion-icon name="remove-circle"></ion-icon>
                 </button>
                 <span class="seat">{{currentNumber}}</span>
+                <!-- <ion-input type="number" class="seat" [(ngModel)]="currentNumber" placeholder="{{currentNumber}}"></ion-input> -->
                 <button ion-button icon-only large color="secondary" (tap)="increment()" clear [disabled]="btnInc">
                     <ion-icon name="add-circle"></ion-icon>
                 </button>

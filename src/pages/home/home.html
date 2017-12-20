@@ -6,6 +6,9 @@
         <ion-title>JomKelas</ion-title>
 
         <ion-buttons end>
+            <button id="notification-button" ion-button icon-only (tap)="toggle()">
+            <ion-icon name="ios-woman" [color]="!toggleSearch ? 'light' : 'secondary'"></ion-icon> 
+        </button>
             <button id="notification-button" ion-button icon-only (tap)="notification()">
             <ion-icon name="notifications"></ion-icon> 
               <ion-badge *ngIf="noti" id="notifications-badge" color="danger">{{noti}}</ion-badge>
@@ -15,9 +18,18 @@
 
 
 
-    <ion-searchbar [(ngModel)]="searchTerm" [showCancelButton]="shouldShowCancel" (ionInput)="setFilteredItems()" (ionCancel)="onCancel($event)" placeholder="Destination">
+    <ion-searchbar [(ngModel)]="searchTerm" [showCancelButton]="shouldShowCancel" (ionInput)="setFilteredItems()" (ionCancel)="onCancel($event)" placeholder="From or Destination">
     </ion-searchbar>
-
+    <!-- <div *ngIf="toggleSearch" style="background: #00BAE1">
+        <ion-item>
+            <ion-label>Women passenger only?</ion-label>
+            <ion-toggle checked="false" [(ngModel)]="isWomen" (ionChange)="setFilteredItems()"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>Car only?</ion-label>
+            <ion-toggle checked="false" [(ngModel)]="isCar" (ionChange)="setFilteredItems()"></ion-toggle>
+        </ion-item>
+    </div> -->
 
 
 
@@ -37,7 +49,7 @@
                     </ion-col>
                     <ion-col col-3>
                         <ion-chip color="danger">
-                            <ion-label>RM 0.50</ion-label>
+                            <ion-label>RM {{trip.price}}</ion-label>
                         </ion-chip>
                     </ion-col>
                 </ion-row>
@@ -70,7 +82,7 @@
         <!-- </span> -->
     </ion-card>
     <div class="dummy-footer"></div>
-    <div class="footer">
+    <!-- <div class="footer">
         <ion-grid no-padding>
             <ion-row>
                 <ion-col col-6 no-padding>
@@ -87,5 +99,11 @@
                 </ion-col>
             </ion-row>
         </ion-grid>
-    </div>
+    </div> -->
+    <ion-fab right bottom>
+        <button ion-fab color="danger" (tap)="offerride()">
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
+
 </ion-content>

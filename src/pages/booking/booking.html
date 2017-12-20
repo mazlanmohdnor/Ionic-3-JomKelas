@@ -29,7 +29,7 @@
                     </ion-col>
                     <ion-col col-3>
                         <ion-chip color="danger">
-                            <ion-label>RM 0.50</ion-label>
+                            <ion-label>RM {{book.totalPrice}}</ion-label>
                         </ion-chip>
                     </ion-col>
                 </ion-row>
@@ -45,7 +45,7 @@
                         <h2>{{book.ridestatus?'test':'Waiting respond from the driver'}}</h2>
                         <ion-chip>
                             <ion-icon name="car" color="secondary"></ion-icon>
-                            <ion-label>{{book.seatOffered}} Seats Available</ion-label>
+                            <ion-label>{{book.seatBooked}} Booked</ion-label>
                         </ion-chip>
                     </ion-col>
 

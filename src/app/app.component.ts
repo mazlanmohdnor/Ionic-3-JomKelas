@@ -1,5 +1,5 @@
 import { Profile } from "./../model/profile";
-import { AngularFireDatabase } from "angularfire2/database";
+import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AuthProvider } from "./../providers/auth/auth";
 import { Component, ViewChild } from "@angular/core";
@@ -17,6 +17,7 @@ import { Storage } from "@ionic/storage";
   templateUrl: "app.html"
 })
 export class MyApp {
+  // profile: FirebaseListObservable<any[]>;
   profile = {} as Profile;
 
   @ViewChild(Nav) nav: Nav;
@@ -66,7 +67,7 @@ export class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
       // this.nav.getActive().component.name
-      console.log('this.nav.getActive().component.name: ', this.nav.getActive());
+    
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
@@ -98,9 +99,9 @@ export class MyApp {
             console.log(result);
           });
           //kalau logged in, set ke homepage
-          if (this.fire.auth.currentUser.emailVerified) {
+          if (user.emailVerified) {
             this.firebaseDB.database
-              .ref(`userProfile/${this.fire.auth.currentUser.uid}`)
+              .ref(`userProfile/${user.uid}`)
               .once("value", data => {
                 this.profile = data.val();
                 // if (!data.val().profileComplete) {

@@ -14,14 +14,14 @@
                     <h2 class="destination"><b> <ion-icon name="arrow-dropleft-circle" color="danger"></ion-icon> {{offerride.destination}}</b></h2>
                 </ion-row>
                 <ion-row>
-                    <h2 class="destination">
+                    <h2 class="destination"><b>
                         <ion-icon name="locate" color="primary"></ion-icon>
-                        Pickup: {{offerride.meetingPoint}}</h2>
+                        Pickup: {{offerride.meetingPoint}}</b></h2>
                 </ion-row>
                 <ion-row>
-                    <h2 class="destination">
+                    <h2 class="destination"><b>
                         <ion-icon name="car" color="bg"></ion-icon>
-                        Seat Offered: {{offerride.seatOffered}}</h2>
+                        Seat Offered: {{offerride.seatOffered}}</b></h2>
                 </ion-row>
             </ion-grid>
 
@@ -49,7 +49,7 @@
 
                 </ion-row>
                 <ion-row class="fare">
-                    <h1 color="primary"><b>Estimated fare: RM 0.50</b></h1>
+                    <h1 color="primary"><b>Estimated fare: RM {{offerride.price}}</b></h1>
                 </ion-row>
             </ion-grid>
 

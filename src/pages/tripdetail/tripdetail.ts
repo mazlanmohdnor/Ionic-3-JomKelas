@@ -16,12 +16,14 @@ export class TripdetailPage {
     public navParams: NavParams,
     public iab:InAppBrowser,
     public modal: ModalController
-  ) {}
+  ) {
+      //get from home.ts
+      this.trip = navParams.get("trip");
+      console.log(this.trip);
+    }
 
   ionViewDidLoad() {
-    //get from home.ts
-    this.trip = this.navParams.get("trip");
-    console.log(this.trip);
+    
   }
   whatsapp(phone) {
     console.log(phone);
