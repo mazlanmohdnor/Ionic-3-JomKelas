@@ -1,41 +1,34 @@
 <ion-header>
-
     <ion-navbar color="primary">
-        <ion-title>Review</ion-title>
+        <ion-title>Rate User</ion-title>
     </ion-navbar>
-
 </ion-header>
+
+
 <ion-content class="bg">
     <h1 text-center>
-        <b>Your last ride</b>
+        <b>Rate this user</b>
     </h1>
-    <p text-center>
-        <b>{{book.date}} - {{book.time}}</b>
-    </p>
+    <!-- <p text-center>
+        <b>{{passanger.pName}}</b>
+    </p> -->
     <ion-card class="mymodal">
-        <ion-card-header>
-            <h3>
-                <b>
-          {{book.from}}
-          <ion-icon name="md-arrow-forward" color="primary"></ion-icon>
-          {{book.destination}}
-        </b>
-            </h3>
-            <hr>
-        </ion-card-header>
+
         <ion-card-content>
             <ion-grid>
                 <ion-row>
                     <ion-col col-3>
-                        <img class="profile" src="{{book.dUserPhotoURL}}">
+                        <img class="profile" src="{{passanger.pPhotoURL}}">
                     </ion-col>
                     <ion-col col-9>
 
-                        <h2>{{book.dName}}</h2>
-                        <ion-chip>
+                        <h2><b>{{passanger.pName}}</b></h2>
+                        <h3>{{passanger.pEmail}}</h3>
+
+                        <!-- <ion-chip>
                             <ion-icon name="car" color="primary" ion-icon></ion-icon>
                             <ion-label>{{book.seatBooked}} Seats Booked</ion-label>
-                        </ion-chip>
+                        </ion-chip> -->
 
                     </ion-col>
 

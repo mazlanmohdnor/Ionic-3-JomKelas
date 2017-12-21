@@ -1,4 +1,4 @@
-page-ratebooking {
+page-rideappreciate {
     .mymodal {
         position: relative;
         // overflow: hidden;
@@ -21,10 +21,6 @@ page-ratebooking {
         height: 45px;
         -webkit-border-radius: 50%;
         border-radius: 50%;
-    }
-    .message {
-        color: rgba(60, 60, 60, 0.688);
-        font-size: 0.8em;
     }
     .flexcenter {
         display: flex;
@@ -49,10 +45,6 @@ page-ratebooking {
     .spacer {
         margin: 30px;
     }
-    .modalbg {
-        // background-color: rgba(0, 0, 0, 0.7) !important;
-        background-color: map-get($colors, primary);
-    }
     .destination {
         margin-left: 10px;
     }
@@ -61,16 +53,6 @@ page-ratebooking {
         white-space: normal;
         text-align: left;
         color: #fff;
-    }
-    // p,
-    // h1 {
-    //     color: #fff;
-    // }
-    .fare {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
     }
     //rating
     ul {

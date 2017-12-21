@@ -36,4 +36,15 @@ export class ViewpassangerPage {
   viewProfile(profile) {
     console.log(profile);
   }
+  
+  report(passanger) {
+    // console.log('report: ', passanger);
+    this.navCtrl.push("RidereportPage",{'report': passanger})
+  }
+
+  appreciate(passanger) {
+    // console.log('appreciate: ', passanger);
+    this.navCtrl.push("RideappreciatePage", { 'appreciate': passanger });
+    
+  }
 }

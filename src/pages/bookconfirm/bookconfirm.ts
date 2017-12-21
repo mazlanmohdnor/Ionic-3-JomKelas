@@ -147,7 +147,7 @@ export class BookconfirmPage {
       this.firebaseDB.database
         .ref(`userProfile/${user.uid}`)
         .on("value", data => {
-          console.log(data.val().ratePercentage);
+          console.log('current user data: ',data.val());
           this.request.pUid = this.fire.auth.currentUser.uid;
           this.request.pName = data.val().fullname;
           this.request.pPhotoURL = data.val().photoURL;

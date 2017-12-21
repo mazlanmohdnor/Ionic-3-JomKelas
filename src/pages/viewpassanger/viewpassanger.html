@@ -6,34 +6,45 @@
 
 
 <ion-content class="bg">
-    <ion-card *ngFor="let passanger of approvedpassangers | keyobject">
+    <ion-card *ngFor="let passanger of approvedpassangers | keyobject" class="mymodal">
         <ion-card-header>
             <h2 class="txtwrap"><b>{{passanger.from}}
-                <ion-icon name="md-arrow-forward" color="primary"></ion-icon> {{passanger.destination}}</b></h2><br>
-            <p>{{passanger.date}} - {{passanger.time}}</p>
+                <ion-icon name="md-arrow-forward" color="primary"></ion-icon> {{passanger.destination}}</b></h2> {{passanger.date}} - {{passanger.time}}
         </ion-card-header>
         <hr>
         <ion-card-content>
             <ion-grid>
                 <ion-row (tap)="viewProfile(passanger)">
-                    <ion-col col-2> <img class="profile" src="{{passanger.pPhotoURL}}"></ion-col>
-                    <ion-col col-10>
+                    <ion-col col-3> <img class="profile" src="{{passanger.pPhotoURL}}"></ion-col>
+                    <ion-col col-9>
                         <h2>{{passanger.pName }}</h2>
-                        <h2>rate:{{passanger.pRatePercentage }}</h2>
                         <rating [(ngModel)]="passanger.pRatePercentage" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
                             <!--use it when you need to do something when user clicks on a star. in case you only need to change ngModel property, this property can be ommited.-->
                         </rating>
-                        <p class="message">{{passanger.comment}}</p>
                         <p class="message">{{passanger.pGender}}</p>
                         <p class="message">{{passanger.pKolej}}</p>
-                        <p class="message">{{passanger.pMatric}}</p>
                         <p class="message">{{passanger.pPhoneNumber}}</p>
-                        <p class="message">{{passanger.pRate}}</p>
                         <p class="message">{{passanger.p_profileComplete}}</p>
                     </ion-col>
 
                 </ion-row>
             </ion-grid>
+            <div class="spacer"></div>
+
+            <div class="footer" no-padding>
+                <ion-row no-padding>
+                    <ion-col col-6 no-padding>
+                        <button ion-button color="danger" full icon-left (tap)="report(passanger)">
+                            <ion-icon name="sad"></ion-icon>Report
+                        </button>
+                    </ion-col>
+                    <ion-col col-6 no-padding>
+                        <button ion-button full icon-left color="secondary" (tap)="appreciate(passanger)">
+                            <ion-icon name="happy"></ion-icon>Appreciate
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </div>
         </ion-card-content>
     </ion-card>
 </ion-content>

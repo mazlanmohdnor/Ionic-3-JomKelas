@@ -50,18 +50,21 @@ export class RatebookingPage {
     loading.present();
 
     this.firebaseDB.database
-      .ref(`/userProfile/${this.book.pUid}`)
+      .ref(`/userProfile/${this.book.dId}`)
       .update({
         rate: this.book.dRate + this.rating,
         //rating mean, total rating/total user giving the rating
-        ratePercentage:(this.book.dRate + this.rating) / (this.totalReviewer + 1),
-        totalRideJoined: (this.book.ptotalRideJoined + 1)
+        ratePercentage:
+          (this.book.dRate + this.rating) / (this.totalReviewer + 1),
+        totalRideJoined: this.book.ptotalRideJoined + 1
       });
       //add review
-      this.firebaseDB.database.ref(`/userreviews/${this.book.pUid}/`).push({
-        reviewerName: this.book.pName,
-        review: this.review
-      });
+      this.firebaseDB.database
+        .ref(`/userreviews/${this.book.dId}/`)
+        .push({
+          reviewerName: this.book.pName,
+          review: this.review
+        });
 
     loading.dismiss();
 
