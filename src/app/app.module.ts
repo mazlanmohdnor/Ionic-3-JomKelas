@@ -22,7 +22,7 @@ import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { Camera } from "@ionic-native/camera";
 import { IonicImageLoader } from "ionic-image-loader";
 import { DeviceFeedback } from "@ionic-native/device-feedback";
-// import { LocalNotifications } from "@ionic-native/local-notifications";
+import { LocalNotifications } from "@ionic-native/local-notifications";
 // import { BackgroundMode } from "@ionic-native/background-mode";
 
 //to use ionic storage
@@ -69,7 +69,7 @@ import { DataProvider } from '../providers/data/data';
     Camera,
     DeviceFeedback,
     DataProvider,
-    // LocalNotifications,
+    LocalNotifications,
     // BackgroundMode,
   ]
 })

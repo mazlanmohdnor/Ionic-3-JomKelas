@@ -165,4 +165,7 @@ export class BookingPage {
     //activeride fetch from userProfile/${user.uid}/books
     //completedride fetch from userProfile/${user.uid}/bookcomplete
   }
+  reportDriver(driver) {
+    this.navCtrl.push("ReportdriverPage",{'driver':driver})
+  }
 }

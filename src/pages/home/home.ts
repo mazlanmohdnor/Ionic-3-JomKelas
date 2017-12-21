@@ -1,5 +1,5 @@
 import { DataProvider } from "./../../providers/data/data";
-// import { LocalNotifications } from "@ionic-native/local-notifications";
+import { LocalNotifications } from "@ionic-native/local-notifications";
 import { DeviceFeedback } from "@ionic-native/device-feedback";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -13,7 +13,7 @@ import {
 } from "ionic-angular";
 import { Profile } from "../../model/profile";
 import { Storage } from "@ionic/storage";
-
+var cordova;
 @IonicPage()
 @Component({
   selector: "page-home",
@@ -21,11 +21,10 @@ import { Storage } from "@ionic/storage";
 })
 export class HomePage {
   userid: any;
-  noti: number;
+  noti: number=0;
   trips: any;
   user = {} as Profile;
   toggleSearch: boolean = false;
-
   notificationAlreadyReceived = false;
   searchTerm: string = "";
   isWomen = false;
@@ -39,7 +38,8 @@ export class HomePage {
     public event: Events,
     private deviceFeedback: DeviceFeedback,
     public storage: Storage,
-    public data: DataProvider // private localNotifications: LocalNotifications
+    public data: DataProvider,
+    private localNotification: LocalNotifications
   ) {}
 
   ionViewWillEnter() {
@@ -48,7 +48,7 @@ export class HomePage {
         this.userid = user.uid;
       }
     });
-    // this.checkNoti();
+    this.checkNoti();
     //check whether user had open the app, if not, set walkthrough
 
     // this.storage.get("profileComplete").then(data => {
@@ -112,7 +112,8 @@ export class HomePage {
 
     this.firebaseDB.database
       .ref(`request/${this.userid}`)
-      .once("value", data => {
+      .on("value", data => {
+       
         // data.forEach(child=>{
         //    // key will be "ada" the first time and "alan" the second time
         // console.log('child.key: ', child.key);
@@ -135,25 +136,32 @@ export class HomePage {
 
         // }
 
-        let arr = Object.keys(data.val()).map(key => data.val()[key]);
+        // let arr = Object.keys(data.val()).map(key => data.val()[key]);
         // console.log('test', arr);
-        this.noti = arr.length;
-
-        // if (arr) {
-        //   //Inbox style
-        //   cordova.plugins.notification.local.schedule({
-        //     id: 1,
-        //     title: 'You got new request!',
-        //     text: 'Text',
-        //     headsup: true,
-        //     vibration: true,
-        //     inbox: {
-        //       lines: ["Line1", "Line2", "Line3"], //You can add as many lines as the notification allows
-        //       summary: "2 More", //Optional summary line that shows at the bottom of the notification
-        //       title: "3 Messages" //Optional title to replace the notification on expand
-        //     }
-        //   });
-        // }
+        // this.noti = arr.length;
+if (data.val()) {
+  if (data.numChildren() > 0) {
+        this.noti = data.numChildren();
+       
+       //Inbox style
+       this.localNotification.schedule({
+         id: 1,
+         title: "You got new request!",
+         text: "Text",
+        //  headsup: true,
+        //  vibration: true,
+        //  inbox: {
+        //    lines: ["Line1", "Line2", "Line3"], //You can add as many lines as the notification allows
+        //    summary: "2 More", //Optional summary line that shows at the bottom of the notification
+        //    title: "3 Messages" //Optional title to replace the notification on expand
+        //  }
+       });
+     }
+  console.log('ada');
+} else {
+  console.log('no noti');
+}
+     
       });
   }
 

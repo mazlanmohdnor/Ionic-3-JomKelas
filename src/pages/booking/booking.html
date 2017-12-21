@@ -42,12 +42,13 @@
                     <ion-col col-2> <img class="profile" src="{{book.dUserPhotoURL}}"></ion-col>
                     <ion-col col-10>
                         <h2>{{book.dName}}</h2>
-                        <h2>{{book.ridestatus?'test':'Waiting respond from the driver'}}</h2>
-                        <h2>is rejected: {{book.isRejected}}</h2>
-                        <ion-chip>
+                        <h2>Status: {{book.ridestatus?'Approved.':'Waiting respond from the driver'}}</h2>
+                        <!-- <h2>is rejected: {{book.isRejected}}</h2> -->
+                        <!-- <ion-chip>
                             <ion-icon name="car" color="secondary"></ion-icon>
                             <ion-label>{{book.seatBooked}} Booked</ion-label>
-                        </ion-chip>
+                        </ion-chip> -->
+                        <button ion-button outline *ngIf="!book.isRejected" color="danger" (tap)="reportDriver(book)">Report Driver</button>
                     </ion-col>
 
                 </ion-row>

@@ -10,7 +10,7 @@
         <b>Rate this user</b>
     </h1> -->
     <!-- <p text-center>
-        <b>{{passanger.pName}}</b>
+        <b>{{driver.pName}}</b>
     </p> -->
     <ion-card class="mymodal">
 
@@ -18,12 +18,12 @@
             <ion-grid>
                 <ion-row>
                     <ion-col col-3>
-                        <img class="profile" src="{{passanger.pPhotoURL}}">
+                        <img class="profile" src="{{driver.dUserPhotoURL}}">
                     </ion-col>
                     <ion-col col-9>
 
-                        <h2><b>{{passanger.pName}}</b></h2>
-                        <h3>{{passanger.pEmail}}</h3>
+                        <h2><b>{{driver.dName}}</b></h2>
+                        <h3>{{driver.dPhone}}</h3>
 
 
 
@@ -35,7 +35,7 @@
                 <ion-row>
                     <h2><b>Choose reason</b></h2>
                     <ion-item text-wrap>
-                        <ion-label>Passanger did not attend.</ion-label>
+                        <ion-label>driver did not attend.</ion-label>
                         <ion-checkbox color="primary" checked="true" [(ngModel)]="isNotAttend"></ion-checkbox>
                     </ion-item>
 
