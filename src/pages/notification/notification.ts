@@ -37,6 +37,7 @@ export class NotificationPage {
           .ref()
           .child(`approvedPassanger/${user.uid}`)
           .on("value", data => {
+            console.log(data.val());
             this.booking = data.val();
           });
     })
@@ -45,5 +46,9 @@ export class NotificationPage {
   review(req) {
     // console.log(req.key);
     this.navCtrl.push("ReviewrequestPage", { request: req.key });
+  }
+
+  book(book) {
+    this.navCtrl.setRoot('BookingPage')
   }
 }
