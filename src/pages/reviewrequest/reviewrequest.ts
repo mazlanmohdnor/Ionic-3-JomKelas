@@ -67,7 +67,7 @@ export class ReviewrequestPage {
 
       //then move the approved passanger to approvedPassanger
       this.firebaseDB.database
-        .ref(`approvedPassanger/${req.dId}-${req.rideid}/${req.pUid}`)
+        .ref(`approvedPassanger/${req.pUid}/${req.dId}-${req.rideid}`)
         .set(req);
       // this.firebaseDB.database
       //   .ref(`userProfile/trips/${req.dId}-${req.rideid}/approved/${req.pUid}`)
@@ -89,7 +89,8 @@ export class ReviewrequestPage {
           //then it will move this user to approvedPassanger node
           .then(() => {
             this.firebaseDB.database
-              .ref(`approvedPassanger/${req.dId}-${req.rideid}/${req.pUid}`)
+              .ref(`approvedPassanger/${req.pUid}/${req.dId}-${req.rideid}`)
+              // .ref(`request/${this.request.dId}/${this.request.rideid}/${this.request.pUid}`)
               .set(req);
         //     this.firebaseDB.database
         // .ref(`userProfile/${user.uid}/trips/${req.dId}-${req.rideid}/approved/${req.pUid}`)
@@ -133,7 +134,8 @@ export class ReviewrequestPage {
         //then it will move this user to declinedPassanger node
         .then(() => {
           this.firebaseDB.database
-            .ref(`declinedPassanger/${req.dId}-${req.rideid}/${req.pUid}`)
+            // .ref(`declinedPassanger/${req.dId}-${req.rideid}/${req.pUid}`)
+            .ref(`declinedPassanger/${req.pUid}/${req.dId}-${req.rideid}`)
             .set(req);
         })
         //then delete approvedPassanger from current node

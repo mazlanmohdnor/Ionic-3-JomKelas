@@ -39,32 +39,40 @@ export class RatebookingPage {
     console.log("ionViewDidLoad RatebookingPage", this.book);
 
     //get the total number of people that give feedback
-    this.firebaseDB.database.ref(`userreviews/${this.book.dId}/`).on("value", data => {
-        this.totalReviewer = data.numChildren()
-        console.log('data.numChildren(): ', data.numChildren());
-      })
-      
+    this.firebaseDB.database
+      .ref(`userreviews/${this.book.dId}/`)
+      .on("value", data => {
+        this.totalReviewer = data.numChildren();
+        console.log("data.numChildren(): ", data.numChildren());
+      });
   }
   submit() {
+    console.log(this.book.pUid);
     let loading = this.loadingCtrl.create({ content: "Submitting..." });
-    loading.present();
-
-    this.firebaseDB.database
-      .ref(`/userProfile/${this.book.dId}`)
-      .update({
-        rate: this.book.dRate + this.rating,
-        //rating mean, total rating/total user giving the rating
-        ratePercentage:
-          (this.book.dRate + this.rating) / (this.totalReviewer + 1),
-        totalRideJoined: this.book.ptotalRideJoined + 1
-      });
-      //add review
-      this.firebaseDB.database
-        .ref(`/userreviews/${this.book.dId}/`)
-        .push({
+    loading
+      .present()
+      .then(() => {
+        this.firebaseDB.database.ref(`/userProfile/${this.book.dId}`).update({
+          rate: this.book.dRate + this.rating,
+          //rating mean, total rating/total user giving the rating
+          ratePercentage:
+            (this.book.dRate + this.rating) / (this.totalReviewer + 1),
+          totalRideJoined: this.book.ptotalRideJoined + 1
+        });
+      })
+      .then(() => {
+        //add review
+        this.firebaseDB.database.ref(`/userreviews/${this.book.dId}/`).push({
           reviewerName: this.book.pName,
           review: this.review
         });
+      })
+    //delete approvedPassanger
+      .then(() => {
+      this.firebaseDB.database
+        .ref(`approvedPassanger/${this.book.pUid}/${this.book.dId}-${this.book.key}`)
+        .remove();
+    })
 
     loading.dismiss();
 
@@ -81,12 +89,14 @@ export class RatebookingPage {
                 .remove()
                 .then(() => {
                   this.firebaseDB.database
-                  .ref(`userProfile/${user.uid}/bookcomplete/${this.book.key}`)
-                  .set(this.book)
+                    .ref(
+                      `userProfile/${user.uid}/bookcomplete/${this.book.key}`
+                    )
+                    .set(this.book);
                 })
                 .then(() => {
-                  this.navCtrl.setRoot('BookingPage', {'isComplete':true})
-                })
+                  this.navCtrl.setRoot("BookingPage", { isComplete: true });
+                });
             });
           }
         }

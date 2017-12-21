@@ -11,6 +11,7 @@ import { Requestmodel } from "../../model/requestmodel";
   templateUrl: "notification.html"
 })
 export class NotificationPage {
+  booking: any;
   child: any;
   riderequest = {} as Requestmodel;
 
@@ -24,12 +25,20 @@ export class NotificationPage {
 
   ionViewDidLoad() {
     this.fire.auth.onAuthStateChanged(user => {
-      let ref = this.firebaseDB.database
+      //noti untuk ride request
+      this.firebaseDB.database
         .ref()
-        .child(`request/${user.uid}`);
-      ref.on("value", data => {
+        .child(`request/${user.uid}`).on("value", data => {
         this.riderequest = data.val();
-      });
+        });
+      
+      //noti untuk booking
+        this.firebaseDB.database
+          .ref()
+          .child(`approvedPassanger/${user.uid}`)
+          .on("value", data => {
+            this.booking = data.val();
+          });
     })
   }  
 

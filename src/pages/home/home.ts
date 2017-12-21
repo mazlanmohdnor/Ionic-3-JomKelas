@@ -21,7 +21,7 @@ var cordova;
 })
 export class HomePage {
   userid: any;
-  noti: number=0;
+  noti: number = 0;
   trips: any;
   user = {} as Profile;
   toggleSearch: boolean = false;
@@ -109,59 +109,77 @@ export class HomePage {
 
   checkNoti() {
     //check notification
+    //this is notification for ride request
+    this.firebaseDB.database.ref(`request/${this.userid}`).on("value", data => {
+      // data.forEach(child=>{
+      //    // key will be "ada" the first time and "alan" the second time
+      // console.log('child.key: ', child.key);
+      // // childData will be the actual contents of the child
+      // console.log('child.val(): ', child.val());
+      // })
+      // //1st for is for getting the route id
+      // console.log('dataval', data.val());
+      // console.log(data.child(data.key).val());
+      // for(var keys in data.val()){
+      //   console.log("data key" + keys.length);
+      //   // console.log("data value" +  data.val()[keys]);
 
+      //   //2nd for is to get the array of
+      //   for (const key in data.val()[keys]) {
+      //     console.log("data key inner" + key.length);
+      //   }
+      //     let arr = Object.keys(data.val())
+      //     console.log(arr);
+
+      // }
+
+      // let arr = Object.keys(data.val()).map(key => data.val()[key]);
+      // console.log('test', arr);
+      // this.noti = arr.length;
+      if (data.val()) {
+        if (data.numChildren() > 0) {
+          this.noti = data.numChildren();
+
+          //Inbox style
+          this.localNotification.schedule({
+            id: 1,
+            title: "You got new request!",
+            text: "Text"
+            //  headsup: true,
+            //  vibration: true,
+            //  inbox: {
+            //    lines: ["Line1", "Line2", "Line3"], //You can add as many lines as the notification allows
+            //    summary: "2 More", //Optional summary line that shows at the bottom of the notification
+            //    title: "3 Messages" //Optional title to replace the notification on expand
+            //  }
+          });
+        }
+        console.log("ada");
+      } else {
+        console.log("no noti");
+      }
+    });
+
+    //this is notification for booking
+    // this.firebaseDB.database.ref(`approvedPassanger/${this.userid}`).on("value", data => {
     this.firebaseDB.database
-      .ref(`request/${this.userid}`)
+      .ref(`approvedPassanger/${this.userid}`)
       .on("value", data => {
-       
-        // data.forEach(child=>{
-        //    // key will be "ada" the first time and "alan" the second time
-        // console.log('child.key: ', child.key);
-        // // childData will be the actual contents of the child
-        // console.log('child.val(): ', child.val());
-        // })
-        // //1st for is for getting the route id
-        // console.log('dataval', data.val());
-        // console.log(data.child(data.key).val());
-        // for(var keys in data.val()){
-        //   console.log("data key" + keys.length);
-        //   // console.log("data value" +  data.val()[keys]);
-
-        //   //2nd for is to get the array of
-        //   for (const key in data.val()[keys]) {
-        //     console.log("data key inner" + key.length);
-        //   }
-        //     let arr = Object.keys(data.val())
-        //     console.log(arr);
-
-        // }
-
-        // let arr = Object.keys(data.val()).map(key => data.val()[key]);
-        // console.log('test', arr);
-        // this.noti = arr.length;
-if (data.val()) {
-  if (data.numChildren() > 0) {
-        this.noti = data.numChildren();
-       
-       //Inbox style
-       this.localNotification.schedule({
-         id: 1,
-         title: "You got new request!",
-         text: "Text",
-        //  headsup: true,
-        //  vibration: true,
-        //  inbox: {
-        //    lines: ["Line1", "Line2", "Line3"], //You can add as many lines as the notification allows
-        //    summary: "2 More", //Optional summary line that shows at the bottom of the notification
-        //    title: "3 Messages" //Optional title to replace the notification on expand
-        //  }
-       });
-     }
-  console.log('ada');
-} else {
-  console.log('no noti');
-}
-     
+        console.log(data.val());
+        if (data.val()) {
+          if (data.numChildren() > 0) {
+            this.noti = data.numChildren();
+            //Inbox style
+            this.localNotification.schedule({
+              id: 1,
+              title: "Your booking is approved!",
+              text: "Text"
+            });
+          }
+          console.log("ada booking");
+        } else {
+          console.log("xde booking");
+        }
       });
   }
 

@@ -13,4 +13,9 @@
             {{ req.key }}
         </ion-card-header>
     </ion-card>
+    <ion-card *ngFor="let req of booking | keyobject" (tap)="review(req)">
+        <ion-card-header text-wrap>
+            {{ req.key }}
+        </ion-card-header>
+    </ion-card>
 </ion-content>

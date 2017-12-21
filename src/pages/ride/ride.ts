@@ -141,11 +141,11 @@ export class RidePage {
                     .set(trip);
                 })
                 //then remove from approvedPassanger
-                .then(() => {
-                  this.firebaseDB.database
-                    .ref(`approvedPassanger/${trip.rideid}`)
-                    .remove();
-                })
+                // .then(() => {
+                //   this.firebaseDB.database
+                //     .ref(`approvedPassanger/${}/${trip.rideid}`)
+                //     .remove();
+                // })
                 .then(() => {
                   this.navCtrl.setRoot("RidePage");
                 });
