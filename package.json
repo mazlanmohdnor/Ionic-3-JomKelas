@@ -52,7 +52,7 @@
     "firebase": "^3.6.6",
     "ionic-angular": "3.9.2",
     "ionic-image-loader": "^4.2.1",
-    "ionic-img-viewer": "^2.9.0",
+    "ionic-img-viewer": "2.7.3",
     "ionic-plugin-keyboard": "^2.2.1",
     "ionic2-rating": "^1.2.2",
     "ionicons": "3.0.0",

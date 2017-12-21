@@ -1,10 +1,10 @@
 keytool -genkey -v -keystore mazlan-jom.keystore -alias mazlan -keyalg RSA -keysize 2048 -validity 10000
  
 
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore mazlan-daftar.keystore aa-u.apk mazlan
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore mazlan-jom.keystore android-release-unsigned.apk mazlan
 
 
-zipalign -v 4 a-u.apk jomkelas.apk
+zipalign -v 4 android-release-unsigned.apk jomkelas1.0.1.apk
 
 faceebook hashkey
 This is how i solved this problem

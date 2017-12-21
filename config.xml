@@ -76,7 +76,7 @@
         <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
     </platform>
-    <content original-src="index.html" src="http://10.114.22.62:8100" />
+    <content src="index.html" />
     <allow-navigation href="http://10.114.22.62:8100" />
     <engine name="android" spec="6.4.0" />
     <plugin name="cordova-plugin-console" spec="^1.1.0" />
