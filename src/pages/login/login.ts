@@ -1,5 +1,5 @@
 import { AngularFireDatabase } from "angularfire2/database";
-import { Facebook } from "@ionic-native/facebook";
+// import { Facebook } from "@ionic-native/facebook";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Component } from "@angular/core";
 import {
@@ -34,7 +34,7 @@ export class LoginPage {
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
-    public fb: Facebook,
+    // public fb: Facebook,
     public firebaseDB: AngularFireDatabase,
     public nativeStorage: NativeStorage,
     public event: Events

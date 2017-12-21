@@ -7,7 +7,7 @@ import {
   AlertController
 } from "ionic-angular";
 import { AngularFireAuth } from "angularfire2/auth";
-import { OfferRideModel } from "../../model/offerridemodel";
+// import { OfferRideModel } from "../../model/offerridemodel";
 import { Requestmodel } from "../../model/requestmodel";
 
 @IonicPage()

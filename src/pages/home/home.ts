@@ -1,5 +1,5 @@
 import { DataProvider } from "./../../providers/data/data";
-import { LocalNotifications } from "@ionic-native/local-notifications";
+// import { LocalNotifications } from "@ionic-native/local-notifications";
 import { DeviceFeedback } from "@ionic-native/device-feedback";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -9,11 +9,12 @@ import {
   NavController,
   NavParams,
   AlertController,
-  Events
+  Events,
+  Platform
 } from "ionic-angular";
 import { Profile } from "../../model/profile";
 import { Storage } from "@ionic/storage";
-var cordova;
+declare var cordova;
 @IonicPage()
 @Component({
   selector: "page-home",
@@ -30,6 +31,7 @@ export class HomePage {
   isWomen = false;
   isCar = false;
   constructor(
+    public platform: Platform,
     public navCtrl: NavController,
     public navParams: NavParams,
     public fire: AngularFireAuth,
@@ -38,9 +40,10 @@ export class HomePage {
     public event: Events,
     private deviceFeedback: DeviceFeedback,
     public storage: Storage,
-    public data: DataProvider,
-    private localNotification: LocalNotifications
-  ) {}
+    public data: DataProvider
+  ) // private localNotification: LocalNotifications
+  {
+  }
 
   ionViewWillEnter() {
     this.fire.authState.subscribe(user => {
@@ -48,7 +51,9 @@ export class HomePage {
         this.userid = user.uid;
       }
     });
-    this.checkNoti();
+    this.platform.ready().then(() => {
+      this.checkNoti();
+    })  
     //check whether user had open the app, if not, set walkthrough
 
     // this.storage.get("profileComplete").then(data => {
@@ -111,6 +116,7 @@ export class HomePage {
     //check notification
     //this is notification for ride request
     this.firebaseDB.database.ref(`request/${this.userid}`).on("value", data => {
+      console.log(data.val());
       // data.forEach(child=>{
       //    // key will be "ada" the first time and "alan" the second time
       // console.log('child.key: ', child.key);
@@ -141,17 +147,18 @@ export class HomePage {
           this.noti = data.numChildren();
 
           //Inbox style
-          this.localNotification.schedule({
+          cordova.plugins.notification.local.schedule({
             id: 1,
             title: "You got new request!",
-            text: "Text"
-            //  headsup: true,
-            //  vibration: true,
-            //  inbox: {
-            //    lines: ["Line1", "Line2", "Line3"], //You can add as many lines as the notification allows
-            //    summary: "2 More", //Optional summary line that shows at the bottom of the notification
-            //    title: "3 Messages" //Optional title to replace the notification on expand
-            //  }
+            text: "Text",
+            headsup: true,
+            foreground: true,
+            vibration: true,
+            inbox: {
+              lines: ["Line1", "Line2", "Line3"], //You can add as many lines as the notification allows
+              summary: "2 More", //Optional summary line that shows at the bottom of the notification
+              title: "3 Messages" //Optional title to replace the notification on expand
+            }
           });
         }
         console.log("ada");
@@ -170,10 +177,18 @@ export class HomePage {
           if (data.numChildren() > 0) {
             this.noti = data.numChildren();
             //Inbox style
-            this.localNotification.schedule({
+            cordova.plugins.notification.local.schedule({
               id: 1,
               title: "Your booking is approved!",
-              text: "Text"
+              text: "Text",
+              headsup: true,
+              foreground: true,
+              vibration: true,
+              inbox: {
+                lines: ["Line1", "Line2", "Line3"], //You can add as many lines as the notification allows
+                summary: "2 More", //Optional summary line that shows at the bottom of the notification
+                title: "3 Messages" //Optional title to replace the notification on expand
+              }
             });
           }
           console.log("ada booking");

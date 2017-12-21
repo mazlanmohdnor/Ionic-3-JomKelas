@@ -10,7 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DatePicker } from '@ionic-native/date-picker';
 import { HttpModule } from "@angular/http";
-import { Facebook } from "@ionic-native/facebook";
+// import { Facebook } from "@ionic-native/facebook";
 import { IonicStorageModule } from '@ionic/storage';
 import { AuthProvider } from '../providers/auth/auth';
 
@@ -22,7 +22,7 @@ import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { Camera } from "@ionic-native/camera";
 import { IonicImageLoader } from "ionic-image-loader";
 import { DeviceFeedback } from "@ionic-native/device-feedback";
-import { LocalNotifications } from "@ionic-native/local-notifications";
+// import { LocalNotifications } from "@ionic-native/local-notifications";
 // import { BackgroundMode } from "@ionic-native/background-mode";
 
 //to use ionic storage
@@ -63,13 +63,13 @@ import { DataProvider } from '../providers/data/data';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    Facebook,
+    // Facebook,
     NativeStorage,
     InAppBrowser,
     Camera,
     DeviceFeedback,
     DataProvider,
-    LocalNotifications,
+    // LocalNotifications,
     // BackgroundMode,
   ]
 })

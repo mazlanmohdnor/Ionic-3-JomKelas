@@ -1,5 +1,5 @@
 import { Profile } from "./../model/profile";
-import { AngularFireDatabase, FirebaseListObservable } from "angularfire2/database";
+import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AuthProvider } from "./../providers/auth/auth";
 import { Component, ViewChild } from "@angular/core";

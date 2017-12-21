@@ -1,5 +1,5 @@
 import { Camera, CameraOptions } from "@ionic-native/camera";
-import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook";
+// import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook";
 import { Profile } from "./../../model/profile";
 import { Component } from "@angular/core";
 import {
@@ -32,7 +32,7 @@ export class UpdateprofilePage {
     public navParams: NavParams,
     public fire: AngularFireAuth,
     public firebaseDB: AngularFireDatabase,
-    public fb: Facebook,
+    // public fb: Facebook,
     public actionSheetCtrl: ActionSheetController,
     private camera: Camera,
     public loadingCtrl: LoadingController,
@@ -100,25 +100,25 @@ export class UpdateprofilePage {
 
   //login with facebook
   fblogin() {
-    this.fb
-      .login(["email", "public_profile"])
-      .then((response: FacebookLoginResponse) => {
-        let userId = response.authResponse.userID;
+    // this.fb
+    //   .login(["email", "public_profile"])
+    //   .then((response: FacebookLoginResponse) => {
+    //     let userId = response.authResponse.userID;
 
-        // Getting name and gender properties
-        this.fb.api("me?fields=id,name", []).then(user => {
-          //
-          // this.userData = { email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name'] }
-          //now we have the users info, let's save it in the firebase
-          this.fire.auth.onAuthStateChanged(auth => {
-            this.firebaseDB.database.ref(`/userProfile/${auth.uid}`).update({
-              fullname: user.name,
-              photoURL:
-                "https://graph.facebook.com/" + userId + "/picture?type=large"
-            });
-          });
-        });
-      });
+    //     // Getting name and gender properties
+    //     this.fb.api("me?fields=id,name", []).then(user => {
+    //       //
+    //       // this.userData = { email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name'] }
+    //       //now we have the users info, let's save it in the firebase
+    //       this.fire.auth.onAuthStateChanged(auth => {
+    //         this.firebaseDB.database.ref(`/userProfile/${auth.uid}`).update({
+    //           fullname: user.name,
+    //           photoURL:
+    //             "https://graph.facebook.com/" + userId + "/picture?type=large"
+    //         });
+    //       });
+    //     });
+    //   });
   }
 
   cameraOption() {
