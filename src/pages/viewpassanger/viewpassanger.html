@@ -6,7 +6,7 @@
 
 
 <ion-content class="bg">
-    <ion-card *ngFor="let passanger of approvedpassangers | keyobject" class="mymodal">
+    <ion-card *ngFor="let passanger of ongoingRide | keyobject" class="mymodal">
         <ion-card-header>
             <h2 class="txtwrap"><b>{{passanger.from}}
                 <ion-icon name="md-arrow-forward" color="primary"></ion-icon> {{passanger.destination}}</b></h2> {{passanger.date}} - {{passanger.time}}
@@ -25,6 +25,10 @@
                         <p class="message">{{passanger.pKolej}}</p>
                         <p class="message">{{passanger.pPhoneNumber}}</p>
                         <p class="message">{{passanger.p_profileComplete}}</p>
+                        <button ion-button icon-left round color="secondary" (click)="whatsapp(passanger.phone)">
+                            <ion-icon name="logo-whatsapp"></ion-icon>
+                            {{passanger.pPhoneNumber}}
+                        </button>
                     </ion-col>
 
                 </ion-row>

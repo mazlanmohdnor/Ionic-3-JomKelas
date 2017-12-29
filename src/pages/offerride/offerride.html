@@ -210,9 +210,7 @@
     <ion-card>
         <ion-card-content no-padding>
 
-            <button ion-button block large (click)="review()" color="secondary">Review Ride</button>
+            <button ion-button block large (click)="review()" color="secondary" [disabled]="!offerride.from || !offerride.destination ||!offerride.meetingPoint || !offerride.date || !offerride.time || !offerride.date || !offerride.vehiclePlate || !offerride.seatOffered || !offerride.comment">Review Ride</button>
         </ion-card-content>
     </ion-card>
 </ion-content>
-
-<!-- [disabled]="!offerride.from || !offerride.destination ||!offerride.meetingPoint || !offerride.date || !offerride.time || !offerride.date || !offerride.vehiclePlate || !offerride.seatOffered || !offerride.comment" -->

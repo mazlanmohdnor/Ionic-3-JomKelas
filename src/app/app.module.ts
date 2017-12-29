@@ -42,7 +42,7 @@ import { DataProvider } from '../providers/data/data';
       scrollPadding: false,
       scrollAssist: true,
       autoFocusAssist: false,
-      pageTransition:'md-transition',
+      pageTransition:'ios-transition',
      
 
     }),

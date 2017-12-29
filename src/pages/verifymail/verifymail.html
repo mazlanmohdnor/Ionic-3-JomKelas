@@ -9,7 +9,7 @@
     <ion-grid>
         <ion-row>
             <ion-col col-12 text-center>
-                <img src="assets/header.png">
+                <img src="assets/mail.png">
                 <h2>Please verify your email</h2>
                 <p>You've just received an email containing verification link on </p>
                 <b>
@@ -19,22 +19,31 @@
                 <p>This step is crucial as we want to ensure all users are verified as a UPM student only. We are using UPM student official email as primary email address. Button below will navigate you to the login page.
                 </p>
 
-                <p>Please login to UPM student official email at http://mail.student.upm.edu.my
-
-                </p>
+                <p>Please login to UPM student official email at <b><h2>http://mail.student.upm.edu.my</h2></b></p>
                 <div class="spacer"></div>
-
+                <p><i>if button below is not working, please navigate to link above using web browser except chrome.</i></p>
 
             </ion-col>
         </ion-row>
-        <ion-row>
+        <!-- <ion-row>
             <ion-col col-6>
                 <button ion-button round color="primary" block (click)="navigateEmail()">Check Email</button>
             </ion-col>
             <ion-col col-6>
                 <button ion-button round outline block (click)="resendEmail()">Resend Email</button>
             </ion-col>
-        </ion-row>
-        <button ion-button clear color="primary" (click)="home()">I will verify later.</button>
+        </ion-row> -->
+        <!-- <button ion-button clear color="primary" (click)="home()">I will verify later.</button> -->
     </ion-grid>
 </ion-content>
+
+<ion-footer>
+    <ion-row>
+        <ion-col col-6>
+            <button ion-button color="primary" block (click)="navigateEmail()">Check Email</button>
+        </ion-col>
+        <ion-col col-6>
+            <button ion-button outline block (click)="resendEmail()">Resend Email</button>
+        </ion-col>
+    </ion-row>
+</ion-footer>

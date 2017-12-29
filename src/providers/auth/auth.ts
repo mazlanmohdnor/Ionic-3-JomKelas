@@ -16,9 +16,12 @@ export class AuthProvider {
   }
   //Signup
   signup(profile) {
-    var email = profile.matric + "@student.upm.edu.my";
+    //concat matric num with upm mail address
+    let email = profile.matric + "@student.upm.edu.my";
     return this.fire.auth
+      //send that email and password to Firebase Auth  
       .createUserWithEmailAndPassword(email, profile.password)
+
       .then(user => {
         //save to firebase database
         this.fire.auth.onAuthStateChanged(auth => {
@@ -34,7 +37,7 @@ export class AuthProvider {
             rate: 0,
             ratePercentage: 0,
             totalRideJoined: 0,
-            totalRideOfferd:0,
+            totalRideOffered:0,
             profileComplete: false,
             vehicleComplete: false
           });

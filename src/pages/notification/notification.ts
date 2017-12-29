@@ -28,20 +28,21 @@ export class NotificationPage {
       //noti untuk ride request
       this.firebaseDB.database
         .ref()
-        .child(`request/${user.uid}`).on("value", data => {
-        this.riderequest = data.val();
+        .child(`request/${user.uid}`)
+        .on("value", data => {
+          this.riderequest = data.val();
         });
-      
+
       //noti untuk booking
-        this.firebaseDB.database
-          .ref()
-          .child(`approvedPassanger/${user.uid}`)
-          .on("value", data => {
-            console.log(data.val());
-            this.booking = data.val();
-          });
-    })
-  }  
+      this.firebaseDB.database
+        .ref()
+        .child(`approvedPassanger/${user.uid}`)
+        .on("value", data => {
+          console.log(data.val());
+          this.booking = data.val();
+        });
+    });
+  }
 
   review(req) {
     // console.log(req.key);
@@ -49,6 +50,20 @@ export class NotificationPage {
   }
 
   book(book) {
-    this.navCtrl.setRoot('BookingPage')
+    this.navCtrl
+      .setRoot("BookingPage")
+      .then(() => {
+        this.firebaseDB.database
+          .ref(`approvedPassanger/${book.pUid}/${book.dId}-${book.rideid}`)
+          .remove();
+      })
+      //add this to ongoing ride
+      .then(() => {
+        this.firebaseDB.database
+          .ref(`ongoingRide/${book.dId}/${book.dId}-${book.rideid}`)
+          .set(book);
+      });
+
+    console.log(book);
   }
 }

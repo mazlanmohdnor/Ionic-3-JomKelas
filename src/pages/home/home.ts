@@ -56,38 +56,39 @@ export class HomePage {
     })  
     //check whether user had open the app, if not, set walkthrough
 
-    // this.storage.get("profileComplete").then(data => {
-    //   if (!data) {
-    //     // alert('!data');
-    //      let alert = this.alertCtrl.create({
-    //       //  title: `Hi ${data.val().fullname}`,
-    //        message:
-    //          "Welcome to JomKelas application, now going to class much easier. Please complete your profile to continue using this application",
-    //        buttons: [
-    //          {
-    //            text: "Later",
-    //            role: "cancel",
-    //            handler: () => {
-    //              this.deviceFeedback.acoustic();
-    //              console.log("Cancel clickedsdasd");
-    //            }
-    //          },
-    //          {
-    //            text: "Ok",
-    //            handler: () => {
-    //              this.deviceFeedback.acoustic();
-    //              this.navCtrl.push("UpdateprofilePage", {
-    //                profile: data.val()
-    //              });
-    //            }
-    //          }
-    //        ]
-    //      });
-    //      alert.present();
-    //   } else {
-    //     alert('data')
-    //   }
-    // });
+    this.storage.get("profileComplete").then(data => {
+      if (!data) {
+        // alert('!data');
+         let alert = this.alertCtrl.create({
+          //  title: `Hi ${data.val().fullname}`,
+           message:
+             "Welcome to JomKelas application, now going to class much easier. Please complete your profile to continue using this application",
+           buttons: [
+             {
+               text: "Later",
+               role: "cancel",
+               handler: () => {
+                 this.deviceFeedback.acoustic();
+                 console.log("Cancel clickedsdasd");
+               }
+             },
+             {
+               text: "Ok",
+               handler: () => {
+                 this.deviceFeedback.acoustic();
+                 this.navCtrl.push("UpdateprofilePage", {
+                  //  profile: data.val()
+                 });
+               }
+             }
+           ]
+         });
+         alert.present();
+      } else {
+        // alert('data')
+        console.log('profile complete');
+      }
+    });
 
     this.firebaseDB.database.ref("offerRides/").on("value", data => {
       // console.log(data);

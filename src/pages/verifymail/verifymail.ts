@@ -38,15 +38,16 @@ export class VerifymailPage {
 
   // navigate to upm email login page
   navigateEmail() {
-    let browser = open(
-      "http://mail.student.upm.edu.my/",
-      "_self",
-      "location=true"
-    );
+    // this.iab.create(url)
+    let browser = this.iab.create("http://mail.student.upm.edu.my", "_system", {
+      location:'yes',
+      clearcache: "yes",
+      clearsessioncache: "yes"
+    });
     let loader = this.loadingCtrl.create({
       content: "Validating..."
     });
-    browser.addEventListener("exit", () => {
+    browser.on('exit').subscribe(() => {
       loader.present();
       this.firebase.auth.onAuthStateChanged(user => {
         //if user x logged in, set page ke login

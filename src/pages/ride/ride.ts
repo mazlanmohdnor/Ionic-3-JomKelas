@@ -100,7 +100,7 @@ export class RidePage {
   }
 
   ridecomplete(trip) {
-    console.log(trip);
+    console.log('current trip',trip);
     let alert = this.alertCtrl.create({
       title: "Trip Completed?",
       buttons: [
@@ -141,11 +141,11 @@ export class RidePage {
                     .set(trip);
                 })
                 //then remove from approvedPassanger
-                // .then(() => {
-                //   this.firebaseDB.database
-                //     .ref(`approvedPassanger/${}/${trip.rideid}`)
-                //     .remove();
-                // })
+                .then(() => {
+                  this.firebaseDB.database
+                    .ref(`ongoingRide/${trip.uid}/${trip.rideid}`)
+                    .remove();
+                })
                 .then(() => {
                   this.navCtrl.setRoot("RidePage");
                 });
@@ -185,7 +185,7 @@ export class RidePage {
   }
 
   detail(ride) {
-    // console.log(ride);
+    console.log(ride);
     this.navCtrl.push("ViewpassangerPage", {'ride':ride});
   }
 }

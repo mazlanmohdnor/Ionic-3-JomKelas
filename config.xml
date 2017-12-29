@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="my.mazlan.jomkelas" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="my.mazlan.jomkelas" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>JomKelas</name>
     <description>Ride Sharing application build specifically for University Putra Malaysia.</description>
     <author email="lan.psis@gmail.com" href="http://mazlan.my/">Mohd Mazlan</author>
@@ -78,6 +78,7 @@
     </platform>
     <content src="index.html" />
     <allow-navigation href="http://10.114.22.62:8100" />
+    <allow-navigation href="http://192.168.0.106:8100" />
     <engine name="android" spec="6.4.0" />
     <plugin name="cordova-plugin-console" spec="^1.1.0" />
     <plugin name="cordova-plugin-device" spec="^1.1.7" />

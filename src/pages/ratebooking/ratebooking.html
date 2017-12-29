@@ -59,7 +59,7 @@
             <div class="footer" no-padding>
                 <ion-row no-padding>
                     <ion-col col-12 no-padding>
-                        <button ion-button item-start large full icon-left color="secondary" (tap)="submit()">
+                        <button ion-button item-start large full icon-left color="secondary" (tap)="submit()" [disabled]="!review || !rating">
               <ion-icon name="car"></ion-icon>
               Submit
             </button>

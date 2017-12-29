@@ -90,7 +90,7 @@ export class BookingPage {
             this.fire.auth.onAuthStateChanged(user => {
               this.firebaseDB.database
                 .ref(`userProfile/${user.uid}/bookcomplete/${book.key}`)
-                .remove();
+                .remove()
             });
           }
         }
@@ -118,7 +118,7 @@ export class BookingPage {
             this.fire.auth.onAuthStateChanged(user => {
               this.firebaseDB.database.ref(`userProfile/${user.uid}/mybooking/${book.key}`)
                 .remove();
-               this.firebaseDB.database.ref(`declinedPassanger/${book.dId}-${book.key}/${user.uid}/`)
+               this.firebaseDB.database.ref(`declinedPassanger/${user.uid}/${book.dId}-${book.key}/`)
                  .remove();
             });
             
